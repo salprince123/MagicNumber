@@ -1,24 +1,42 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-
+import Number from './API/Number';
+import React from 'react';
+import 'antd/dist/antd.css';
+import './index.css';
+import {NavLink} from 'react-router-dom';
+import {Navbar,Nav} from 'react-bootstrap';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+  return ( 
+    <BrowserRouter>
+    <div className="container">
+     <Navbar bg="dark" >
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Nav>
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/">
+                    Home
+                </NavLink>
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                    Trending
+                </NavLink>
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/Number">
+                    Number
+                </NavLink>
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                    Login
+                </NavLink>
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                    Signup
+                </NavLink>
+                </Nav>
+            </Navbar>
+
+     <Switch>
+       <Route path='/number' component={Number}/>
+     </Switch>
     </div>
+    </BrowserRouter>   
   );
 }
 
