@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import './index.css';
 import {NavLink} from 'react-router-dom';
 import {Navbar,Nav} from 'react-bootstrap';
+import NumberForm from './Component/NumberForm';
 function App() {
   
   return ( 
@@ -17,23 +18,24 @@ function App() {
                 <NavLink className="d-inline p-2 bg-dark text-white" to="/">
                     Home
                 </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/Trending">
                     Trending
                 </NavLink>
                 <NavLink className="d-inline p-2 bg-dark text-white" to="/Number">
                     Number
                 </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/Login">
                     Login
                 </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/NumberForm">
+                <NavLink className="d-inline p-2 bg-dark text-white" to="/SignUp">
                     Signup
                 </NavLink>
                 </Nav>
             </Navbar>
 
      <Switch>
-       <Route path='/number' component={Number}/>
+       <Route path='/number' component={NumberForm}/>
+       <Route path='/trending' component={Number}/>
      </Switch>
     </div>
     </BrowserRouter>   
