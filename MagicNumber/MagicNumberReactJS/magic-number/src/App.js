@@ -7,6 +7,7 @@ import './index.css';
 import {NavLink} from 'react-router-dom';
 import {Navbar,Nav} from 'react-bootstrap';
 import NumberForm from './Component/NumberForm';
+import NewFeed from './Component/NewFeed';
 function App() {
   
   return ( 
@@ -35,7 +36,7 @@ function App() {
 
      <Switch>
        <Route path='/number' component={NumberForm}/>
-       <Route path='/trending' component={Number}/>
+       <Route path='/trending' component={NewFeed}/>
      </Switch>
     </div>
     </BrowserRouter>   

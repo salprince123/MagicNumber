@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http;
 using MagicNumber.Models;
 
+
 namespace MagicNumber.Controllers
 {
 	public class NumberController : ApiController
@@ -99,6 +100,7 @@ namespace MagicNumber.Controllers
 				return "Fail to add";
 			}
         }
+
 		public string Delete(string id)
 		{
 			try
