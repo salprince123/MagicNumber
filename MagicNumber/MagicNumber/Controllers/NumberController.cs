@@ -7,7 +7,9 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using MagicNumber.Models;
-
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MagicNumber.Controllers
 {
@@ -100,7 +102,22 @@ namespace MagicNumber.Controllers
 				return "Fail to add";
 			}
         }
-
+		public string Put(Number num)
+		{			
+			try
+			{
+				string sql = $" update number set Title='{num.Title}', Detail='{num.Detail}' where numberID='{num.NumberID}'";
+				MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return "Edit successfully!";
+			}
+			catch (Exception)
+			{
+				return "Fail to edit";
+			}
+		}
 		public string Delete(string id)
 		{
 			try
