@@ -46,8 +46,10 @@ namespace MagicNumber.Controllers
 			{
 				number += Int16.Parse(num[i].ToString());
 			}
-			while(number>9)
+			while(number>11 )
             {
+				if (number == 22)
+					return number;
 				int temp = 0;
 				string tempNum = number.ToString();
 				for (int i = 0; i < tempNum.Length; i++)
@@ -66,6 +68,7 @@ namespace MagicNumber.Controllers
 			DateTime temp= DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 			int number = CalculateNumber($"{temp.Day.ToString()}{temp.Month.ToString()}{temp.Year.ToString()}");
 			string sql = $" SELECT * FROM number where NumberID='CD0{number}'";
+			if(number>9) sql = $" SELECT * FROM number where NumberID='CD{number}'";
 			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
