@@ -15,23 +15,28 @@ function AppHeader() {
     setVisible(false);
   };
 
+  const addNewArticle = () => {
+    setVisible(true);
+  };
   return (
     <div className="container-fluid">
       <div className="header">
         <div className="logo">
           <i className="fas fa-bolt"></i>
-          <a href="http://google.com">Tech</a>
+          <a href="http://localhost:3000">Magic Number</a>
         </div>
+       
         <div className="mobileHidden">
           <Anchor targetOffset="65">
-            <Link href="#hero" title="Home" />
+            <Link href="http://localhost:3000/Home" title="Home" />
             <Link href="#about" title="About" />
-            <Link href="#feature" title="Features" />
-            <Link href="#works" title="How it works" />
-            <Link href="#faq" title="FAQ" />
-            <Link href="#pricing" title="Pricing" />
-            <Link href="#contact" title="Contact" />
+            <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+            <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+            <Button type="primary" className="button-add-article" >
+              <a href="http://localhost:3000/NewArticle">Write</a>
+            </Button>
           </Anchor>
+          
         </div>
         <div className="mobileVisible">
           <Button type="primary" onClick={showDrawer}>
@@ -44,13 +49,10 @@ function AppHeader() {
             visible={visible}
           >
             <Anchor targetOffset="65">
-              <Link href="#hero" title="Home" />
+              <Link href="http://localhost:3000/Home" title="Home" />
               <Link href="#about" title="About" />
-              <Link href="#feature" title="Features" />
-              <Link href="#works" title="How it works" />
-              <Link href="#faq" title="FAQ" />
-              <Link href="#pricing" title="Pricing" />
-              <Link href="#contact" title="Contact" />
+              <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+              
             </Anchor>
           </Drawer>
         </div>

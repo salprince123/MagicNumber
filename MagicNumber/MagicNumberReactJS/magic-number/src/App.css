@@ -84,16 +84,19 @@ header
   font-size: 22px;
   text-transform: uppercase;
   font-weight: 400;
+  width: auto;
 }
 
 .header .logo .fas {
   color: #1890ff;
   margin: 0 5px 0 0;
   font-size: 28px;
+  width: auto;
 }
 
 .header .logo a {
   color: #333;
+  width: auto;
 }
 
 .header .ant-anchor-wrapper {
@@ -200,6 +203,7 @@ header
 hero
 ---- 
 */
+
 .heroBlock {
   background: url('assets/images/bg-hero.jpg') no-repeat;
   background-position: 50% 100%;

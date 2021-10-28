@@ -1,15 +1,15 @@
 import { Input } from "antd";
 import { Button } from "antd/lib/radio";
 import { Component } from "react";
+import "./NewArticleForm.css";
 const { TextArea } = Input;
-export class NewArticleForm extends Component{
-    onChange = e => {
+function NewArticleForm () {
+    const onChange = e => {
         console.log('Change:', e.target.value);
       };
-    render()
-    {
+    
         return(
-            <div>
+            <div className="inputForm">
                 <br/>
                <Input size="large" placeholder="Your Title here"   ></Input>
                <TextArea showCount maxLength={2000} placeholder="Detail"
@@ -21,9 +21,8 @@ export class NewArticleForm extends Component{
                     transform: 'translate(-50%, -50%)'
                                 }}>Xuất bản</Button>
             </div>
-        )
+        );
         
     }
-}
 
 export default NewArticleForm;

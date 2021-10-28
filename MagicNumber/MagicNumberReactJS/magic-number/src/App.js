@@ -53,21 +53,31 @@ import AppFooter from './components/common/footer';
 import AppHome from './views/home';
 
 import { Layout } from 'antd';
+import { Route, Router, Switch } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import NumberForm from './MyComponent/NumberForm';
+import NewArticleForm from './MyComponent/NewArticleForm';
 const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
+    <div>
     <Layout className="mainLayout">
       <Header>
         <AppHeader/>
-      </Header>
-      <Content>
-        <AppHome/>
-      </Content>
-      <Footer>
-        <AppFooter/>  
-      </Footer>      
+      </Header>            
     </Layout>
+
+    <BrowserRouter>
+    <div className="container">       
+     <Switch>
+        <Route path='/Home' component={AppHome}/>
+        <Route path='/FindNumber' component={NumberForm}/>
+        <Route path='/NewArticle' component={NewArticleForm }/>
+     </Switch>
+    </div>
+    </BrowserRouter>   
+    </div>
   );
 }
 
