@@ -78,6 +78,8 @@ header
   justify-content: space-between;
   align-items: center;
   padding: 15px 0;
+  top: 0cm;
+  height: 1.5cm;
 }
 
 .header .logo {

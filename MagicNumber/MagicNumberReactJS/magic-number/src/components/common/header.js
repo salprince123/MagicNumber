@@ -23,14 +23,14 @@ function AppHeader() {
       <div className="header">
         <div className="logo">
           <i className="fas fa-bolt"></i>
-          <a href="http://localhost:3000">Magic Number</a>
+          <a href="http://localhost:3000/MainPage">Magic Number</a>
         </div>
        
         <div className="mobileHidden">
           <Anchor targetOffset="65">
-            <Link href="http://localhost:3000/Home" title="Home" />
+            <Link href="http://localhost:3000/MainPage" title="MainPage" />
             <Link href="#about" title="About" />
-            <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+            
             <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
             <Button type="primary" className="button-add-article" >
               <a href="http://localhost:3000/NewArticle">Write</a>
