@@ -3,7 +3,10 @@ import './MainPage.css'
 import { Typography } from 'antd';
 import { useAxiosGet, useAxiosGetWithHeader, useAxiosGetWithQuery } from '../../MyAPI/Axios';
 import { Avatar, Card, Col, Row } from 'antd';
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 const { Meta } = Card;
+
 
 
 const { Title } = Typography;
@@ -12,6 +15,7 @@ function TopTrending(){
   const news = useAxiosGet(url)
   const cardInfo = [];
   let content =null;
+  const history = useHistory();
 
   if(news.error){
       content = <div>
@@ -35,27 +39,32 @@ function TopTrending(){
       }
       
   }
+  const handleClick = (data, e) => {
+    history.replace("NewArticle");
+}
   
   const renderCard = (card, index) => {
       return (
           <div>
               <div className="site-card-wrapper">
-              <Row gutter={8} >
-              <Card
-              style={{ width: 300 }} bordered={false}
-              cover={
-              <img alt="example" style={{ height: 150 }}
-                  src={"https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-thumbnails/" + card.thumbnail}
-              />
-              }
-              >
-                  <Meta
-                  avatar={<Avatar src={"https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-xs-avatar/"+ card.creator_id.avatar }/>}
-                  title={card.title}
-                  description={card.description}
-                  />
-              </Card>    
-              </Row>            
+                <Row gutter={8} >
+                    <Card
+                        style={{ width: 300 }} bordered={false}
+                        cover={
+                            <img alt="example" style={{ height: 150 }}
+                                src={"https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-thumbnails/" + card.thumbnail}
+                            />
+                        }
+                        onClick={handleClick.bind(this, card.slug)}
+                        
+                    >
+                        <Meta
+                        avatar={<Avatar src={"https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-xs-avatar/"+ card.creator_id.avatar }/>}
+                        title={card.title}
+                        description={card.description}
+                        />
+                    </Card>
+                </Row>            
               </div>
               
           </div>

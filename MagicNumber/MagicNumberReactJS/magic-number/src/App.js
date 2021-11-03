@@ -55,7 +55,6 @@ import AppHome from './views/home';
 import { Layout } from 'antd';
 import { Route, Router, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import NumberForm from './MyComponent/NumberForm';
 import NewArticleForm from './MyComponent/NewArticleForm';
 import MainPage from './components/MainPage/MainPage';
 const { Header, Content, Footer } = Layout;
@@ -72,7 +71,6 @@ function App() {
     <div className="container">       
      <Switch>
         <Route path='/Home' component={AppHome}/>
-        <Route path='/FindNumber' component={NumberForm}/>
         <Route path='/NewArticle' component={NewArticleForm }/>
         <Route path='/MainPage' component={MainPage }/>
      </Switch>
