@@ -31,7 +31,7 @@ function AppHeader() {
             <Link href="http://localhost:3000/MainPage" title="MainPage" />
             <Link href="#about" title="About" />
             
-            <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+            
             <Button type="primary" className="button-add-article" >
               <a href="http://localhost:3000/NewArticle">Write</a>
             </Button>
@@ -51,7 +51,7 @@ function AppHeader() {
             <Anchor targetOffset="65">
               <Link href="http://localhost:3000/Home" title="Home" />
               <Link href="#about" title="About" />
-              <Link href="http://localhost:3000/FindNumber" title="Find Your Number" />
+              
               
             </Anchor>
           </Drawer>

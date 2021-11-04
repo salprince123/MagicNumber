@@ -5,6 +5,7 @@ import { useAxiosGet, useAxiosGetWithHeader, useAxiosGetWithQuery } from '../../
 import { Avatar, Card, Col, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import { Alert } from 'react-bootstrap';
 const { Meta } = Card;
 
 
@@ -40,7 +41,8 @@ function TopTrending(){
       
   }
   const handleClick = (data, e) => {
-    history.replace("NewArticle");
+    history.push("Read"+"/"+data);
+    
 }
   
   const renderCard = (card, index) => {

@@ -1,49 +1,4 @@
-/*import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
-import Number from './API/Number';
-import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
-import {NavLink} from 'react-router-dom';
-import {Navbar,Nav} from 'react-bootstrap';
-import NumberForm from './Component/NumberForm';
-import NewFeed from './Component/NewFeed';
-function App() {
-  
-  return ( 
-    <BrowserRouter>
-    <div className="container">
-     <Navbar bg="dark" >
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Nav>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/">
-                    Home
-                </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/Trending">
-                    Trending
-                </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/Number">
-                    Number
-                </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/Login">
-                    Login
-                </NavLink>
-                <NavLink className="d-inline p-2 bg-dark text-white" to="/SignUp">
-                    Signup
-                </NavLink>
-                </Nav>
-            </Navbar>
 
-     <Switch>
-       <Route path='/number' component={NumberForm}/>
-       <Route path='/trending' component={NewFeed}/>
-     </Switch>
-    </div>
-    </BrowserRouter>   
-  );
-}
-
-export default App;*/
 import React from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
@@ -53,19 +8,38 @@ import AppFooter from './components/common/footer';
 import AppHome from './views/home';
 
 import { Layout } from 'antd';
-import { Route, Router, Switch } from 'react-router';
+import { Redirect, Route, Router, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import NewArticleForm from './MyComponent/NewArticleForm';
 import MainPage from './components/MainPage/MainPage';
+import { ReadArticle } from './components/Read/ReadArticle';
 const { Header, Content, Footer } = Layout;
+const sample = 'https://spiderum.com/api/v1/post/Nhung-thu-phu-phiem-v3h';
 
 function App() {
+
+  const CustomRoute = ({ component: Component, sample, ...rest}) => {
+    return(
+        <Route 
+            {...rest}
+            //route has a render prop that lets you create a component in-line with the route
+            render = {props =>
+                sample === true ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/Read"/>
+                )
+            }
+        />
+    )
+}
   return (
     <div>
     <Layout className="mainLayout">
       <Header>
         <AppHeader/>
-      </Header>            
+      </Header>    
+           
     </Layout>
     <BrowserRouter>
     <div className="container">       
@@ -73,6 +47,8 @@ function App() {
         <Route path='/Home' component={AppHome}/>
         <Route path='/NewArticle' component={NewArticleForm }/>
         <Route path='/MainPage' component={MainPage }/>
+        <Route path='/Read' component={ReadArticle }/>
+        <CustomRoute path={"Read"+sample} component={ReadArticle} sample={sample}/>
      </Switch>
     </div>
     </BrowserRouter>   
