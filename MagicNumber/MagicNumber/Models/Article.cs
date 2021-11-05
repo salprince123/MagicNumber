@@ -9,8 +9,10 @@ namespace MagicNumber.Models
     {
         public string ArticleID { get; set; }
         public string Title { get; set; }
+        public string ImageLink { get; set; }
         public string Detail { get; set; }
         public string Upvote { get; set; }
+        public string Slug { get; set; }
         public string AuthorID { get; set; }
         public string ArticleTypeID { get; set; }
         public Article()

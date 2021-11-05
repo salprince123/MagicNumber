@@ -29,7 +29,9 @@ namespace MagicNumber.Controllers
 				temp1.ArticleID = reader.GetString("ArticleID");
 				temp1.Detail = reader.GetString("Detail");
 				temp1.Title = reader.GetString("Title");
+				temp1.ImageLink = reader.GetString("ImageLink");
 				temp1.Upvote = reader.GetString("Upvote");
+				temp1.Slug = reader.GetString("Slug");
 				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
 				temp.Add(temp1);
 			}
@@ -37,11 +39,11 @@ namespace MagicNumber.Controllers
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
 		}
 		// GET: Article
-		[System.Web.Http.Route("api/Article/GetByID")]
+		[System.Web.Http.Route("api/Article/GetBySlug")]
 		[System.Web.Http.HttpGet]
-		public HttpResponseMessage GetByID(string id)
+		public HttpResponseMessage GetByID(string slug)
 		{
-			string sql = $" SELECT * FROM article where articleID='{id}'  ";
+			string sql = $" SELECT * FROM article where slug='{slug}'  ";
 			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
@@ -51,9 +53,11 @@ namespace MagicNumber.Controllers
 			while (reader.Read())
 			{
 				temp.ArticleID = reader.GetString("ArticleID");
-				temp.Detail= reader.GetString("Detail");
-				temp.Title= reader.GetString("Title");
-				temp.Upvote= reader.GetString("Upvote");
+				temp.Detail = reader.GetString("Detail");
+				temp.Title = reader.GetString("Title");
+				temp.ImageLink = reader.GetString("ImageLink");
+				temp.Upvote = reader.GetString("Upvote");
+				temp.Slug = reader.GetString("Slug");
 				temp.ArticleTypeID = reader.GetString("ArticleTypeID");
 			}
 			con.Close();
@@ -77,7 +81,37 @@ namespace MagicNumber.Controllers
 				temp1.ArticleID = reader.GetString("ArticleID");
 				temp1.Detail = reader.GetString("Detail");
 				temp1.Title = reader.GetString("Title");
+				temp1.ImageLink = reader.GetString("ImageLink");
 				temp1.Upvote = reader.GetString("Upvote");
+				temp1.Slug = reader.GetString("Slug");
+				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
+				temp.Add(temp1);
+			}
+			con.Close();
+			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
+		}
+
+		[System.Web.Http.Route("api/Article/GetRandomPost")]
+		[System.Web.Http.HttpGet]
+		public HttpResponseMessage GetRandomPost()
+		{
+			string sql = $" SELECT * FROM article limit 5 ";
+			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+			MySqlCommand cmd = new MySqlCommand(sql, con);
+			con.Open();
+
+			MySqlDataReader reader = cmd.ExecuteReader();
+
+			List<Article> temp = new List<Article>();
+			while (reader.Read())
+			{
+				Article temp1 = new Article();
+				temp1.ArticleID = reader.GetString("ArticleID");
+				temp1.Detail = reader.GetString("Detail");
+				temp1.Title = reader.GetString("Title");
+				temp1.ImageLink = reader.GetString("ImageLink");
+				temp1.Upvote = reader.GetString("Upvote");
+				temp1.Slug= reader.GetString("Slug");
 				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
 				temp.Add(temp1);
 			}
