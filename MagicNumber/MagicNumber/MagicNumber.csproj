@@ -237,6 +237,7 @@
     <Compile Include="Controllers\NumberController.cs" />
     <Compile Include="Controllers\TypeArticleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="GetData\MyConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

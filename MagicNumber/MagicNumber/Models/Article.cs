@@ -15,6 +15,7 @@ namespace MagicNumber.Models
         public string Slug { get; set; }
         public string AuthorID { get; set; }
         public string ArticleTypeID { get; set; }
+        public User Author { get; set; }
         public Article()
         {
             this.AuthorID = "admin";

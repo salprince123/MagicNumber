@@ -13,9 +13,16 @@ const { Meta } = Card;
 const { Title } = Typography;
 function TopTrending(){
   const url = "https://spiderum.com/api/v1/post/getRandomPost";
+  //const url = "http://localhost:7999/api/Article/GetRandomPost";
   const news = useAxiosGet(url)
   const cardInfo = [];
   let content =null;
+
+  /*const apiUrl = "http://localhost:7999/api/Article/GetRandomPost";
+  const post = useAxiosGet(apiUrl)
+  const postInfo = [];
+  let postContent =null;*/
+
   const history = useHistory();
 
   if(news.error){
@@ -40,6 +47,30 @@ function TopTrending(){
       }
       
   }
+  //
+  /*if(post.error){
+    postContent = <div>
+        <div className="bg-blue-300 mb-2 p-3">
+            If you see this error. Please remember to create your own <a href="https://mockapi.io/">mock API</a>.
+        </div>
+        <div className="bg-red-300 p-3">
+            There was an error please refresh or try again later.
+        </div>
+    </div>
+}
+if(post.loading){
+    postContent = <h1>Page is load</h1>
+}
+
+if(post.data){
+    //for (var i = 0; i < Object.keys(news.data).length; i++)
+    for (var i = 0; i < 4; i++)
+    {
+        postContent.push(post.data[i]);
+    }
+    
+}*/
+
   const handleClick = (data, e) => {
     history.push("Read"+"/"+data);
     
@@ -79,7 +110,8 @@ function TopTrending(){
       <div  >
           <Row gutter={8}>
               {cardInfo.map(renderCard)}
-          </Row>    
+          </Row>   
+          
       </div>
   }
     return (

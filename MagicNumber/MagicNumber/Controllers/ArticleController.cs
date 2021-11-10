@@ -1,4 +1,5 @@
-﻿using MagicNumber.Models;
+﻿using MagicNumber.GetData;
+using MagicNumber.Models;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,35 @@ namespace MagicNumber.Controllers
 {
     public class ArticleController : ApiController
     {
+		private Article loadFromTable(MySqlDataReader reader)
+        {
+			Article temp1 = new Article();
+			User author = new User();
+			temp1.ArticleID = reader.GetString("ArticleID");
+			temp1.Detail = reader.GetString("Detail");
+			temp1.Title = reader.GetString("Title");
+			temp1.ImageLink = reader.GetString("ImageLink");
+			temp1.Upvote = reader.GetString("Upvote");
+			temp1.Slug = reader.GetString("Slug");
+			temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
+			author.Name = reader.GetString("Name");
+			author.Avatar = reader.GetString("avatar");
+			temp1.Author = author;
+			return temp1;
+		}
 		[System.Web.Http.Route("api/Article/GetAll")]
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetAll()
 		{
-			string sql = $" SELECT * FROM article  ";
-			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID  ";
+			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
-
-			MySqlDataReader reader = cmd.ExecuteReader();
-			
+			MySqlDataReader reader = cmd.ExecuteReader();			
 			List<Article> temp = new List<Article>();
 			while (reader.Read())
 			{
-				Article temp1 = new Article();
-				temp1.ArticleID = reader.GetString("ArticleID");
-				temp1.Detail = reader.GetString("Detail");
-				temp1.Title = reader.GetString("Title");
-				temp1.ImageLink = reader.GetString("ImageLink");
-				temp1.Upvote = reader.GetString("Upvote");
-				temp1.Slug = reader.GetString("Slug");
-				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
-				temp.Add(temp1);
+				temp.Add(loadFromTable(reader));
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
@@ -43,8 +50,8 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetByID(string slug)
 		{
-			string sql = $" SELECT * FROM article where slug='{slug}'  ";
-			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID where slug='{slug}'  ";
+			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
 
@@ -52,13 +59,7 @@ namespace MagicNumber.Controllers
 			Article temp = new Article();
 			while (reader.Read())
 			{
-				temp.ArticleID = reader.GetString("ArticleID");
-				temp.Detail = reader.GetString("Detail");
-				temp.Title = reader.GetString("Title");
-				temp.ImageLink = reader.GetString("ImageLink");
-				temp.Upvote = reader.GetString("Upvote");
-				temp.Slug = reader.GetString("Slug");
-				temp.ArticleTypeID = reader.GetString("ArticleTypeID");
+				temp=loadFromTable(reader);
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
@@ -68,8 +69,8 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetByType(string typeId)
 		{
-			string sql = $" SELECT * FROM article where articleTypeID='{typeId}'  ";
-			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID where articleTypeID='{typeId}'  ";
+			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
 
@@ -77,15 +78,7 @@ namespace MagicNumber.Controllers
 			List<Article> temp = new List<Article>();
 			while (reader.Read())
 			{
-				Article temp1 = new Article();
-				temp1.ArticleID = reader.GetString("ArticleID");
-				temp1.Detail = reader.GetString("Detail");
-				temp1.Title = reader.GetString("Title");
-				temp1.ImageLink = reader.GetString("ImageLink");
-				temp1.Upvote = reader.GetString("Upvote");
-				temp1.Slug = reader.GetString("Slug");
-				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
-				temp.Add(temp1);
+				temp.Add(loadFromTable(reader));
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
@@ -95,8 +88,8 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetRandomPost()
 		{
-			string sql = $" SELECT * FROM article limit 5 ";
-			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID limit 5 ";
+			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
 
@@ -105,15 +98,7 @@ namespace MagicNumber.Controllers
 			List<Article> temp = new List<Article>();
 			while (reader.Read())
 			{
-				Article temp1 = new Article();
-				temp1.ArticleID = reader.GetString("ArticleID");
-				temp1.Detail = reader.GetString("Detail");
-				temp1.Title = reader.GetString("Title");
-				temp1.ImageLink = reader.GetString("ImageLink");
-				temp1.Upvote = reader.GetString("Upvote");
-				temp1.Slug= reader.GetString("Slug");
-				temp1.ArticleTypeID = reader.GetString("ArticleTypeID");
-				temp.Add(temp1);
+				temp.Add(loadFromTable(reader));
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
@@ -125,7 +110,7 @@ namespace MagicNumber.Controllers
 			try
 			{
 				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.Detail}','{article.Upvote}','{article.AuthorID}','{article.ArticleTypeID}')  ";
-				MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
 				cmd.ExecuteNonQuery();
@@ -144,7 +129,7 @@ namespace MagicNumber.Controllers
 			try
 			{
 				string sql = $" update article set Title='{article.Title}', Detail='{article.Detail}', Upvote='{article.Upvote}',ArticleTypeID= '{article.ArticleTypeID}'  where ArticleID='{article.ArticleID}'";
-				MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
 				cmd.ExecuteNonQuery();
