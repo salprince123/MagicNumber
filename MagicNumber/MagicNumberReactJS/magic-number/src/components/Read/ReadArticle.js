@@ -15,7 +15,7 @@ export function ReadArticle(targetURL)
     //const slug="Nguoi-tre-va-nghe-nghiep-Hoa-hong-hay-thuong-dau-p1a";
     //const url = "https://spiderum.com/api/v1/post/"+slug;
     const slug= targetURL.location.pathname.substr(6,targetURL.location.pathname.length);
-    const url="https://spiderum.com/api/v1/post/" +slug;
+    const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
     //const url = `https://spiderum.com/api/v1/post/ ${targetURL}`;
     const returnData = useAxiosGet(url)
     const article=[]; 
@@ -40,7 +40,7 @@ export function ReadArticle(targetURL)
   
     if(returnData.data){
         
-        article.push(returnData.data.post);
+        article.push(returnData.data[0]);
     }
 
     const renderPost = (postData) => {
@@ -48,10 +48,10 @@ export function ReadArticle(targetURL)
             <div>
                 <div>
                     <h1 className="article-header">
-                        {postData.title}
+                        {postData.Title}
                     </h1>
                     <html className="article-body">
-                    { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postData.body) }} /> }
+                    { <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postData.Detail) }} /> }
                     </html>
                     
                 </div>

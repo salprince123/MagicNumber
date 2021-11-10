@@ -46,7 +46,7 @@ namespace MagicNumber.Controllers
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
 		}
 		// GET: Article
-		[System.Web.Http.Route("api/Article/GetBySlug")]
+		[System.Web.Http.Route("api/Article/GetBySlug/{slug}")]
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetByID(string slug)
 		{
@@ -56,10 +56,10 @@ namespace MagicNumber.Controllers
 			con.Open();
 
 			MySqlDataReader reader = cmd.ExecuteReader();
-			Article temp = new Article();
+			List<Article> temp = new List<Article>();
 			while (reader.Read())
 			{
-				temp=loadFromTable(reader);
+				temp.Add(loadFromTable(reader));
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
