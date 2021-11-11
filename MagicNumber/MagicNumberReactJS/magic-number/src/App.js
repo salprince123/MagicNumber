@@ -13,6 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 import NewArticleForm from './MyComponent/NewArticleForm';
 import MainPage from './components/MainPage/MainPage';
 import { ReadArticle } from './components/Read/ReadArticle';
+import UserDetail from './components/User/UserDetail';
 const { Header, Content, Footer } = Layout;
 const sample = 'https://spiderum.com/api/v1/post/Nhung-thu-phu-phiem-v3h';
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/NewArticle' component={NewArticleForm }/>
         <Route path='/MainPage' component={MainPage }/>
         <Route path='/Read' component={ReadArticle }/>
+        <Route path='/User' component={UserDetail }/>
         <CustomRoute path={"Read"+sample} component={ReadArticle} sample={sample}/>
      </Switch>
     </div>

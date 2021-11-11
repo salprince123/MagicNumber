@@ -109,16 +109,38 @@ namespace MagicNumber.Controllers
 		{
 			try
 			{
-				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.Detail}','{article.Upvote}','{article.AuthorID}','{article.ArticleTypeID}')  ";
+				string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				string small_alphabets = "abcdefghijklmnopqrstuvwxyz";
+				string numbers = "1234567890";
+				string characters = small_alphabets;
+				string id = "";
+				for (int i = 0; i < 5; i++)
+				{
+					string character = string.Empty;
+					do
+					{
+						int index = new Random().Next(0, characters.Length);
+						character = characters.ToCharArray()[index].ToString();
+					} while (id.IndexOf(character) != -1);
+					id += character;
+				}
+				article.Slug = "";
+				string[] temp = article.Title.Split(' ');
+				foreach (string t in temp)
+				{
+					article.Slug += $"-{t}";
+				}
+				article.Slug += id;
+				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.ImageLink}','{article.Detail}','0','{article.Slug}','{article.AuthorID}','{article.ArticleTypeID}')  ";
 				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
 				cmd.ExecuteNonQuery();
 				return "Add successfully!";
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				return "Fail to add";
+				return $"Fail to add {e.Message}";
 			}
 		}
 

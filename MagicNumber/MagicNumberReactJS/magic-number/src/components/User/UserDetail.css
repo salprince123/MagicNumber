@@ -1,0 +1,47 @@
+.mainBody
+  {
+    width: 1378px;
+    height: 1000px;
+    background-color: #FFFFFF;
+    overflow: visible;
+    margin-left: 1.3cm;
+    margin-top: 2cm;
+  }
+  .variant-1 {
+    width: 262px;
+  height: 346px;
+  overflow: visible;
+    margin-left: 1.3cm;
+    margin-top: 2cm;
+  }
+  .panel-name{
+    text-align: center;
+    margin-top: 0.5cm;
+    width: 100%;
+  }
+  .panel-user {
+    float: left;
+    width: 262px;
+    height: 346px;
+    background-color: #FFFFFF;
+    overflow: visible;
+    margin-left: 0.1cm;
+    margin-top: 1cm;
+  }
+  .wallpaper {
+    width: 1379px;
+    height: 260px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+  }
+  .avatar{
+    margin-top: 1cm;
+  }
+  .tab{
+    margin-top: 1cm;
+    margin-left: 7.5cm;
+    font-family:'Times New Roman', Times, serif;
+  }
