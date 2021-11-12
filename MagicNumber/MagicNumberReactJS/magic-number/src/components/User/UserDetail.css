@@ -1,11 +1,10 @@
 .mainBody
   {
     width: 1378px;
-    height: 1000px;
     background-color: #FFFFFF;
     overflow: visible;
     margin-left: 1.3cm;
-    margin-top: 2cm;
+    margin-bottom: 0cm;
   }
   .variant-1 {
     width: 262px;
@@ -41,7 +40,7 @@
     margin-top: 1cm;
   }
   .tab{
-    margin-top: 1cm;
+    margin-top: 0.4cm;
     margin-left: 7.5cm;
     font-family:'Times New Roman', Times, serif;
   }
