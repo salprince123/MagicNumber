@@ -65,3 +65,29 @@ export function useAxiosGetWithQuery(url, params){
 
     return request
 }
+export function useAxiosPost(url, data)
+{
+    const json = JSON.stringify(data);
+    const [request, setRequest] = useState({
+        loading: false,
+        data: null,
+        error: false
+    })
+
+    useEffect(() => {
+        setRequest({
+            loading: true,
+            data: null,
+            error: false
+        })
+        axios.post(url, json)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+    }, [url])
+
+    return request
+}

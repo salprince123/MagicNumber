@@ -124,6 +124,8 @@ namespace MagicNumber.Controllers
 					} while (id.IndexOf(character) != -1);
 					id += character;
 				}
+				article.ArticleID = $"Art{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Millisecond}{id}";
+
 				article.Slug = "";
 				string[] temp = article.Title.Split(' ');
 				foreach (string t in temp)

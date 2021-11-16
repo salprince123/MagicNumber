@@ -11,7 +11,7 @@ function NewArticleForm () {
         return(
             <div className="inputForm">
                 <br/>
-               <Input size="large" placeholder="Your Title here"   ></Input>
+               <Input size="large" placeholder="Your Title here" onIn  ></Input>
                <TextArea showCount maxLength={2000} placeholder="Detail"
                 autoSize={{ minRows: 3 }}></TextArea>
                 <br/>

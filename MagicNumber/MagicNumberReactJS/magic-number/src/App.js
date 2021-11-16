@@ -14,6 +14,7 @@ import NewArticleForm from './MyComponent/NewArticleForm';
 import MainPage from './components/MainPage/MainPage';
 import { ReadArticle } from './components/Read/ReadArticle';
 import UserDetail from './components/User/UserDetail';
+import NewArticle from './components/write/NewArticle';
 const { Header, Content, Footer } = Layout;
 const sample = 'https://spiderum.com/api/v1/post/Nhung-thu-phu-phiem-v3h';
 
@@ -46,7 +47,7 @@ function App() {
     <div className="container">       
      <Switch>
         <Route path='/Home' component={AppHome}/>
-        <Route path='/NewArticle' component={NewArticleForm }/>
+        <Route path='/NewArticle' component={NewArticle }/>
         <Route path='/MainPage' component={MainPage }/>
         <Route path='/Read' component={ReadArticle }/>
         <Route path='/User' component={UserDetail }/>
