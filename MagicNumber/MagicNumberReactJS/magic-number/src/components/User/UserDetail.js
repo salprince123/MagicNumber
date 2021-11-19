@@ -101,13 +101,14 @@ const ExampleComment = ({ children }) => (
 function UserDetail(){    
       return (
         <div className="mainBody">
-            <div className="wallpaper">
-                <Image src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"></Image>
+            <div >
+                <Avatar className="wallpaper" 
+                src="https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-cover/9b39f2804d0911e78d979d841160f2c5.jpg"></Avatar>
             </div>
             <Card className="panel-user" style={{ height: 400 }}>
             <Col  align="middle">
                 <Avatar className="avatar" alt="example" style={{ height: 150, width:150 }} 
-                            src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+                            src="https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-avatar/001befb0738b11e98bc52d654e80e4ac.jpg"
                         />
                 <Meta className="panel-name"
                     title="SolWannaGone"

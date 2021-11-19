@@ -91,3 +91,14 @@ export function useAxiosPost(url, data)
 
     return request
 }
+export default axios.create({
+    baseURL: "http://localhost:7999/api/Article/Add",
+    headers: {
+        "Title": "Test 19200",
+        "ImageLink": "https://www.studytienganh.vn/upload/2021/05/98114.jpg",
+        "Detail": "hahaha",
+        "Upvote": "0",
+        "AuthorID": "admin",
+        "ArticleTypeID": "type2"
+    }
+  });
