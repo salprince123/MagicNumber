@@ -28,6 +28,7 @@ namespace MagicNumber.Controllers
 			temp1.Author = author;
 			return temp1;
 		}
+
 		[System.Web.Http.Route("api/Article/GetAll")]
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetAll()
@@ -163,6 +164,27 @@ namespace MagicNumber.Controllers
 			{
 				
 				return $"Fail to edit {e.Message}";
+
+			}
+		}
+
+		[System.Web.Http.Route("api/Article/Upvote")]
+		[System.Web.Http.HttpPut]
+		public string Upvote(String slug)
+		{
+			try
+			{
+				string sql = $" update article set Upvote= Upvote +1 where slug='{slug}'";
+				MySqlConnection con = new MyConnection().GetConnection();
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return "Upvote successfully!";
+			}
+			catch (Exception e)
+			{
+
+				return $"Fail to Upvote {e.Message}";
 
 			}
 		}
