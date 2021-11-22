@@ -188,5 +188,28 @@ namespace MagicNumber.Controllers
 
 			}
 		}
+
+		[System.Web.Http.Route("api/Article/AddComment")]
+		[System.Web.Http.HttpPost]
+		public string AddComment(String slug, String detail, string userID)
+		{
+			try
+			{
+				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{userID}', " +
+							$" (SELECT ArticleID FROM article where slug='{slug}'), " +
+							$" '{detail}','{DateTime.Now.ToString()}'); ";
+				MySqlConnection con = new MyConnection().GetConnection();
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return "Add Comment successfully!";
+			}
+			catch (Exception e)
+			{
+
+				return $"Fail to Add Comment {e.Message}";
+
+			}
+		}
 	}
 }
