@@ -60,12 +60,12 @@ const BlogList = () => {
       return (
         <Col key={item.Title} md='6'>
           <Card>
-            <Link to={`/pages/blog/detail/${item.Slug}`}>
+            <Link to={`/pages/article/detail/${item.Slug}`}>
               <CardImg className='img-fluid' src={item.ImageLink} alt={item.Title} top />
             </Link>
             <CardBody>
               <CardTitle tag='h4'>
-                <Link className='blog-title-truncate text-body-heading' to={`/pages/blog/detail/${item.Slug}`}>
+                <Link className='blog-title-truncate text-body-heading' to={`/pages/article/detail/${item.Slug}`}>
                   {item.Title}
                 </Link>
               </CardTitle>
@@ -86,11 +86,11 @@ const BlogList = () => {
               <CardText className='blog-content-truncate'>{item.Title}</CardText>
               <hr />
               <div className='d-flex justify-content-between align-items-center'>
-                <Link to={`/pages/blog/detail/${item.Slug}`}>
+                <Link to={`/pages/article/detail/${item.Slug}`}>
                   <MessageSquare size={15} className='text-body mr-50' />
                   <span className='text-body font-weight-bold'>{item.Title} Comments</span>
                 </Link>
-                <Link className='font-weight-bold' to={`/pages/blog/detail/${item.Slug}`}>
+                <Link className='font-weight-bold' to={`/pages/article/detail/${item.Slug}`}>
                   Read More
                 </Link>
               </div>

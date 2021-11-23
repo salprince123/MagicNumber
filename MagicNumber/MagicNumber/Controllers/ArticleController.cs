@@ -211,5 +211,24 @@ namespace MagicNumber.Controllers
 
 			}
 		}
+
+		[System.Web.Http.Route("api/Article/Delete")]
+		[System.Web.Http.HttpDelete]
+		public string Delete(string id)
+		{
+			try
+			{
+				string sql = $" delete from Article where ArticleID='{id}'";
+				MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return $"Delete article {id} successfully!";
+			}
+			catch (Exception e)
+			{
+				return $"Fail +{e.Message}";
+			}
+		}
 	}
 }
