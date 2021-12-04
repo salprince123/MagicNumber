@@ -2,10 +2,10 @@ import { Fragment, useState, useEffect } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
 import Sidebar from '../BlogSidebar'
-import Avatar from '@components/avatar'
+import Avatar from '../../../@core/components/avatar'
 import { Link } from 'react-router-dom'
 import { MessageSquare } from 'react-feather'
-import Breadcrumbs from '@components/breadcrumbs'
+import Breadcrumbs from '../../../@core/components/breadcrumbs'
 import {
   Row,
   Col,
@@ -21,7 +21,7 @@ import {
   PaginationLink
 } from 'reactstrap'
 
-import '@styles/base/pages/page-blog.scss'
+import '../../../@core/scss/base/pages/page-blog.scss'
 
 const BlogList = () => {
   const [data, setData] = useState(null)

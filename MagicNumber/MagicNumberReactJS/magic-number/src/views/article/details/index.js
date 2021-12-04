@@ -2,9 +2,9 @@ import { Fragment, useState, useEffect } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
 import Sidebar from '../BlogSidebar'
-import Avatar from '@components/avatar'
-import cmtImg from '@src/assets/images/portrait/small/avatar-s-6.jpg'
-import { kFormatter } from '@utils'
+import Avatar from '../../../@core/components/avatar'
+import cmtImg from '../../../assets/images/portrait/small/avatar-s-6.jpg'
+import { kFormatter } from '../../../utility/Utils'
 import {
   Share2,
   MessageSquare,
@@ -16,7 +16,7 @@ import {
   Linkedin,
   CornerUpLeft
 } from 'react-feather'
-import Breadcrumbs from '@components/breadcrumbs'
+import Breadcrumbs from '../../../@core/components/breadcrumbs'
 import {
   Row,
   Col,
@@ -38,7 +38,7 @@ import {
   CustomInput
 } from 'reactstrap'
 
-import '@styles/base/pages/page-blog.scss'
+import '../../../@core/scss/base/pages/page-blog.scss'
 
 const BlogDetails = () => {
   const [data, setData] = useState(null)

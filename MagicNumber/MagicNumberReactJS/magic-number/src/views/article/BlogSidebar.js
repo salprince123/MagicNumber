@@ -2,9 +2,9 @@ import { useEffect, useState, Fragment } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
 import * as Icon from 'react-feather'
-import Avatar from '@components/avatar'
+import Avatar from 'components/avatar'
 import { Link } from 'react-router-dom'
-import { InputGroup, InputGroupAddon, Input, InputGroupText, Media } from 'reactstrap'
+import { InputGroup, Input, InputGroupText, Media } from 'reactstrap'
 
 const BlogSidebar = () => {
   const [data, setData] = useState(null)
@@ -76,11 +76,6 @@ const BlogSidebar = () => {
             <div className='blog-search'>
               <InputGroup className='input-group-merge'>
                 <Input placeholder='Search here' />
-                <InputGroupAddon addonType='append'>
-                  <InputGroupText>
-                    <Icon.Search size={14} />
-                  </InputGroupText>
-                </InputGroupAddon>
               </InputGroup>
             </div>
             {data !== null ? (
