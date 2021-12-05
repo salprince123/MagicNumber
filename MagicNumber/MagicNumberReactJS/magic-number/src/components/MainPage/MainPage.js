@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+
 import { Avatar, Card, Col, Row } from 'antd';
 import React, { useState } from 'react';
 import { useAxiosGet, useAxiosGetWithHeader, useAxiosGetWithQuery } from '../../MyAPI/Axios';
@@ -10,6 +10,8 @@ function MainPage(){
     return (
         <TopTrending></TopTrending>
     )
+
+
 
 }
 export default MainPage;
