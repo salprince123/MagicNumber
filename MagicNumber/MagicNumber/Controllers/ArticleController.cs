@@ -28,6 +28,7 @@ namespace MagicNumber.Controllers
 			temp1.Author = author;
 			return temp1;
 		}
+
 		[System.Web.Http.Route("api/Article/GetAll")]
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetAll()
@@ -109,16 +110,40 @@ namespace MagicNumber.Controllers
 		{
 			try
 			{
-				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.Detail}','{article.Upvote}','{article.AuthorID}','{article.ArticleTypeID}')  ";
+				string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				string small_alphabets = "abcdefghijklmnopqrstuvwxyz";
+				string numbers = "1234567890";
+				string characters = small_alphabets;
+				string id = "";
+				for (int i = 0; i < 5; i++)
+				{
+					string character = string.Empty;
+					do
+					{
+						int index = new Random().Next(0, characters.Length);
+						character = characters.ToCharArray()[index].ToString();
+					} while (id.IndexOf(character) != -1);
+					id += character;
+				}
+				article.ArticleID = $"Art{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}{DateTime.Now.Hour}{DateTime.Now.Minute}{DateTime.Now.Millisecond}{id}";
+
+				article.Slug = "";
+				string[] temp = article.Title.Split(' ');
+				foreach (string t in temp)
+				{
+					article.Slug += $"-{t}";
+				}
+				article.Slug += id;
+				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.ImageLink}','{article.Detail}','0','{article.Slug}','{article.AuthorID}','{article.ArticleTypeID}')  ";
 				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
 				cmd.ExecuteNonQuery();
 				return "Add successfully!";
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				return "Fail to add";
+				return $"Fail to add {e.Message}";
 			}
 		}
 
@@ -139,6 +164,50 @@ namespace MagicNumber.Controllers
 			{
 				
 				return $"Fail to edit {e.Message}";
+
+			}
+		}
+
+		[System.Web.Http.Route("api/Article/Upvote")]
+		[System.Web.Http.HttpPut]
+		public string Upvote(String slug)
+		{
+			try
+			{
+				string sql = $" update article set Upvote= Upvote +1 where slug='{slug}'";
+				MySqlConnection con = new MyConnection().GetConnection();
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return "Upvote successfully!";
+			}
+			catch (Exception e)
+			{
+
+				return $"Fail to Upvote {e.Message}";
+
+			}
+		}
+
+		[System.Web.Http.Route("api/Article/AddComment")]
+		[System.Web.Http.HttpPost]
+		public string AddComment(String slug, String detail, string userID)
+		{
+			try
+			{
+				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{userID}', " +
+							$" (SELECT ArticleID FROM article where slug='{slug}'), " +
+							$" '{detail}','{DateTime.Now.ToString()}'); ";
+				MySqlConnection con = new MyConnection().GetConnection();
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return "Add Comment successfully!";
+			}
+			catch (Exception e)
+			{
+
+				return $"Fail to Add Comment {e.Message}";
 
 			}
 		}

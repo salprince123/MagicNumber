@@ -13,45 +13,48 @@ import { BrowserRouter } from 'react-router-dom';
 import NewArticleForm from './MyComponent/NewArticleForm';
 import MainPage from './components/MainPage/MainPage';
 import { ReadArticle } from './components/Read/ReadArticle';
+import UserDetail from './components/User/UserDetail';
+import NewArticle from './components/write/NewArticle';
 const { Header, Content, Footer } = Layout;
 const sample = 'https://spiderum.com/api/v1/post/Nhung-thu-phu-phiem-v3h';
 
 function App() {
 
-  const CustomRoute = ({ component: Component, sample, ...rest }) => {
-    return (
-      <Route
-        {...rest}
-        //route has a render prop that lets you create a component in-line with the route
-        render={props =>
-          sample === true ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/Read" />
-          )
-        }
-      />
+  const CustomRoute = ({ component: Component, sample, ...rest}) => {
+    return(
+        <Route 
+            {...rest}
+            //route has a render prop that lets you create a component in-line with the route
+            render = {props =>
+                sample === true ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/Read"/>
+                )
+            }
+        />
     )
-  }
+}
   return (
     <div>
-      <Layout className="mainLayout">
-        <Header>
-          <AppHeader />
-        </Header>
-
-      </Layout>
-      <BrowserRouter>
-        <div className="container">
-          <Switch>
-            <Route path='/Home' component={AppHome} />
-            <Route path='/NewArticle' component={NewArticleForm} />
-            <Route path='/MainPage' component={MainPage} />
-            <Route path='/Read' component={ReadArticle} />
-            <CustomRoute path={"Read" + sample} component={ReadArticle} sample={sample} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+    <Layout className="mainLayout">
+      <Header>
+        <AppHeader/>
+      </Header>    
+           
+    </Layout>
+    <BrowserRouter>
+    <div className="container">       
+     <Switch>
+        <Route path='/Home' component={AppHome}/>
+        <Route path='/NewArticle' component={NewArticle }/>
+        <Route path='/MainPage' component={MainPage }/>
+        <Route path='/Read' component={ReadArticle }/>
+        <Route path='/User' component={UserDetail }/>
+        <CustomRoute path={"Read"+sample} component={ReadArticle} sample={sample}/>
+     </Switch>
+    </div>
+    </BrowserRouter>   
     </div>
   );
 }
