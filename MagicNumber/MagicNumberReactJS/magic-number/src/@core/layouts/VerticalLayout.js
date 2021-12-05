@@ -16,7 +16,6 @@ import { Navbar, Button } from 'reactstrap'
 import themeConfig from '@configs/themeConfig'
 
 // ** Custom Components
-import Customizer from '@components/customizer'
 import FooterComponent from './components/footer'
 import NavbarComponent from './components/navbar'
 import SidebarComponent from './components/menu/vertical-menu'
@@ -175,31 +174,6 @@ const VerticalLayout = props => {
       ></div>
       {/* Vertical Nav Menu Overlay */}
 
-      {themeConfig.layout.customizer === true ? (
-        <Customizer
-          skin={skin}
-          setSkin={setSkin}
-          footerType={footerType}
-          setFooterType={setFooterType}
-          navbarType={navbarType}
-          setNavbarType={setNavbarType}
-          navbarColor={navbarColor}
-          setNavbarColor={setNavbarColor}
-          isRtl={isRtl}
-          setIsRtl={setIsRtl}
-          layout={props.layout}
-          setLayout={props.setLayout}
-          isHidden={isHidden}
-          setIsHidden={setIsHidden}
-          contentWidth={contentWidth}
-          setContentWidth={setContentWidth}
-          menuCollapsed={menuCollapsed}
-          setMenuCollapsed={setMenuCollapsed}
-          transition={props.transition}
-          setTransition={props.setTransition}
-          themeConfig={themeConfig}
-        />
-      ) : null}
       <footer
         className={classnames(`footer footer-light ${footerClasses[footerType] || 'footer-static'}`, {
           'd-none': footerType === 'hidden'

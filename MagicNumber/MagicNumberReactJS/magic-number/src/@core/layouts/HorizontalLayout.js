@@ -16,7 +16,6 @@ import { Navbar, NavItem, Button } from 'reactstrap'
 import themeConfig from '@configs/themeConfig'
 
 // ** Custom Components
-import Customizer from '@components/customizer'
 import NavbarComponent from './components/navbar'
 import FooterComponent from './components/footer'
 import MenuComponent from './components/menu/horizontal-menu'
@@ -156,29 +155,7 @@ const HorizontalLayout = props => {
       ) : null}
 
       {children}
-      {themeConfig.layout.customizer === true ? (
-        <Customizer
-          skin={skin}
-          setSkin={setSkin}
-          footerType={footerType}
-          setFooterType={setFooterType}
-          navbarType={navbarType}
-          setNavbarType={setNavbarType}
-          navbarColor={navbarColor}
-          setNavbarColor={setNavbarColor}
-          isRtl={isRtl}
-          setIsRtl={setIsRtl}
-          layout={props.layout}
-          setLayout={props.setLayout}
-          isHidden={isHidden}
-          setIsHidden={setIsHidden}
-          contentWidth={contentWidth}
-          setContentWidth={setContentWidth}
-          transition={props.transition}
-          setTransition={props.setTransition}
-          themeConfig={themeConfig}
-        />
-      ) : null}
+    
       <footer
         className={classnames(`footer footer-light ${footerClasses[footerType] || 'footer-static'}`, {
           'd-none': footerType === 'hidden'

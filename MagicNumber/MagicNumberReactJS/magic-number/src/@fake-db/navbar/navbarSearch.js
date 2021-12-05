@@ -6,28 +6,12 @@ export const searchArr = [
     searchLimit: 4,
     data: [
       {
-        id: 1,
-        target: 'analyticsDash',
-        isBookmarked: false,
-        title: 'Analytics Dashboard',
-        icon: 'Home',
-        link: '/dashboard/analytics'
-      },
-      {
         id: 2,
         target: 'eCommerceDash',
         isBookmarked: false,
         title: 'eCommerce Dashboard',
         icon: 'Home',
         link: '/'
-      },
-      {
-        id: 3,
-        target: 'email',
-        isBookmarked: true,
-        title: 'Email',
-        icon: 'Mail',
-        link: '/apps/email'
       },
       {
         id: 4,
@@ -231,15 +215,6 @@ export const searchArr = [
         link: '/pages/faq'
       },
       {
-        id: 29,
-        target: 'knowledgeBase',
-        isBookmarked: false,
-        title: 'Knowledge Base Page',
-        icon: 'AlignLeft',
-        link: '/pages/knowledge-base'
-      },
-
-      {
         id: 30,
         target: 'pricing',
         isBookmarked: false,
@@ -355,14 +330,6 @@ export const searchArr = [
         link: '/cards/statistics'
       },
       {
-        id: 44,
-        target: 'CardAnalytics',
-        isBookmarked: false,
-        title: 'Card Analytics',
-        icon: 'BarChart2',
-        link: '/cards/analytics'
-      },
-      {
         id: 45,
         target: 'cardActions',
         isBookmarked: false,
@@ -401,14 +368,6 @@ export const searchArr = [
         title: 'Badges',
         icon: 'Circle',
         link: '/components/badges'
-      },
-      {
-        id: 50,
-        target: 'breadCrumbs',
-        isBookmarked: false,
-        title: 'Breadcrumbs',
-        icon: 'MoreHorizontal',
-        link: '/components/breadcrumbs'
       },
       {
         id: 51,
@@ -897,14 +856,6 @@ export const searchArr = [
         title: 'Datatables Advance',
         icon: 'Grid',
         link: '/datatables/advance'
-      },
-      {
-        id: 114,
-        target: 'apex',
-        isBookmarked: false,
-        title: 'Apex Charts',
-        icon: 'BarChart',
-        link: '/charts/apex'
       },
       {
         id: 115,
