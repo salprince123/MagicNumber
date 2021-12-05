@@ -866,14 +866,6 @@ export const searchArr = [
         link: '/charts/chartjs'
       },
       {
-        id: 116,
-        target: 'recharts',
-        isBookmarked: false,
-        title: 'Recharts',
-        icon: 'BarChart2',
-        link: '/charts/recharts'
-      },
-      {
         id: 117,
         target: 'leafletMaps',
         isBookmarked: false,
