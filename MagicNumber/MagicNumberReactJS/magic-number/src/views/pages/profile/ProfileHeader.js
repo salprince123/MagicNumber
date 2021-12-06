@@ -9,15 +9,15 @@ const ProfileHeader = ({ data }) => {
 
   return (
     <Card className='profile-header mb-2'>
-      <CardImg src={data.coverImg} alt='User Profile Image' top />
+      <CardImg src={data.Background} alt='User Profile Image' top />
       <div className='position-relative'>
         <div className='profile-img-container d-flex align-items-center'>
           <div className='profile-img'>
-            <img className='rounded img-fluid' src={data.avatar} alt='Card image' />
+            <img className='rounded img-fluid' src={data.Avatar} alt='Card image' />
           </div>
           <div className='profile-title ml-3'>
-            <h2 className='text-white'>{data.username}</h2>
-            <p className='text-white'>{data.designation}</p>
+            <h2 className='text-white'>{data.Name}</h2>
+            <p className='text-white'>{data.Quote}</p>
           </div>
         </div>
       </div>

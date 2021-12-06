@@ -25,7 +25,7 @@ const UserDropdown = () => {
 
   // ** State
   const [userData, setUserData] = useState(null)
-
+  
   //** ComponentDidMount
   useEffect(() => {
     if (isUserLoggedIn() !== null) {

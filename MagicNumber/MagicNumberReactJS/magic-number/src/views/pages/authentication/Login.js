@@ -28,6 +28,7 @@ import {
 } from 'reactstrap'
 
 import '@styles/base/pages/page-auth.scss'
+import axios from 'axios'
 
 const ToastContent = ({ name, role }) => (
   <Fragment>
@@ -48,15 +49,42 @@ const Login = props => {
   const ability = useContext(AbilityContext)
   const dispatch = useDispatch()
   const history = useHistory()
+  //const [email, setEmail] = useState('salprince@gmail.com')
+  //const [password, setPassword] = useState('123456')
   const [email, setEmail] = useState('admin@demo.com')
   const [password, setPassword] = useState('admin')
-
+  const temp={
+    action: 'manage',
+    subject: 'all'
+  }
+  const [realPass, setRealPass] = useState('')
   const { register, errors, handleSubmit } = useForm()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
-
+  const urlCheckPass ="http://localhost:7999/api/User/CheckPassword"
+  const urlGetInfo= "http://localhost:7999/api/User/GetByID"
   const onSubmit = data => {
-    if (isObjEmpty(errors)) {
+    /*alert("input "+ email)
+    axios.get(urlCheckPass,{
+      params: {
+        id: "salprince@gmail.com"
+      }
+    }).then(response => setRealPass(response.data))
+    
+    
+    if(realPass==password)
+    {
+      dispatch(handleLogin(data))
+      ability.update(temp)
+      history.push(getHomeRouteForLoggedInUser("admin"))
+          toast.success(
+            <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
+            { transition: Slide, hideProgressBar: true, autoClose: 2000 }
+          )
+    }
+    else alert("wrong pass!"+ email+realPass)*/
+    //alert(realPass);
+    if (isObjEmpty(errors) ) {
       useJwt
         .login({ email, password })
         .then(res => {
@@ -71,8 +99,9 @@ const Login = props => {
         })
         .catch(err => console.log(err))
     }
+  
   }
-
+  
   return (
     <div className='auth-wrapper auth-v2'>
       <Row className='auth-inner m-0'>
@@ -138,6 +167,7 @@ const Login = props => {
               Welcome! 👋
             </CardTitle>
             <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
+            {/*
             <Alert color='primary'>
               <div className='alert-body font-small-2'>
                 <p>
@@ -161,6 +191,7 @@ const Login = props => {
                 This is just for ACL demo purpose.
               </UncontrolledTooltip>
             </Alert>
+            */ }
             <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
               <FormGroup>
                 <Label className='form-label' for='login-email'>
