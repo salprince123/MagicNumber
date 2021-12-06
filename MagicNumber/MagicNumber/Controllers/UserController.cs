@@ -18,8 +18,11 @@ namespace MagicNumber.Controllers
 			temp1.UserID = reader.GetString("UserID");
 			temp1.Password = reader.GetString("Password");
 			temp1.Name = reader.GetString("Name");
+			temp1.About = reader.GetString("About");
+			temp1.Quote = reader.GetString("Quote");
 			temp1.Birthday = reader.GetString("Birthday");
 			temp1.Avatar = reader.GetString("Avatar");
+			temp1.Background = reader.GetString("Background");
 			return temp1;
 		}
 
@@ -40,6 +43,25 @@ namespace MagicNumber.Controllers
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
+		}
+
+		[System.Web.Http.Route("api/User/CheckPassword")]
+		[System.Web.Http.HttpGet]
+		public HttpResponseMessage CheckPassword(string id)
+		{
+			string sql = $"select password from User where UserID='{id}' ";
+			MySqlConnection con = new MyConnection().GetConnection();
+			MySqlCommand cmd = new MySqlCommand(sql, con);
+			con.Open();
+
+			MySqlDataReader reader = cmd.ExecuteReader();
+			String pass = "";
+			while (reader.Read())
+			{
+				pass= reader.GetString("Password");
+			}
+			con.Close();
+			return Request.CreateResponse(System.Net.HttpStatusCode.OK, pass);
 		}
 
 		[System.Web.Http.Route("api/User/Edit")]

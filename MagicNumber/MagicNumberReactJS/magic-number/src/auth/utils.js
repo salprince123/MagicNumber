@@ -1,4 +1,5 @@
 import useJwt from '@src/@core/auth/jwt/useJwt'
+import { useState } from 'react'
 
 /**
  * Return if user is logged in
@@ -10,7 +11,18 @@ export const isUserLoggedIn = () => {
   return localStorage.getItem('userData') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
 }
 
-export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
+//export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
+/*export const getUserData = () =>
+{
+  const url ="http://localhost:7999/api/User/CheckPassword"
+  const [userList,setUserList]=useState(null)
+  axios.get(url,{
+    params: {
+      id: 'admin'
+    }
+  }).then(response => setUserList(response.data))
+  return(userList);
+}*/
 
 /**
  * This function is used for demo purpose route navigation

@@ -150,6 +150,11 @@ const VerticalLayout = props => {
         />
       ) : null}
 
+      {
+        /*
+        
+        */
+      }
       <Navbar
         expand='lg'
         light={skin !== 'dark'}

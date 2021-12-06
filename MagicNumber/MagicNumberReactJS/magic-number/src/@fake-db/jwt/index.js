@@ -5,10 +5,10 @@ const data = {
   users: [
     {
       id: 1,
-      fullName: 'John Doe',
-      username: 'johndoe',
+      fullName: 'Admin',
+      username: 'admin',
       password: 'admin',
-      avatar: require('@src/assets/images/portrait/small/avatar-s-11.jpg').default,
+      avatar: "https://anhdep123.com/wp-content/uploads/2021/01/anh-mang-cute-lam-hinh-dai-dien-dep-nhat.jpg",
       email: 'admin@demo.com',
       role: 'admin',
       ability: [

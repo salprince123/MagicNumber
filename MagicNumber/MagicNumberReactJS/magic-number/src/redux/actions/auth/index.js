@@ -10,8 +10,8 @@ export const handleLogin = data => {
       type: 'LOGIN',
       data,
       config,
-      [config.storageTokenKeyName]: data[config.storageTokenKeyName],
-      [config.storageRefreshTokenKeyName]: data[config.storageRefreshTokenKeyName]
+      //[config.storageTokenKeyName]: data[config.storageTokenKeyName],
+      //[config.storageRefreshTokenKeyName]: data[config.storageRefreshTokenKeyName]
     })
 
     // ** Add to user, accessToken & refreshToken to localStorage

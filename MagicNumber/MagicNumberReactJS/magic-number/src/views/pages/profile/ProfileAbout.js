@@ -5,8 +5,13 @@ const ProfileAbout = ({ data }) => {
     <Card>
       <CardBody>
         <h5 className='mb-75'>About</h5>
-        <CardText>{data.about}</CardText>
-        <div className='mt-2'>
+        <CardText>{data.About}</CardText>
+        
+      </CardBody>
+    </Card>
+  )
+}
+/*<div className='mt-2'>
           <h5 className='mb-75'>Joined:</h5>
           <CardText>{data.joined}</CardText>
         </div>
@@ -21,10 +26,5 @@ const ProfileAbout = ({ data }) => {
         <div className='mt-2'>
           <h5 className='mb-75'>Website:</h5>
           <CardText>{data.website}</CardText>
-        </div>
-      </CardBody>
-    </Card>
-  )
-}
-
+        </div> */
 export default ProfileAbout
