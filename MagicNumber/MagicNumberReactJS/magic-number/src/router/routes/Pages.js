@@ -40,7 +40,7 @@ const PagesRoutes = [
     component: lazy(() => import('../../views/pages/blog/list'))
   },
   {
-    path: '/pages/blog/detail/:id',
+    path: '/pages/article/detail/:id',
     exact: true,
     component: lazy(() => import('../../views/pages/blog/details')),
     meta: {
@@ -48,22 +48,22 @@ const PagesRoutes = [
     }
   },
   {
-    path: '/pages/blog/detail',
+    path: '/pages/article/detail',
     exact: true,
     component: () => <Redirect to='/pages/blog/detail/1' />
   },
   {
-    path: '/pages/blog/edit/:id',
+    path: '/pages/article/edit/:id',
     exact: true,
     component: lazy(() => import('../../views/pages/blog/edit')),
     meta: {
-      navLink: '/pages/blog/edit'
+      navLink: '/pages/article/edit'
     }
   },
   {
-    path: '/pages/blog/edit',
+    path: '/pages/article/edit',
     exact: true,
-    component: () => <Redirect to='/pages/blog/edit/1' />
+    component: () => <Redirect to='/pages/article/edit/1' />
   },
   {
     path: '/misc/coming-soon',
