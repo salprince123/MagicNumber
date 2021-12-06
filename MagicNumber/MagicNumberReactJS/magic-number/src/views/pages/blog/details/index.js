@@ -5,7 +5,6 @@ import Sidebar from '../BlogSidebar'
 import Avatar from '@components/avatar'
 import cmtImg from '@src/assets/images/portrait/small/avatar-s-6.jpg'
 import { kFormatter } from '@utils'
-import DOMPurify from "dompurify";
 import {
   Share2,
   MessageSquare,

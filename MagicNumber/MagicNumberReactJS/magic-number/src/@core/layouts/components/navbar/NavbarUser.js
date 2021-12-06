@@ -2,10 +2,11 @@
 import UserDropdown from './UserDropdown'
 import NavbarSearch from './NavbarSearch'
 import NotificationDropdown from './NotificationDropdown'
+import { Link } from 'react-router-dom'
 
 // ** Third Party Components
 import { Sun, Moon } from 'react-feather'
-import { NavItem, NavLink } from 'reactstrap'
+import { NavItem, NavLink, Button } from 'reactstrap'
 
 const NavbarUser = props => {
   // ** Props
@@ -29,6 +30,10 @@ const NavbarUser = props => {
       </NavItem>
       <NavbarSearch />
       <NotificationDropdown />
+      <div className="px-2"/>
+      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/pages/article/create'>
+      Write Article
+      </Button.Ripple>
       <UserDropdown />
     </ul>
   )

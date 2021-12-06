@@ -35,6 +35,11 @@ const PagesRoutes = [
     component: lazy(() => import('../../views/pages/account-settings'))
   },
   {
+    path: '/pages/article/create',
+    exact: true,
+    component: lazy(() => import('../../views/pages/blog/create'))
+  },
+  {
     path: '/pages/article/list',
     exact: true,
     component: lazy(() => import('../../views/pages/blog/list'))
