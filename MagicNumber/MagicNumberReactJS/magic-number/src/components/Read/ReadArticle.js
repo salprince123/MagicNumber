@@ -11,17 +11,12 @@ import './Read.css'
  */
 export function ReadArticle(targetURL)
 {
-    // note: target URL không nhận kiểu String nên k ghép vô url đc
-    //const slug="Nguoi-tre-va-nghe-nghiep-Hoa-hong-hay-thuong-dau-p1a";
-    //const url = "https://spiderum.com/api/v1/post/"+slug;
     const slug= targetURL.location.pathname.substr(6,targetURL.location.pathname.length);
     const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
-    //const url = `https://spiderum.com/api/v1/post/ ${targetURL}`;
     const returnData = useAxiosGet(url)
     const article=[]; 
     let content =null;
-
-
+    
     if(returnData.error){
         
         content = <div>

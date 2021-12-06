@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Row, Col } from 'reactstrap'
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
-const EcommerceDashboard = () => {
+const Dashboard = () => {
   const { colors } = useContext(ThemeColors),
     trackBgColor = '#e9ecef'
 
@@ -13,4 +13,4 @@ const EcommerceDashboard = () => {
   )
 }
 
-export default EcommerceDashboard
+export default Dashboard
