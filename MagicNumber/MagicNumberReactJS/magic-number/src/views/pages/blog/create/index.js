@@ -6,6 +6,8 @@ import htmlToDraft from 'html-to-draftjs'
 import { selectThemeColors } from '@utils'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, ContentState } from 'draft-js'
+import { Link } from 'react-router-dom'
+
 import {
   Row,
   Col,
@@ -26,7 +28,7 @@ import '@styles/base/plugins/forms/form-quill-editor.scss'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/base/pages/page-blog.scss'
 
-const BlogEdit = () => {
+const BlogCreate = () => {
   const initialContent = ``
 
   const contentBlock = htmlToDraft(initialContent)
@@ -122,7 +124,7 @@ const BlogEdit = () => {
 
                             <p className='my-50'>
                               <a href='/' onClick={e => e.preventDefault()}>
-                                {`C:/fakepath/${imgPath}`}
+                                {imgPath}
                               </a>
                             </p>
                             <div className='d-inline-block'>
@@ -144,7 +146,7 @@ const BlogEdit = () => {
                       <Button.Ripple color='primary' className='mr-1'>
                         Save Changes
                       </Button.Ripple>
-                      <Button.Ripple color='secondary' outline>
+                      <Button.Ripple color='secondary' outline tag={Link} to='/home'>
                         Cancel
                       </Button.Ripple>
                     </Col>
@@ -158,4 +160,4 @@ const BlogEdit = () => {
   )
 }
 
-export default BlogEdit
+export default BlogCreate
