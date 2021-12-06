@@ -9,16 +9,6 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/chat'))
   },
   {
-    path: '/apps/ecommerce/product-detail',
-    exact: true,
-    className: 'ecommerce-application',
-    component: () => <Redirect to='/apps/ecommerce/product-detail/apple-i-phone-11-64-gb-black-26' />
-  },
-  {
-    path: '/apps/user/list',
-    component: lazy(() => import('../../views/apps/user/list'))
-  },
-  {
     path: '/apps/user/edit',
     exact: true,
     component: () => <Redirect to='/apps/user/edit/1' />

@@ -16,6 +16,6 @@ export default [
     id: 'pages',
     title: 'All Articles',
     icon: <FileText />,
-    navLink: '/pages/blog/list'
+    navLink: '/pages/article/list'
   }
 ]

@@ -35,7 +35,7 @@ const PagesRoutes = [
     component: lazy(() => import('../../views/pages/account-settings'))
   },
   {
-    path: '/pages/blog/list',
+    path: '/pages/article/list',
     exact: true,
     component: lazy(() => import('../../views/pages/blog/list'))
   },
@@ -44,13 +44,13 @@ const PagesRoutes = [
     exact: true,
     component: lazy(() => import('../../views/pages/blog/details')),
     meta: {
-      navLink: '/pages/blog/detail'
+      navLink: '/pages/article/detail'
     }
   },
   {
     path: '/pages/article/detail',
     exact: true,
-    component: () => <Redirect to='/pages/blog/detail/1' />
+    component: () => <Redirect to='/pages/article/detail/1' />
   },
   {
     path: '/pages/article/edit/:id',
