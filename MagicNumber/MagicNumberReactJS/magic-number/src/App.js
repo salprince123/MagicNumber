@@ -1,5 +1,9 @@
+import Router from './router/Router'
 
-import React from 'react';
+const App = props => <Router />
+
+export default App
+/*import React from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -39,9 +43,10 @@ function App() {
         <Header>
           <AppHeader />
         </Header>
-
       </Layout>
+
       <BrowserRouter>
+
         <div className="container">
           <Switch>
             <Route path='/Home' component={AppHome} />
@@ -57,3 +62,4 @@ function App() {
 }
 
 export default App;
+*/

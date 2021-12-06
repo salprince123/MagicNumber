@@ -5,6 +5,7 @@ import Sidebar from '../BlogSidebar'
 import Avatar from '@components/avatar'
 import cmtImg from '@src/assets/images/portrait/small/avatar-s-6.jpg'
 import { kFormatter } from '@utils'
+import DOMPurify from "dompurify";
 import {
   Share2,
   MessageSquare,
@@ -36,16 +37,25 @@ import {
   FormGroup,
   CustomInput
 } from 'reactstrap'
-
+/**
+ * This is a React function component.
+ *
+ * @param {Object} targetURL
+ * @param {Object} targetURL.location
+ * @param {String} targetURL.location.pathname
+ */
 import '@styles/base/pages/page-blog.scss'
 
-const BlogDetails = () => {
+const BlogDetails = (targetURL) => {
   const [data, setData] = useState(null)
-
+  const slug= targetURL.location.pathname.substr(19,targetURL.location.pathname.length);
+  const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
   useEffect(() => {
-    axios.get('/blog/list/data/detail').then(res => setData(res.data))
+    axios.get(url).then(res => setData(res.data))
   }, [])
-
+  const fakeData="<div class=\"entry-content clearfix single-post-content\" itemprop=\"articleBody\">\n\t\t\t\t\t\t\t\t\t\t<p style=\"text-align: center;\"><span style=\"font-size: 14pt; font-family: arial, helvetica, sans-serif; color: #008000;\"><strong>Khát Tâm Số 2</strong></span></p>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\">Khát Tâm Số thể hiện những khát khao và mong muốn tiềm ẩn của chính bạn, khi được tác động trực tiếp vào đúng trọng tâm khát khao của bạn, bạn sẽ đạt được đỉnh cao của hạnh phúc và thỏa mãn cảm xúc. Khát Tâm Số được xem là con số giải mã bí mật trong chính linh hồn của bạn, giải mã mục đích sống trong chính họ tên mà bạn được đặt khi sinh ra. Nó cũng là một trong năm con số cốt lõi được sử dụng trong biểu đồ số học của mỗi người. Biết được tâm hồn ta thực sự muốn gì như một cách tự khám phá những năng lực của bản thân, hiểu được giá trị của ta nằm ở đâu.</span></p>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\"><strong>Cách tính Khát Tâm Số</strong></span></p>\n<figure id=\"attachment_32229\" aria-describedby=\"caption-attachment-32229\" style=\"width: 350px\" class=\"wp-caption aligncenter\"><img loading=\"lazy\" class=\" wp-image-32229\" src=\"https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart.png\" alt=\"Ảnh: Google\" width=\"350\" height=\"225\" srcset=\"https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart.png 244w, https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart-210x136.png 210w\" sizes=\"(max-width: 350px) 100vw, 350px\" title=\"Khát Tâm Số 2 1\" /><figcaption id=\"caption-attachment-32229\" class=\"wp-caption-text\">Ảnh: Google</figcaption></figure>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\">Để tính con số khát tâm của mình, chúng ta phải dựa vào bảng chuyển đổi chữ cái thành các con số giống như Định Mệnh Số n"
+  //if(data!=null)
+    //alert(data[0].Detail)
   const badgeColorsArr = {
     Quote: 'light-info',
     Fashion: 'light-primary',
@@ -54,7 +64,7 @@ const BlogDetails = () => {
     Food: 'light-success'
   }
 
-  const renderTags = () => {
+  /*const renderTags = () => {
     return data.blog.tags.map((tag, index) => {
       return (
         <a key={index} href='/' onClick={e => e.preventDefault()}>
@@ -70,9 +80,9 @@ const BlogDetails = () => {
         </a>
       )
     })
-  }
+  }*/
 
-  const renderComments = () => {
+  /*const renderComments = () => {
     return data.comments.map(comment => {
       return (
         <Card className='mb-3' key={comment.userFullName}>
@@ -95,7 +105,7 @@ const BlogDetails = () => {
         </Card>
       )
     })
-  }
+  }*/
 
   return (
     <Fragment>
@@ -106,27 +116,25 @@ const BlogDetails = () => {
               <Row>
                 <Col sm='12'>
                   <Card className='mb-3'>
-                    <CardImg src={data.blog.img} className='img-fluid' top />
+                    <CardImg src={data[0].ImageLink} className='img-fluid' top />
                     <CardBody>
-                      <CardTitle tag='h4'>{data.blog.title}</CardTitle>
+                      <CardTitle tag='h4'>{data[0].Title}</CardTitle>
                       <Media>
-                        <Avatar className='mr-50' img={data.blog.avatar} imgHeight='24' imgWidth='24' />
+                        <Avatar className='mr-50' img={data[0].Author.Avatar} imgHeight='24' imgWidth='24' />
                         <Media body>
                           <small className='text-muted mr-25'>by</small>
                           <small>
                             <a className='text-body' href='/' onClick={e => e.preventDefault()}>
-                              {data.blog.userFullName}
+                              {data[0].Author.Name}
                             </a>
                           </small>
                           <span className='text-muted ml-50 mr-25'>|</span>
-                          <small className='text-muted'>{data.blog.createdTime}</small>
+                          <small className='text-muted'>17.11.2021</small>
                         </Media>
                       </Media>
-                      <div className='my-1 py-25'>{renderTags()}</div>
+                      <div className='my-1 py-25'></div>
                       <div
-                        dangerouslySetInnerHTML={{
-                          __html: data.blog.content
-                        }}
+                        dangerouslySetInnerHTML={{ __html: data[0].Detail  }}
                       ></div>
                       <Media>
                         <Avatar img={cmtImg} className='mr-2' imgHeight={60} imgWidth={60} />
@@ -146,7 +154,7 @@ const BlogDetails = () => {
                               <MessageSquare size={21} className='text-body align-middle' />
                             </a>
                             <a href='/' onClick={e => e.preventDefault()}>
-                              <div className='text-body align-middle'>{kFormatter(data.blog.comments)}</div>
+                              <div className='text-body align-middle'></div>
                             </a>
                           </div>
                           <div className='d-flex align-items-cente'>
@@ -154,7 +162,7 @@ const BlogDetails = () => {
                               <Bookmark size={21} className='text-body align-middle' />
                             </a>
                             <a href='/' onClick={e => e.preventDefault()}>
-                              <div className='text-body align-middle'>{data.blog.bookmarked}</div>
+                              <div className='text-body align-middle'>BOOKMART HERE</div>
                             </a>
                           </div>
                         </div>
@@ -186,7 +194,7 @@ const BlogDetails = () => {
                 </Col>
                 <Col sm='12'>
                   <h6 className='section-label'>Comment</h6>
-                  {renderComments()}
+                  COMMENT HERE
                 </Col>
                 <Col sm='12'>
                   <h6 className='section-label'>Leave a Comment</h6>
