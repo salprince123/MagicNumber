@@ -48,14 +48,12 @@ import '@styles/base/pages/page-blog.scss'
 
 const BlogDetails = (targetURL) => {
   const [data, setData] = useState(null)
-  const slug= targetURL.location.pathname.substr(19,targetURL.location.pathname.length);
+  const slug= targetURL.location.pathname.substr(22,targetURL.location.pathname.length);
   const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
   }, [])
-  const fakeData="<div class=\"entry-content clearfix single-post-content\" itemprop=\"articleBody\">\n\t\t\t\t\t\t\t\t\t\t<p style=\"text-align: center;\"><span style=\"font-size: 14pt; font-family: arial, helvetica, sans-serif; color: #008000;\"><strong>Khát Tâm Số 2</strong></span></p>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\">Khát Tâm Số thể hiện những khát khao và mong muốn tiềm ẩn của chính bạn, khi được tác động trực tiếp vào đúng trọng tâm khát khao của bạn, bạn sẽ đạt được đỉnh cao của hạnh phúc và thỏa mãn cảm xúc. Khát Tâm Số được xem là con số giải mã bí mật trong chính linh hồn của bạn, giải mã mục đích sống trong chính họ tên mà bạn được đặt khi sinh ra. Nó cũng là một trong năm con số cốt lõi được sử dụng trong biểu đồ số học của mỗi người. Biết được tâm hồn ta thực sự muốn gì như một cách tự khám phá những năng lực của bản thân, hiểu được giá trị của ta nằm ở đâu.</span></p>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\"><strong>Cách tính Khát Tâm Số</strong></span></p>\n<figure id=\"attachment_32229\" aria-describedby=\"caption-attachment-32229\" style=\"width: 350px\" class=\"wp-caption aligncenter\"><img loading=\"lazy\" class=\" wp-image-32229\" src=\"https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart.png\" alt=\"Ảnh: Google\" width=\"350\" height=\"225\" srcset=\"https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart.png 244w, https://tarot.vn/wp-content/uploads/2018/12/expression-destiny-number-numerology-chart-210x136.png 210w\" sizes=\"(max-width: 350px) 100vw, 350px\" title=\"Khát Tâm Số 2 1\" /><figcaption id=\"caption-attachment-32229\" class=\"wp-caption-text\">Ảnh: Google</figcaption></figure>\n<p style=\"text-align: justify;\"><span style=\"font-size: 12pt; font-family: arial, helvetica, sans-serif;\">Để tính con số khát tâm của mình, chúng ta phải dựa vào bảng chuyển đổi chữ cái thành các con số giống như Định Mệnh Số n"
-  //if(data!=null)
-    //alert(data[0].Detail)
+  //alert(url);
   const badgeColorsArr = {
     Quote: 'light-info',
     Fashion: 'light-primary',
