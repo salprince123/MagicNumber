@@ -27,7 +27,7 @@ const BlogSidebar = () => {
         <Media
           key={index}
           className={classnames({
-            'mb-2': index !==1 - 1
+            'mb-2': index !== data.length - 1
           })}
         >
           <Link className='mr-2' to={`/pages/article/detail/${post.Slug}`}>

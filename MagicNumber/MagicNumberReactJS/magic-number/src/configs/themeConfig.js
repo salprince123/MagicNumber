@@ -3,8 +3,8 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'App Name',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appName: 'Infinity Universe',
+    appLogoImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Infinite.svg/800px-Infinite.svg.png"
   },
   layout: {
     isRTL: false,
