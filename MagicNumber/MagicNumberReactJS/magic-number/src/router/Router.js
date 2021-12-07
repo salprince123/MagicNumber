@@ -21,6 +21,7 @@ import { DefaultRoute, Routes } from './routes'
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
+import { CalculateNumber } from '../views/CalculateNumber'
 
 const Router = () => {
   // ** Hooks
@@ -207,6 +208,7 @@ const Router = () => {
         {ResolveRoutes()}
 
         {/* NotFound Error page */}
+        <Route path='/CalculateNumber' component={CalculateNumber} />
         <Route path='*' component={Error} />
       </Switch>
     </AppRouter>
