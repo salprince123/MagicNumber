@@ -17,8 +17,14 @@ import { Fragment, useState } from 'react'
 import Flatpickr from 'react-flatpickr'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
+
 const NumberForm = () => {
     const [picker, setPicker] = useState(new Date())
+    const [data, setData]= useState("tét ")
+    const findNumber= () =>
+    {
+        setData("ahaha");
+    }
     return (
         <Card>
             <CardHeader>
@@ -44,7 +50,7 @@ const NumberForm = () => {
                         </Col>
                         <Col sm='12'>
                             <FormGroup className='d-flex mb-0'>
-                                <Button.Ripple className='mr-1' color='primary' type='submit' onClick={e => e.preventDefault()}>
+                                <Button.Ripple className='mr-1' color='primary' type='submit' onClick={findNumber}>
                                     See Result
                                 </Button.Ripple>
                                 <Button.Ripple outline color='secondary' type='reset'>
@@ -54,6 +60,7 @@ const NumberForm = () => {
                         </Col>
                     </Row>
                 </Form>
+                {data}
             </CardBody>
         </Card>
     )
