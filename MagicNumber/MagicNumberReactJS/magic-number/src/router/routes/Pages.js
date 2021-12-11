@@ -40,6 +40,14 @@ const PagesRoutes = [
     component: lazy(() => import('../../views/number'))
   },
   {
+    path: '/find-number/result/:id',
+    exact: true,
+    component: lazy(() => import('../../views/number/details')),
+    meta: {
+      navLink: '/find-number/result'
+    }
+  },
+  {
     path: '/pages/article/create',
     exact: true,
     component: lazy(() => import('../../views/pages/blog/create'))
@@ -47,7 +55,7 @@ const PagesRoutes = [
   {
     path: '/pages/article/list',
     exact: true,
-    component: lazy(() => import('../../views/pages/blog/list'))
+    component: lazy(() => import('../../views/pages/blog/list')),
   },
   {
     path: '/pages/article/detail/:id',
