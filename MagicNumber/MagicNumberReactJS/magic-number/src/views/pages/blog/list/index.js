@@ -24,7 +24,7 @@ import '@styles/base/pages/page-blog.scss'
 
 const BlogList = () => {
   const [data, setData] = useState(null)
-  const url = "http://localhost:7999/api/Article/GetAll"
+  const url = "http://localhost:55675/api/Article/GetAll"
 
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
