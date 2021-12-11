@@ -30,9 +30,13 @@ const NavbarUser = props => {
       </NavItem>
       <NavbarSearch />
       <NotificationDropdown />
-      <div className="px-2"/>
+      <div className="px-1" />
+      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/find-number'>
+        Find your number
+      </Button.Ripple>
+      <div className="px-0.5" />
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/pages/article/create'>
-      Write Article
+        Write Article
       </Button.Ripple>
       <UserDropdown />
     </ul>
