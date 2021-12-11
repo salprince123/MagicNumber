@@ -13,19 +13,64 @@ import {
     CustomInput
 } from 'reactstrap'
 
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useCallback } from 'react'
 import Flatpickr from 'react-flatpickr'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
+import axios from 'axios'
 
 
 const NumberForm = () => {
+    const tempData={
+        "NumberID": "",
+        "Title": "",
+        "Detail":"ahahah" 
+        }
     const [picker, setPicker] = useState(new Date())
-    const [data, setData]= useState("test")    
-    const findNumber= (e) =>
+    const [data, setData]= useState(tempData)    
+    const url="http://localhost:7999/api/Number/SubmitForm"
+    const [isSending, setIsSending] = useState(false)
+    const findNumber =useCallback(async (e) => {
+        e.preventDefault();
+        if (isSending) return
+        setIsSending(true)
+        // send the actual request
+        //change Date into string
+        var temp =new Date(picker);
+        var month0= temp.getMonth()+1;
+        var month =("0" + month0).slice(-2)
+        var day=("0" + temp.getDate()).slice(-2)
+        var fullDate= day+"/"+ month+ "/"+temp.getFullYear()
+        // complete change Date into string
+        //alert(day+"/"+ month+ "/"+temp.getFullYear());
+        setData(tempData);
+        await 
+        axios.get(url, {
+            params: {
+              date: fullDate
+            }
+          }).then(res => setData(res.data));
+        setIsSending(false)
+        if(data!=null)
+            alert(JSON.stringify(data))
+      }, [isSending])
+    /*const findNumber= (e) =>
     {
         e.preventDefault();
-        setData("ahaha");
-    }
+        var temp =new Date(picker);
+        var month0= temp.getMonth()+1;
+        var month =("0" + month0).slice(-2)
+        var day=("0" + temp.getDate()).slice(-2)
+        var fullDate= day+"/"+ month+ "/"+temp.getFullYear()
+        //alert(day+"/"+ month+ "/"+temp.getFullYear());
+        setData(tempData);
+        axios.get(url, {
+            params: {
+              date: fullDate
+            }
+          }).then(res => setData(res.data));
+          if(data!=null)
+            alert(JSON.stringify(data))
+    }*/
     return (
         <Card>
             <CardHeader>
@@ -51,7 +96,7 @@ const NumberForm = () => {
                         </Col>
                         <Col sm='12'>
                             <FormGroup className='d-flex mb-0'>
-                                <Button.Ripple className='mr-1' color='primary' type='submit'>
+                                <Button.Ripple className='mr-1' color='primary' type='submit' onSubmit={findNumber} >
                                     See Result
                                 </Button.Ripple>
                                 <Button.Ripple outline color='secondary' type='reset'>
@@ -61,7 +106,7 @@ const NumberForm = () => {
                         </Col>
                     </Row>
                 </Form>
-                {data}
+                <Label > {data.Detail}</Label>
             </CardBody>
         </Card>
     )
