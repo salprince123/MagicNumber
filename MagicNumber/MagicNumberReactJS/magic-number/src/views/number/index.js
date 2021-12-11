@@ -13,16 +13,17 @@ import {
     CustomInput
 } from 'reactstrap'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import Flatpickr from 'react-flatpickr'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 
 
 const NumberForm = () => {
     const [picker, setPicker] = useState(new Date())
-    const [data, setData]= useState("tét ")
-    const findNumber= () =>
+    const [data, setData]= useState("test")    
+    const findNumber= (e) =>
     {
+        e.preventDefault();
         setData("ahaha");
     }
     return (
@@ -32,12 +33,12 @@ const NumberForm = () => {
             </CardHeader>
 
             <CardBody>
-                <Form>
+                <Form onSubmit={findNumber}>
                     <Row>
                         <Col sm='12'>
                             <FormGroup>
                                 <Label for='nameVertical'>Input Your Fullname</Label>
-                                <Input type='text' name='name' id='nameVertical' placeholder='Full Name' />
+                                <Input type='text' id='nameVertical' placeholder='Full Name' />
                             </FormGroup>
                         </Col>
                         <Col sm='12'>
@@ -50,7 +51,7 @@ const NumberForm = () => {
                         </Col>
                         <Col sm='12'>
                             <FormGroup className='d-flex mb-0'>
-                                <Button.Ripple className='mr-1' color='primary' type='submit' onClick={findNumber}>
+                                <Button.Ripple className='mr-1' color='primary' type='submit'>
                                     See Result
                                 </Button.Ripple>
                                 <Button.Ripple outline color='secondary' type='reset'>
