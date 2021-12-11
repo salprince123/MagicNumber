@@ -65,8 +65,13 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage SubmitForm(String date)
 		{
-			DateTime temp= DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-			int number = CalculateNumber($"{temp.Day.ToString()}{temp.Month.ToString()}{temp.Year.ToString()}");
+			//DateTime temp= DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+			string day = $"{date[0]}{date[1]}";
+			string month = $"{date[2]}{date[3]}";
+			string year = $"{date[4]}{date[5]}{date[6]}{date[7]}";
+			int number = CalculateNumber(date);
+			//int number = CalculateNumber($"{temp.Day.ToString()}{temp.Month.ToString()}{temp.Year.ToString()}");
+
 			string sql = $" SELECT * FROM number where NumberID='CD0{number}'";
 			if(number>9) sql = $" SELECT * FROM number where NumberID='CD{number}'";
 			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");

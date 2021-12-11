@@ -38,7 +38,6 @@ import {
 } from 'reactstrap'
 /**
  * This is a React function component.
- *
  * @param {Object} targetURL
  * @param {Object} targetURL.location
  * @param {String} targetURL.location.pathname
