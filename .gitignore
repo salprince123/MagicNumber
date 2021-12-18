@@ -1,3 +1,12 @@
 
 MagicNumber/.vs/MagicNumber/v16/.suo
 *.cache
+*.dll
+*.cshtml
+*.pdb
+*.min.*
+*.config
+*.map
+MagicNumber/MagicNumber/obj/Release/*
+MagicNumber/MagicNumber/obj/Debug/*
+*.user

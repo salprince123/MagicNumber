@@ -15,6 +15,12 @@ namespace MagicNumber.Controllers
 {
 	public class NumberController : ApiController
 	{
+		//template object return 
+		public class ReturnObjects
+		{
+			public Number returnNumber { get; set; }
+			public List<string> birthdayChart { get; set; }
+		}
 		// GET: Number
 		public HttpResponseMessage Get()
 		{
@@ -69,6 +75,8 @@ namespace MagicNumber.Controllers
 			string day = $"{date[0]}{date[1]}";
 			string month = $"{date[2]}{date[3]}";
 			string year = $"{date[4]}{date[5]}{date[6]}{date[7]}";
+			ReturnObjects returnObjects = new ReturnObjects();
+			returnObjects.birthdayChart = new List<string>();
 			int number = CalculateNumber(date);
 			//int number = CalculateNumber($"{temp.Day.ToString()}{temp.Month.ToString()}{temp.Year.ToString()}");
 
@@ -77,13 +85,11 @@ namespace MagicNumber.Controllers
 			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
-
 			MySqlDataReader reader = cmd.ExecuteReader();
-			IList<Number> _numbers = new List<Number>();
+			List<ReturnObjects> list = new List<ReturnObjects>();
 			while (reader.Read())
 			{
-
-				_numbers.Add(new Number
+				returnObjects.returnNumber = (new Number
 				{
 					NumberID = reader.GetString("numberID"),
 					Title = reader.GetString("title"),
@@ -91,8 +97,18 @@ namespace MagicNumber.Controllers
 				});
 			}
 			con.Close();
+			//full the birthdayChart
+			for (int i = 0; i < 10; i++)
+				returnObjects.birthdayChart.Add("");
+			for(int i=0; i < date.Length; i++)
+            {
+				if (date[i].Equals('0')) continue;
+				int pos = Int32.Parse(date[i].ToString());
+				returnObjects.birthdayChart[pos] += date[i];
 
-			return Request.CreateResponse(System.Net.HttpStatusCode.OK, _numbers);
+			}
+			list.Add(returnObjects);
+			return Request.CreateResponse(System.Net.HttpStatusCode.OK, list);
 		}
 		public string Post(Number num)
         {
