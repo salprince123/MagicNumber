@@ -82,7 +82,9 @@ const NumberForm = () => {
                     <button disabled={true} class="squares">{data.birthdayChart[7]}</button>
                     
                 </div>
-                
+                <div >
+                {data.BirthChartArrow}
+                </div>
             </CardBody>
         </Card>
         </div>
