@@ -18,6 +18,8 @@ import {
  * @param {Object} targetURL.location
  * @param {String} targetURL.location.pathname
  */
+import ChartTree from "./ChartTree";
+import "./index.css";
 import { Fragment, useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -50,6 +52,18 @@ const NumberForm = () => {
             </CardHeader>
             <CardBody>
                 <Label >{data.Detail}</Label>
+                <div class="board">
+                    <button disabled={true} class="squares">1</button>
+                    <button disabled={true} class="squares">2</button>
+                    <button disabled={true} class="squares">3</button>
+                    <button disabled={true} class="squares"></button>
+                    <button disabled={true} class="squares"></button>
+                    <button disabled={true} class="squares"></button>
+                    <button disabled={true} class="squares"></button>
+                    <button disabled={true} class="squares"></button>
+                    <button disabled={true} class="squares"></button>
+                </div>
+                
             </CardBody>
         </Card>
         ) : null}
