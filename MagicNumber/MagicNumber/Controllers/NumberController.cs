@@ -70,6 +70,10 @@ namespace MagicNumber.Controllers
 			public Number returnNumber { get; set; }
 			public List<string> birthdayChart { get; set; }
 			public String BirthChartArrow { get; set; }
+			public String BirthChartNumber { get; set; }
+			public String SoulNumber { get; set; }
+			public String OutNumber { get; set; }
+			public String BirthdayNumber { get; set; }
 		}
 		// GET: Number
 		public HttpResponseMessage Get()
@@ -93,6 +97,84 @@ namespace MagicNumber.Controllers
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, _numbers);
+		}
+		public int CalculateOutNumber(String name)
+		{
+			int number = 0;
+			for (int i = 0; i < name.Length; i++)
+			{
+				switch(name[i])
+                {
+					case 'j':case 's':
+						number += 1;break;
+					case 'b':case 'k':case 't':
+						number += 2; break;
+					case 'c':case 'l':
+						number += 3; break;
+					case 'd':case 'm':case 'v':
+						number += 4; break;
+					case 'n':case 'w':
+						number += 5; break;
+					case 'f':case 'x':
+						number += 6; break;
+					case 'g':case 'p':
+						number += 7; break;
+					case 'h':case 'q':case 'z':
+						number += 8; break;
+					case 'r':
+						number += 9; break;
+					default: number += 0; break;
+				}
+			}			
+			while (number > 11)
+			{
+				if (number == 22)
+					return number;
+				int temp = 0;
+				string tempNum = number.ToString();
+				for (int i = 0; i < tempNum.Length; i++)
+				{
+					temp += Int16.Parse(tempNum[i].ToString());
+				}
+				number = temp;
+			}
+			return number;
+		}
+		public int CalculateSoulNumber(String name)
+		{
+			int number = 0;
+			for (int i = 0; i < name.Length; i++)
+			{
+				switch (name[i])
+				{
+					case 'a':
+						number += 1; break;
+					case 'u':
+						number += 3; break;
+					case 'e':
+						number += 5; break;
+					case 'o':
+						number += 6; break;
+					case 'y':
+						number += 7; break;
+					case 'i':
+						number += 9; break;
+					default: number += 0; break;
+				}
+			}
+			while (number > 11)
+			{
+				if (number == 22)
+					return number;
+				int temp = 0;
+				string tempNum = number.ToString();
+				for (int i = 0; i < tempNum.Length; i++)
+				{
+					temp += Int16.Parse(tempNum[i].ToString());
+				}
+				number = temp;
+			}
+			return number;
 		}
 		public int ArrowCheck(String num, String Arrow)
         {
@@ -154,7 +236,7 @@ namespace MagicNumber.Controllers
 
 		[System.Web.Http.Route("api/Number/SubmitForm")]
 		[System.Web.Http.HttpGet]
-		public HttpResponseMessage SubmitForm(String date)
+		public HttpResponseMessage SubmitForm(String date,String name="")
 		{
 			//DateTime temp= DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 			string day = $"{date[0]}{date[1]}";
@@ -162,7 +244,24 @@ namespace MagicNumber.Controllers
 			string year = $"{date[4]}{date[5]}{date[6]}{date[7]}";
 			ReturnObjects returnObjects = new ReturnObjects();
 			returnObjects.birthdayChart = new List<string>();
+			//insert birtdaychart
+			for (int i = 0; i < 10; i++)
+				returnObjects.birthdayChart.Add("");
+			for (int i = 0; i < date.Length; i++)
+			{
+				if (date[i].Equals('0')) continue;
+				int pos = Int32.Parse(date[i].ToString());
+				returnObjects.birthdayChart[pos] += date[i];
+
+			}
 			int number = CalculateNumber(date);
+			int soulNumber=0, outNumber=0;
+			if(name!="")
+            {
+				soulNumber = CalculateSoulNumber(name);
+				outNumber = CalculateOutNumber(name);
+				
+			}
 			//int number = CalculateNumber($"{temp.Day.ToString()}{temp.Month.ToString()}{temp.Year.ToString()}");
 			//calculate arrow in birthday chart
 			List<String> resultArrow = CalculateArrow(date);
@@ -173,14 +272,31 @@ namespace MagicNumber.Controllers
 				getArrowDetail += $"'{resultArrow[i]}',";
             }
 			getArrowDetail += $"'{resultArrow[resultArrow.Count-1]}')";
-
-			//returnObjects.BirthChartArrow += getArrowDetail;
+			//get number in birthchart 
+			string getNumberBirthChart = "SELECT * from birthchartnumber where id in (";
+			for (int i = 0; i < returnObjects.birthdayChart.Count - 1; i++)
+			{
+				if(returnObjects.birthdayChart[i]!="")
+					getNumberBirthChart += $"'{returnObjects.birthdayChart[i]}',";
+			}
+			getNumberBirthChart += $"'{returnObjects.birthdayChart[returnObjects.birthdayChart.Count - 1]}')";
+			//get soul number 
+			string getSoulNumber = $" SELECT * FROM number where NumberID='LH0{soulNumber}'";
+			if (soulNumber > 9) getSoulNumber = $" SELECT * FROM number where NumberID='LH{soulNumber}'";
+			//get out number 
+			string getOutNumber = $" SELECT * FROM number where NumberID='TH0{outNumber}'";
+			if (outNumber > 9) getOutNumber = $" SELECT * FROM number where NumberID='TH{outNumber}'";
 
 			string sql = $" SELECT * FROM number where NumberID='CD0{number}'";
 			if(number>9) sql = $" SELECT * FROM number where NumberID='CD{number}'";
 			MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			MySqlCommand cmdGetArrow = new MySqlCommand(getArrowDetail, con);
+			MySqlCommand cmdGetNumberBirthChart = new MySqlCommand(getNumberBirthChart, con);
+			MySqlCommand cmdGetSoulNum = new MySqlCommand(getSoulNumber, con);
+			MySqlCommand cmdGetOutNum = new MySqlCommand(getOutNumber, con);
+			//returnObjects.SoulNumber = getSoulNumber;
+			//returnObjects.OutNumber = getOutNumber;
 			con.Open();
 			MySqlDataReader reader = cmd.ExecuteReader();
 			List<ReturnObjects> list = new List<ReturnObjects>();
@@ -194,28 +310,45 @@ namespace MagicNumber.Controllers
 				});
 			}
 			con.Close();
-			con.Open();
+
 			//read arrow 
+			con.Open();			
 			reader = cmdGetArrow.ExecuteReader();
 			while (reader.Read())
 			{
 				if(reader.GetString("id").Contains("Missing"))
-					returnObjects.BirthChartArrow += $"Mũi tên trống {reader.GetString("id").Substring(0,3)} \n {reader.GetString("Detail")}\n\n\n";
+					returnObjects.BirthChartArrow += $"Mũi tên trống {reader.GetString("id").Substring(0,3)}: {reader.GetString("Detail")}\n\n\n";
 				else 
-					returnObjects.BirthChartArrow += $"Mũi tên {reader.GetString("id").Substring(0, 3)} \n {reader.GetString("Detail")}\n\n\n";
+					returnObjects.BirthChartArrow += $"Mũi tên {reader.GetString("id").Substring(0, 3)}: {reader.GetString("Detail")}\n\n\n";
 
 			}
 			con.Close();
-			//full the birthdayChart
-			for (int i = 0; i < 10; i++)
-				returnObjects.birthdayChart.Add("");
-			for(int i=0; i < date.Length; i++)
-            {
-				if (date[i].Equals('0')) continue;
-				int pos = Int32.Parse(date[i].ToString());
-				returnObjects.birthdayChart[pos] += date[i];
 
+			//read the number in birthchart
+			con.Open();
+			reader = cmdGetNumberBirthChart.ExecuteReader();
+			while (reader.Read())
+			{
+				returnObjects.BirthChartNumber += $"Bạn có {reader.GetString("id")} \n {reader.GetString("Detail")}\n\n\n";
 			}
+			con.Close();
+			//read the soul number 
+			con.Open();
+			reader = cmdGetSoulNum.ExecuteReader();
+			while (reader.Read())
+			{
+				returnObjects.SoulNumber += $"Con số linh hồn của bạn là {soulNumber} \n {reader.GetString("Detail")}\n";
+			}
+			con.Close();
+			//read the soul number 
+			con.Open();
+			reader = cmdGetOutNum.ExecuteReader();
+			while (reader.Read())
+			{
+				returnObjects.OutNumber += $"Con số biểu hiện của bạn là {outNumber} \n {reader.GetString("Detail")}\n";
+			}
+			con.Close();
+
 			list.Add(returnObjects);
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, list);
 		}

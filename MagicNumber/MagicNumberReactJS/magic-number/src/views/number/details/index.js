@@ -59,8 +59,7 @@ const NumberForm = () => {
                             <CardTitle tag='h4'>Con số chủ đạo(con số đường đời) của bạn là {data.returnNumber.NumberID[2]}{data.returnNumber.NumberID[3]}</CardTitle>
                         </CardHeader>
                         <CardBody>
-                            <Label >{data.returnNumber.Detail}</Label>
-
+                        <div dangerouslySetInnerHTML={{ __html: data.returnNumber.Detail  }}/>
                         </CardBody>
                     </Card>
                     <Card>
@@ -82,7 +81,9 @@ const NumberForm = () => {
                                 <button disabled={true} class="squares">{data.birthdayChart[7]}</button>
 
                             </div>
-                            <Col sm='12'>
+                            {
+                                /*
+                                <Col sm='12'>
                                 <ChartTree 
                                 dateNumber="1" 
                                 monthNumber="4" 
@@ -101,9 +102,11 @@ const NumberForm = () => {
                                     <Label className='px-1' tag="h4">Năm 1974</Label>
                                 </FormGroup>
                             </Col>
-                            <div>
-                                {data.BirthChartArrow}
-                            </div>
+                                */
+                            }
+                            <div dangerouslySetInnerHTML={{ __html: data.BirthChartNumber  }}/>
+                            <CardTitle tag='h4'>Biểu đồ ngày sinh của bạn có các mũi tên sau:</CardTitle>
+                            <div dangerouslySetInnerHTML={{ __html: data.BirthChartArrow  }}/>
                         </CardBody>
                     </Card>
                 </div>
