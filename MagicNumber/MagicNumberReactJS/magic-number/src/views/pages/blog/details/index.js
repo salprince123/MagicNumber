@@ -132,7 +132,10 @@ const BlogDetails = (targetURL) => {
                       <div
                         dangerouslySetInnerHTML={{ __html: data[0].Detail  }}
                       ></div>
-                      <Media>
+                      
+                      {
+                        /*
+                        <Media>
                         <Avatar img={cmtImg} className='mr-2' imgHeight={60} imgWidth={60} />
                         <Media body>
                           <h6 className='font-weight-bolder'>Willie Clark</h6>
@@ -142,7 +145,7 @@ const BlogDetails = (targetURL) => {
                           </CardText>
                         </Media>
                       </Media>
-                      <hr className='my-2' />
+                        <hr className='my-2' />
                       <div className='d-flex align-items-center justify-content-between'>
                         <div className='d-flex align-items-center'>
                           <div className='d-flex align-items-center mr-1'>
@@ -185,6 +188,9 @@ const BlogDetails = (targetURL) => {
                           </DropdownMenu>
                         </UncontrolledDropdown>
                       </div>
+                        */
+                      }
+                      
                     </CardBody>
                   </Card>
                 </Col>
@@ -203,7 +209,9 @@ const BlogDetails = (targetURL) => {
                               <Input placeholder='Name' />
                             </FormGroup>
                           </Col>
-                          <Col sm='6'>
+                          {
+                            /*
+                            <Col sm='6'>
                             <FormGroup className='mb-2'>
                               <Input type='email' placeholder='Email' />
                             </FormGroup>
@@ -213,12 +221,18 @@ const BlogDetails = (targetURL) => {
                               <Input type='url' placeholder='Website' />
                             </FormGroup>
                           </Col>
+                            */
+
+                          }
+                          
                           <Col sm='12'>
                             <FormGroup className='mb-2'>
                               <Input className='mb-2' type='textarea' rows='4' placeholder='Comment' />
                             </FormGroup>
                           </Col>
-                          <Col sm='12'>
+                          {
+                            /*
+                            <Col sm='12'>
                             <CustomInput
                               className='mb-2'
                               type='checkbox'
@@ -226,7 +240,10 @@ const BlogDetails = (targetURL) => {
                               label='Save my name, email, and website in this browser for the next time I comment.'
                               htmlFor='exampleCustomCheckbox4'
                             />
-                          </Col>
+                          </Col>  
+                            */
+                          }
+                          
                           <Col sm='12'>
                             <Button.Ripple color='primary'>Post Comment</Button.Ripple>
                           </Col>

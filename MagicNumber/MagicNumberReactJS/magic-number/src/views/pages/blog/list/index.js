@@ -25,10 +25,20 @@ import '@styles/base/pages/page-blog.scss'
 const BlogList = () => {
   const [data, setData] = useState(null)
   const url = "http://localhost:7999/api/Article/GetAll"
-
+  const [currentPage, setCurrentPage]= useState(0)
+  const [pagesCount, setPageCount]= useState(3)
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
-  }, [])
+    if(data!=null)
+    {
+      if(data.length%5==0)
+      setPageCount(data.length%5)
+      else setPageCount(parseInt(data.length/5)+1 )
+      if(data.length<=5)
+        setPageCount(1)
+    }
+    
+  }, [data])
   
   const badgeColorsArr = {
     Quote: 'light-info',
@@ -37,8 +47,9 @@ const BlogList = () => {
     Video: 'light-warning',
     Food: 'light-success'
   }
-  const renderRenderList = () => {
-    return data.map(item => {
+  const renderRenderList = () => { 
+    
+    return data.slice(currentPage*5,(currentPage+1)*5).map(item => {
       /*const renderTags = () => {
         return item.tags.map((tag, index) => {
           return (
@@ -111,11 +122,34 @@ const BlogList = () => {
                 <Row>{renderRenderList()}</Row>
                 <Row>
                   <Col sm='12'>
-                    <Pagination className='d-flex justify-content-center mt-2'>
+                  <Pagination className='d-flex justify-content-center mt-2'>            
+                    <PaginationItem disabled={currentPage <= 0}>                      
+                      <PaginationLink  
+                                              
+                        previous
+                        href="#"
+                      />                      
+                    </PaginationItem>
+                    {[...Array(pagesCount)].map((page, i) => 
+                      <PaginationItem active={i === currentPage} key={i}>
+                        <PaginationLink  href="#" onClick={e => setCurrentPage(i)}>
+                          {i + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )}
+                    <PaginationItem disabled={currentPage >= pagesCount - 1}>                      
+                      <PaginationLink                        
+                        next
+                        href="#"
+                      />                      
+                    </PaginationItem>                    
+                  </Pagination>
+                    {
+                      /*<Pagination className='d-flex justify-content-center mt-2'>
                       <PaginationItem className='prev-item'>
                         <PaginationLink href='#' onClick={e => e.preventDefault()}></PaginationLink>
                       </PaginationItem>
-                      <PaginationItem>
+                      <PaginationItem active>
                         <PaginationLink href='#' onClick={e => e.preventDefault()}>
                           1
                         </PaginationLink>
@@ -130,7 +164,7 @@ const BlogList = () => {
                           3
                         </PaginationLink>
                       </PaginationItem>
-                      <PaginationItem active>
+                      <PaginationItem >
                         <PaginationLink href='#' onClick={e => e.preventDefault()}>
                           4
                         </PaginationLink>
@@ -154,6 +188,8 @@ const BlogList = () => {
                         <PaginationLink href='#' onClick={e => e.preventDefault()}></PaginationLink>
                       </PaginationItem>
                     </Pagination>
+                    */
+                    }
                   </Col>
                 </Row>
               </div>
