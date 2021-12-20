@@ -8,9 +8,9 @@ import { InputGroup, InputGroupAddon, Input, InputGroupText, Media } from 'react
 
 const BlogSidebar = () => {
   const [data, setData] = useState(null)
-
+  const url = "http://localhost:7999/api/Article/GetRandomPost"
   useEffect(() => {
-    axios.get('/blog/list/data/sidebar').then(res => setData(res.data))
+    axios.get(url).then(res => setData(res.data))
   }, [])
 
   const CategoryColorsArr = {
@@ -22,31 +22,30 @@ const BlogSidebar = () => {
   }
 
   const renderRecentPosts = () => {
-    return data.recentPosts.map((post, index) => {
+    return data.map((post, index) => {
       return (
         <Media
           key={index}
           className={classnames({
-            'mb-2': index !== data.recentPosts.length - 1
+            'mb-2': index !==1 - 1
           })}
         >
-          <Link className='mr-2' to={`/pages/blog/detail/${post.id}`}>
-            <img className='rounded' src={post.img} alt={post.title} width='100' height='70' />
+          <Link className='mr-2' to={`/pages/article/detail/${post.Slug}`}>
+            <img className='rounded' src={post.ImageLink} alt={post.Title} width='100' height='70' />
           </Link>
           <Media body>
             <h6 className='blog-recent-post-title'>
-              <Link className='text-body-heading' to={`/pages/blog/detail/${post.id}`}>
-                {post.title}
+              <Link className='text-body-heading' to={`/pages/article/detail/${post.Slug}`}>
+                {post.Title}                
               </Link>
             </h6>
-            <div className='text-muted mb-0'>{post.createdTime}</div>
           </Media>
         </Media>
       )
     })
   }
 
-  const renderCategories = () => {
+  /*const renderCategories = () => {
     return data.categories.map((item, index) => {
       const IconTag = Icon[item.icon]
 
@@ -66,14 +65,16 @@ const BlogSidebar = () => {
         </div>
       )
     })
-  }
+  }*/
 
   return (
     <div className='sidebar-detached sidebar-right'>
       <div className='sidebar'>
         <div className='blog-sidebar right-sidebar my-2 my-lg-0'>
           <div className='right-sidebar-content'>
-            <div className='blog-search'>
+            {
+              /*
+              <div className='blog-search'>
               <InputGroup className='input-group-merge'>
                 <Input placeholder='Search here' />
                 <InputGroupAddon addonType='append'>
@@ -83,16 +84,16 @@ const BlogSidebar = () => {
                 </InputGroupAddon>
               </InputGroup>
             </div>
+               */
+            }
+            
             {data !== null ? (
               <Fragment>
                 <div className='blog-recent-posts mt-3'>
                   <h6 className='section-label'>Recent Posts</h6>
                   <div className='mt-75'>{renderRecentPosts()}</div>
                 </div>
-                <div className='blog-categories mt-3'>
-                  <h6 className='section-label'>Categories</h6>
-                  <div className='mt-1'>{renderCategories()}</div>
-                </div>
+                
               </Fragment>
             ) : null}
           </div>

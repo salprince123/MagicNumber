@@ -7,7 +7,7 @@ import { selectThemeColors } from '@utils'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, ContentState } from 'draft-js'
 import { Link } from 'react-router-dom'
-
+import { convertToHTML } from 'draft-convert';
 import {
   Row,
   Col,
@@ -27,7 +27,8 @@ import '@styles/react/libs/editor/editor.scss'
 import '@styles/base/plugins/forms/form-quill-editor.scss'
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/base/pages/page-blog.scss'
-
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css';
 const BlogCreate = () => {
   const initialContent = ``
 
@@ -36,24 +37,30 @@ const BlogCreate = () => {
   const editorState = EditorState.createWithContent(contentState)
 
   const [data, setData] = useState(null),
-    [title, setTitle] = useState(''),
+    [title, setTitle] = useState('test'),
     [slug, setSlug] = useState(''),
-    [content, setContent] = useState(editorState),
-    [blogCategories, setBlogCategories] = useState([]),
+    [content, setContent] = useState(() => EditorState.createEmpty()),
     [featuredImg, setFeaturedImg] = useState(null),
-    [imgPath, setImgPath] = useState('banner.jpg')
+    [imgPath, setImgPath] = useState('banner.jpg'),
+    [convertedContent, setConvertedContent] = useState("null")
+  const url="http://localhost:7999/api/Article/Add" ;
+  const staticData={
+    Title: title,
+    ImageLink: "https://www.studytienganh.vn/upload/2021/05/98114.jpg",
+    Detail: convertedContent,
+    Upvote: "0",
+    AuthorID: "admin",
+    ArticleTypeID: "type2"
+  }
+  
 
-  useEffect(() => {
-   
-  }, [])
-
-  const categories = [
+  /*const categories = [
     { value: 'fashion', label: 'Fashion' },
     { value: 'gaming', label: 'Gaming' },
     { value: 'quote', label: 'Quote' },
     { value: 'video', label: 'Video' },
     { value: 'food', label: 'Food' }
-  ]
+  ]*/
 
   const onChange = e => {
     const reader = new FileReader(),
@@ -64,7 +71,15 @@ const BlogCreate = () => {
     }
     reader.readAsDataURL(files[0])
   }
-
+  function sendRequest(){    
+    axios.post(url,staticData )
+        .then(function (response) {
+          alert(response.data + content );
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
   return (
     <div className='blog-edit-wrapper'>
         <Row>
@@ -79,6 +94,7 @@ const BlogCreate = () => {
                         <Input id='blog-edit-title' value={title} onChange={e => setTitle(e.target.value)} />
                       </FormGroup>
                     </Col>
+                    {/*
                     <Col md='6'>
                       <FormGroup className='mb-2'>
                         <Label for='blog-edit-category'>Category</Label>
@@ -95,18 +111,29 @@ const BlogCreate = () => {
                           onChange={data => setBlogCategories(data)}
                         />
                       </FormGroup>
-                    </Col>
+                    </Col>*/
+                    }
+                    
                     <Col md='6'>
                       <FormGroup className='mb-2'>
-                        <Label for='blog-edit-slug'>Slug</Label>
+                        <Label for='blog-edit-slug'>Small Detail</Label>
                         <Input id='blog-edit-slug' value={slug} onChange={e => setSlug(e.target.value)} />
                       </FormGroup>
                     </Col>
-                    <Col sm='12'>
+                    {
+                      /*
+                       <Col sm='12'>
                       <FormGroup className='mb-2'>
                         <Label>Content</Label>
-                        <Editor editorState={content} onEditorStateChange={data => setContent(data)} />
+                        <Editor editorState={content} onEditorStateChange={handleEditorChange} />
                       </FormGroup>
+                    </Col>
+                      */
+                    }
+                   
+                   <Col sm='12'>
+                   <ReactQuill  placeholder="Your text here"  onChange={setConvertedContent}>    
+                   </ReactQuill>
                     </Col>
                     <Col className='mb-2' sm='12'>
                       <div className='border rounded p-2'>
@@ -143,7 +170,7 @@ const BlogCreate = () => {
                       </div>
                     </Col>
                     <Col className='mt-50'>
-                      <Button.Ripple color='primary' className='mr-1'>
+                      <Button.Ripple color='primary' className='mr-1' onClick={sendRequest} >
                         Save Changes
                       </Button.Ripple>
                       <Button.Ripple color='secondary' outline tag={Link} to='/home'>
