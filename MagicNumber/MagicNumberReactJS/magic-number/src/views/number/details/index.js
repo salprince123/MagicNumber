@@ -42,7 +42,8 @@ const NumberForm = () => {
     useEffect(() => {
         axios.get(url, {
             params: {
-                date: birthday
+                date: birthday,
+                name: name
             }
         }).then(res => setData(res.data[0]));
     }, [])
@@ -105,8 +106,34 @@ const NumberForm = () => {
                                 */
                             }
                             <div dangerouslySetInnerHTML={{ __html: data.BirthChartNumber  }}/>
+                            {data.BirthChartArrow !== null ? (
                             <CardTitle tag='h4'>Biểu đồ ngày sinh của bạn có các mũi tên sau:</CardTitle>
+                            ) : null}
                             <div dangerouslySetInnerHTML={{ __html: data.BirthChartArrow  }}/>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle tag='h4'>Bạn tên là {name}</CardTitle>
+                        </CardHeader>                        
+                        <CardBody>
+                        <div dangerouslySetInnerHTML={{ __html: data.SoulNumber  }}/>
+                        <div dangerouslySetInnerHTML={{ __html: data.OutNumber  }}/>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle tag='h4'>Sau đây là các đỉnh cao trong đời bạn</CardTitle>
+                        </CardHeader>                        
+                        <CardBody>
+                        <CardTitle tag='h4'>Đỉnh cao số 1 của bạn xảy ra vào năm bạn {data.top[0].age} dưới sự ảnh hưởng của số {data.top[0].number}</CardTitle>
+                        <div dangerouslySetInnerHTML={{ __html: data.top[0].detail  }}/>
+                        <CardTitle tag='h4'>Đỉnh cao số 2 của bạn xảy ra vào năm bạn {data.top[1].age} dưới sự ảnh hưởng của số {data.top[1].number}</CardTitle>
+                        <div dangerouslySetInnerHTML={{ __html: data.top[1].detail  }}/>
+                        <CardTitle tag='h4'>Đỉnh cao số 3 của bạn xảy ra vào năm bạn {data.top[2].age} dưới sự ảnh hưởng của số {data.top[2].number}</CardTitle>
+                        <div dangerouslySetInnerHTML={{ __html: data.top[2].detail  }}/>
+                        <CardTitle tag='h4'>Đỉnh cao số 4 của bạn xảy ra vào năm bạn {data.top[3].age} dưới sự ảnh hưởng của số {data.top[3].number}</CardTitle>
+                        <div dangerouslySetInnerHTML={{ __html: data.top[3].detail  }}/>
                         </CardBody>
                     </Card>
                 </div>

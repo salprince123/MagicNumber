@@ -65,6 +65,12 @@ namespace MagicNumber.Controllers
 			list.Add("789");
 			return list;
 		}
+		public class top
+        {
+			public int number { get; set; }
+			public int age { get; set; }
+			public String detail { get; set; }
+		}
 		public class ReturnObjects
 		{
 			public Number returnNumber { get; set; }
@@ -74,6 +80,8 @@ namespace MagicNumber.Controllers
 			public String SoulNumber { get; set; }
 			public String OutNumber { get; set; }
 			public String BirthdayNumber { get; set; }
+			public  List<top> top { get; set; }
+
 		}
 		// GET: Number
 		public HttpResponseMessage Get()
@@ -219,6 +227,44 @@ namespace MagicNumber.Controllers
 			}
 			return number;
         }
+		public int CalculateDayMonthYear(String num)
+		{
+			int number = 0;
+			for (int i = 0; i < num.Length; i++)
+			{
+				number += Int16.Parse(num[i].ToString());
+			}
+			while (number > 9)
+			{				
+				int temp = 0;
+				string tempNum = number.ToString();
+				for (int i = 0; i < tempNum.Length; i++)
+				{
+					temp += Int16.Parse(tempNum[i].ToString());
+				}
+				number = temp;
+			}
+			return number;
+		}
+		public int CalculateTop34(String num)
+		{
+			int number = 0;
+			for (int i = 0; i < num.Length; i++)
+			{
+				number += Int16.Parse(num[i].ToString());
+			}
+			while (number > 11)
+			{
+				int temp = 0;
+				string tempNum = number.ToString();
+				for (int i = 0; i < tempNum.Length; i++)
+				{
+					temp += Int16.Parse(tempNum[i].ToString());
+				}
+				number = temp;
+			}
+			return number;
+		}
 		public List <String> CalculateArrow(String num)
 		{
 			List<String> arrow = arrowList();
@@ -244,6 +290,20 @@ namespace MagicNumber.Controllers
 			string year = $"{date[4]}{date[5]}{date[6]}{date[7]}";
 			ReturnObjects returnObjects = new ReturnObjects();
 			returnObjects.birthdayChart = new List<string>();
+			returnObjects.top = new List<top>();
+			returnObjects.top.Add(new top());
+			returnObjects.top.Add(new top());
+			returnObjects.top.Add(new top());
+			returnObjects.top.Add(new top());
+			int dayNum, dayMonth, dayyear = 0;
+			dayNum = CalculateDayMonthYear(day);
+			dayMonth = CalculateDayMonthYear(month);
+			dayyear = CalculateDayMonthYear(year);
+			returnObjects.top[0].number = CalculateDayMonthYear((dayMonth+dayNum).ToString()) ;
+			returnObjects.top[1].number = CalculateDayMonthYear((dayyear + dayNum).ToString());
+			returnObjects.top[2].number = CalculateTop34((dayMonth + dayNum+ dayNum+dayyear).ToString());
+			returnObjects.top[3].number = CalculateTop34((dayMonth + dayyear).ToString());
+			List<int> topNumber = new List<int>();
 			//insert birtdaychart
 			for (int i = 0; i < 10; i++)
 				returnObjects.birthdayChart.Add("");
@@ -252,9 +312,12 @@ namespace MagicNumber.Controllers
 				if (date[i].Equals('0')) continue;
 				int pos = Int32.Parse(date[i].ToString());
 				returnObjects.birthdayChart[pos] += date[i];
-
 			}
 			int number = CalculateNumber(date);
+			returnObjects.top[0].age = 36 - number;
+			returnObjects.top[1].age = returnObjects.top[0].age + 9;
+			returnObjects.top[2].age = returnObjects.top[0].age + 18;
+			returnObjects.top[3].age = returnObjects.top[0].age + 27;
 			int soulNumber=0, outNumber=0;
 			if(name!="")
             {
@@ -267,11 +330,15 @@ namespace MagicNumber.Controllers
 			List<String> resultArrow = CalculateArrow(date);
 
 			string getArrowDetail = "SELECT * from strengtharrow where id in (";
-			for(int i=0; i < resultArrow.Count-1; i++)
-            {
-				getArrowDetail += $"'{resultArrow[i]}',";
-            }
-			getArrowDetail += $"'{resultArrow[resultArrow.Count-1]}')";
+			if (resultArrow.Count > 0)
+			{
+				for (int i = 0; i < resultArrow.Count - 1; i++)
+				{
+					getArrowDetail += $"'{resultArrow[i]}',";
+				}
+				getArrowDetail += $"'{resultArrow[resultArrow.Count - 1]}')";
+			}
+			else getArrowDetail = "SELECT * from strengtharrow where id='nothignhere'";
 			//get number in birthchart 
 			string getNumberBirthChart = "SELECT * from birthchartnumber where id in (";
 			for (int i = 0; i < returnObjects.birthdayChart.Count - 1; i++)
@@ -329,7 +396,7 @@ namespace MagicNumber.Controllers
 			reader = cmdGetNumberBirthChart.ExecuteReader();
 			while (reader.Read())
 			{
-				returnObjects.BirthChartNumber += $"Bạn có {reader.GetString("id")} \n {reader.GetString("Detail")}\n\n\n";
+				returnObjects.BirthChartNumber += $"Bạn có {reader.GetString("id").Length} số {reader.GetString("id")[0]} \n {reader.GetString("Detail")}\n\n\n";
 			}
 			con.Close();
 			//read the soul number 
@@ -348,7 +415,18 @@ namespace MagicNumber.Controllers
 				returnObjects.OutNumber += $"Con số biểu hiện của bạn là {outNumber} \n {reader.GetString("Detail")}\n";
 			}
 			con.Close();
-
+			for (int i=0; i <4; i++)
+            {
+				string mysql = $" SELECT * FROM number where NumberID='TOP{returnObjects.top[i].number}'";
+				MySqlCommand mycmd = new MySqlCommand(mysql, con);
+				con.Open();
+				reader = mycmd.ExecuteReader();
+				while (reader.Read())
+				{
+					returnObjects.top[i].detail += $"{reader.GetString("Detail")}\n\n";
+				}
+				con.Close();
+			}
 			list.Add(returnObjects);
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, list);
 		}
