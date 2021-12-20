@@ -40,13 +40,13 @@ const BlogCreate = () => {
     [title, setTitle] = useState('test'),
     [slug, setSlug] = useState(''),
     [content, setContent] = useState(() => EditorState.createEmpty()),
-    [featuredImg, setFeaturedImg] = useState(null),
+    [featuredImg, setFeaturedImg] = useState("https://www.studytienganh.vn/upload/2021/05/98114.jpg"),
     [imgPath, setImgPath] = useState('banner.jpg'),
     [convertedContent, setConvertedContent] = useState("null")
   const url="http://localhost:7999/api/Article/Add" ;
   const staticData={
     Title: title,
-    ImageLink: "https://www.studytienganh.vn/upload/2021/05/98114.jpg",
+    ImageLink:featuredImg ,
     Detail: convertedContent,
     Upvote: "0",
     AuthorID: "admin",
@@ -70,6 +70,7 @@ const BlogCreate = () => {
       setFeaturedImg(reader.result)
     }
     reader.readAsDataURL(files[0])
+    //alert(featuredImg)
   }
   function sendRequest(){    
     axios.post(url,staticData )
