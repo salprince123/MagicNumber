@@ -1,11 +1,11 @@
 .board {
-  border: 1rem solid #ffffff;
+  margin: 1rem;
   background: #000000;
   width: 500px;
   height: 500px;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  gap: 1rem;
+  gap: 5px;
 }
 
 .squares {
@@ -15,4 +15,14 @@
   /* font-weight: 800; */
   cursor: pointer;
   outline: none;
+}
+.pyramid {
+    position: relative;
+    display: inline-flex;
+}
+.rounded-circle {
+    position: absolute;
+}
+.pyramid-line{
+    position: relative;
 }

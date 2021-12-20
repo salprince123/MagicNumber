@@ -80,34 +80,15 @@ const NumberForm = () => {
                                 <button disabled={true} class="squares">{data.birthdayChart[1]}</button>
                                 <button disabled={true} class="squares">{data.birthdayChart[4]}</button>
                                 <button disabled={true} class="squares">{data.birthdayChart[7]}</button>
-
                             </div>
-                            <Col sm='12'>
-                                <ChartTree 
-                                dateNumber="1" 
-                                monthNumber="4" 
-                                yearNumber="1"/>
-                            </Col>
-                            <Col sm='12'>
-                                <FormGroup className='d-flex mb-0' >
-                                    <Label tag="h4">Tháng 5</Label>
-                                    <div className="px-5" />
-                                    <div className="px-5" />
-                                    <div className="px-3" />
-                                    <Label className="px-5" tag="h4">Ngày 1</Label>
-                                    <div className="px-5" />
-                                    <div className="px-5" />
-                                    <div className="px-3" />
-                                    <Label className='px-1' tag="h4">Năm 1974</Label>
-                                </FormGroup>
-                            </Col>
                             <div>
                                 {data.BirthChartArrow}
                             </div>
                         </CardBody>
                     </Card>
+                    <ChartTree/>
                 </div>
-        ) : null}
+            ) : null}
         </div>
     )
 }
