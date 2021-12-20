@@ -4,7 +4,7 @@ import { Button, Labelk, Card, CardHeader, CardTitle, CardBody } from 'reactstra
 import "./index.css";
 import Pyramid from '@src/assets/images/pyramid-line.png'
 
-const PyramidNumber = ({ dateNumber, monthNumber, yearNumber }) => {
+const PyramidNumber = ({ dateNumber, monthNumber, yearNumber, top1, top2, top3, top4 }) => {
 
     const firstLayer = {
         "Month": dateNumber,
@@ -13,13 +13,13 @@ const PyramidNumber = ({ dateNumber, monthNumber, yearNumber }) => {
     }
 
     const secondLayer = {
-        "Month_Date": 6,
-        "Date_Year": 4,
+        "Month_Date": top1,
+        "Date_Year": top2,
     }
 
-    const thirdLayer = 0;
+    const thirdLayer = top3;
 
-    const fourthLayer = 0;
+    const fourthLayer = top4;
 
     return (
         <Card>
