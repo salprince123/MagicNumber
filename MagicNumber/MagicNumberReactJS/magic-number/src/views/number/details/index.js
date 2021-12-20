@@ -80,7 +80,6 @@ const NumberForm = () => {
                                 <button disabled={true} class="squares">{data.birthdayChart[1]}</button>
                                 <button disabled={true} class="squares">{data.birthdayChart[4]}</button>
                                 <button disabled={true} class="squares">{data.birthdayChart[7]}</button>
-
                             </div>
                             {
                                 /*
@@ -136,8 +135,9 @@ const NumberForm = () => {
                         <div dangerouslySetInnerHTML={{ __html: data.top[3].detail  }}/>
                         </CardBody>
                     </Card>
+                    <ChartTree/>
                 </div>
-        ) : null}
+            ) : null}
         </div>
     )
 }
