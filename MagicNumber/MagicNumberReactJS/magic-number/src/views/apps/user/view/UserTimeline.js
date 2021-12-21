@@ -31,7 +31,7 @@ const data = [
       <Media className='align-items-center'>
         <Avatar img={ceo} imgHeight={38} imgWidth={38} />
         <Media className='ml-50' body>
-          <h6 className='mb-0'>John Doe (Client)</h6>
+          <h6 className='mb-0'>Sol (Client)</h6>
           <span>CEO of Infibeam</span>
         </Media>
       </Media>

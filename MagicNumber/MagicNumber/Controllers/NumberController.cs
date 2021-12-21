@@ -17,6 +17,35 @@ namespace MagicNumber.Controllers
 	{
 		//template object return 	
 		//
+		string[] VietNamChar = new string[]
+		{
+			"aAeEoOuUiIdDyY",
+			"áàạảãâấầậẩẫăắằặẳẵ",
+			"ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+			"éèẹẻẽêếềệểễ",
+			"ÉÈẸẺẼÊẾỀỆỂỄ",
+			"óòọỏõôốồộổỗơớờợởỡ",
+			"ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+			"úùụủũưứừựửữ",
+			"ÚÙỤỦŨƯỨỪỰỬỮ",
+			"íìịỉĩ",
+			"ÍÌỊỈĨ",
+			"đ",
+			"Đ",
+			"ýỳỵỷỹ",
+			"ÝỲỴỶỸ"
+		};
+		public string HandleName(string str)
+		{
+			//Thay thế và lọc dấu từng char      
+			for (int i = 1; i < VietNamChar.Length; i++)
+			{
+				for (int j = 0; j < VietNamChar[i].Length; j++)
+					str = str.Replace(VietNamChar[i][j], VietNamChar[0][i - 1]);
+			}
+			str.ToLower();
+			return str;
+		}
 		private static int CompareByLength(string x, string y)
 		{
 			if (x == null)
@@ -70,6 +99,9 @@ namespace MagicNumber.Controllers
 			public int number { get; set; }
 			public int age { get; set; }
 			public String detail { get; set; }
+			public String day { get; set; }
+			public String month { get; set; }
+			public String year { get; set; }
 		}
 		public class ReturnObjects
 		{
@@ -285,6 +317,8 @@ namespace MagicNumber.Controllers
 		public HttpResponseMessage SubmitForm(String date,String name="")
 		{
 			//DateTime temp= DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+			//handle the name input 
+			name =HandleName(name);
 			string day = $"{date[0]}{date[1]}";
 			string month = $"{date[2]}{date[3]}";
 			string year = $"{date[4]}{date[5]}{date[6]}{date[7]}";
@@ -299,6 +333,9 @@ namespace MagicNumber.Controllers
 			dayNum = CalculateDayMonthYear(day);
 			dayMonth = CalculateDayMonthYear(month);
 			dayyear = CalculateDayMonthYear(year);
+			returnObjects.top[0].day = dayNum.ToString();
+			returnObjects.top[0].month = dayMonth.ToString();
+			returnObjects.top[0].year = dayyear.ToString();
 			returnObjects.top[0].number = CalculateDayMonthYear((dayMonth+dayNum).ToString()) ;
 			returnObjects.top[1].number = CalculateDayMonthYear((dayyear + dayNum).ToString());
 			returnObjects.top[2].number = CalculateTop34((dayMonth + dayNum+ dayNum+dayyear).ToString());
