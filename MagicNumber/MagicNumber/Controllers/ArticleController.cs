@@ -105,6 +105,26 @@ namespace MagicNumber.Controllers
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
 		}
+
+		[System.Web.Http.Route("api/Article/GetTop")]
+		[System.Web.Http.HttpGet]
+		public HttpResponseMessage GetTop( string top)
+		{
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID limit {top} ";
+			MySqlConnection con = new MyConnection().GetConnection();
+			MySqlCommand cmd = new MySqlCommand(sql, con);
+			con.Open();
+
+			MySqlDataReader reader = cmd.ExecuteReader();
+
+			List<Article> temp = new List<Article>();
+			while (reader.Read())
+			{
+				temp.Add(loadFromTable(reader));
+			}
+			con.Close();
+			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
+		}
 		[System.Web.Http.Route("api/Article/Add")]
 		[System.Web.Http.HttpPost]
 		public HttpResponseMessage Add(Article article)
