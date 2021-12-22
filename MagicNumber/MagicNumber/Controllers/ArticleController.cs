@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using MagicNumber.Controllers;
 
 namespace MagicNumber.Controllers
 {
@@ -106,7 +107,7 @@ namespace MagicNumber.Controllers
 		}
 		[System.Web.Http.Route("api/Article/Add")]
 		[System.Web.Http.HttpPost]
-		public string Add(Article article)
+		public HttpResponseMessage Add(Article article)
 		{
 			try
 			{
@@ -131,7 +132,7 @@ namespace MagicNumber.Controllers
 				string[] temp = article.Title.Split(' ');
 				foreach (string t in temp)
 				{
-					article.Slug += $"-{t}";
+					article.Slug += $"-{FormatString.HandleName(t)}";
 				}
 				article.Slug += id;
 				string sql = $" Insert into article values('{article.ArticleID}','{article.Title}','{article.ImageLink}','{article.Detail}','0','{article.Slug}','{article.AuthorID}','{article.ArticleTypeID}')  ";
@@ -139,11 +140,11 @@ namespace MagicNumber.Controllers
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
 				cmd.ExecuteNonQuery();
-				return "Add successfully!";
+				return Request.CreateResponse(System.Net.HttpStatusCode.OK, article.Slug);
 			}
 			catch (Exception e)
 			{
-				return $"Fail to add {e.Message}";
+				return Request.CreateResponse(System.Net.HttpStatusCode.OK, "");
 			}
 		}
 
