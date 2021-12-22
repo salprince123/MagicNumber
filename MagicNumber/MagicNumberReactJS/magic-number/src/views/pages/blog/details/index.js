@@ -43,11 +43,15 @@ import {
  * @param {String} targetURL.location.pathname
  */
 import '@styles/base/pages/page-blog.scss'
+import { useHistory } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 const BlogDetails = (targetURL) => {
   const [data, setData] = useState(null)
   const slug= targetURL.location.pathname.substr(22,targetURL.location.pathname.length);
   const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
+  const urlDelete="http://localhost:7999/api/Article/Delete";
+  const history = useHistory()
   useEffect(() => {
     axios.get(url).then(
       res => setData(res.data))
@@ -64,48 +68,16 @@ const BlogDetails = (targetURL) => {
     Food: 'light-success'
   }
 
-  /*const renderTags = () => {
-    return data.blog.tags.map((tag, index) => {
-      return (
-        <a key={index} href='/' onClick={e => e.preventDefault()}>
-          <Badge
-            className={classnames({
-              'mr-50': index !== data.blog.tags.length - 1
-            })}
-            color={badgeColorsArr[tag]}
-            pill
-          >
-            {tag}
-          </Badge>
-        </a>
-      )
-    })
-  }*/
-
-  /*const renderComments = () => {
-    return data.comments.map(comment => {
-      return (
-        <Card className='mb-3' key={comment.userFullName}>
-          <CardBody>
-            <Media>
-              <Avatar className='mr-75' img={comment.avatar} width='38' height='38' />
-              <Media body>
-                <h6 className='font-weight-bolder mb-25'>{comment.userFullName}</h6>
-                <CardText>{comment.commentedAt}</CardText>
-                <CardText>{comment.commentText}</CardText>
-                <a href='/' onClick={e => e.preventDefault()}>
-                  <div className='d-inline-flex align-items-center'>
-                    <CornerUpLeft size={18} className='mr-50' />
-                    <span>Reply</span>
-                  </div>
-                </a>
-              </Media>
-            </Media>
-          </CardBody>
-        </Card>
-      )
-    })
-  }*/
+  function sendDeleteRequest(){    
+    axios.delete(urlDelete, {
+      params: {
+          slug: slug
+      }
+  }).then(
+    history.push(`/home`),
+    alert("Xóa bài viết thành công")
+  );
+  }
 
   return (
     <Fragment>
@@ -137,7 +109,9 @@ const BlogDetails = (targetURL) => {
                         dangerouslySetInnerHTML={{ __html: data[0].Detail  }}
                       ></div>
                     </CardBody>
+                    <Button.Ripple color='primary' onClick={sendDeleteRequest} >Xoa bai viet</Button.Ripple>
                   </Card>
+                  
                 </Col>
                 <Col sm='12'>
                   <h6 className='section-label'>Comment</h6>

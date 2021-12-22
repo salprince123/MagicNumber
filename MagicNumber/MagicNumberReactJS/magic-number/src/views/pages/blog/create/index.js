@@ -74,9 +74,9 @@ const BlogCreate = () => {
   }
   function sendRequest(){    
     axios.post(url,staticData )
-        .then( 
-        res =>history.push(`/pages/article/detail/${res.data}`)
-        )    
+    .then( 
+      res =>history.push(`/pages/article/detail/${res.data}`)
+      )    
   }
   return (
     <div className='blog-edit-wrapper'>
@@ -92,12 +92,41 @@ const BlogCreate = () => {
                         <Input id='blog-edit-title' value={title} onChange={e => setTitle(e.target.value)} />
                       </FormGroup>
                     </Col>
-                   
+                    {/*
+                    <Col md='6'>
+                      <FormGroup className='mb-2'>
+                        <Label for='blog-edit-category'>Category</Label>
+                        <Select
+                          id='blog-edit-category'
+                          isClearable={false}
+                          theme={selectThemeColors}
+                          value={blogCategories}
+                          isMulti
+                          name='colors'
+                          options={categories}
+                          className='react-select'
+                          classNamePrefix='select'
+                          onChange={data => setBlogCategories(data)}
+                        />
+                      </FormGroup>
+                    </Col>*/
+                    }
+                    
                     <Col md='6'>
                       <FormGroup className='mb-2'>
                         <Label for='blog-edit-slug'>Small Detail</Label>                        
                       </FormGroup>
                     </Col>
+                    {
+                      /*
+                       <Col sm='12'>
+                      <FormGroup className='mb-2'>
+                        <Label>Content</Label>
+                        <Editor editorState={content} onEditorStateChange={handleEditorChange} />
+                      </FormGroup>
+                    </Col>
+                      */
+                    }
                    
                    <Col sm='12'>
                    <ReactQuill  placeholder="Your text here"  onChange={setConvertedContent}>    

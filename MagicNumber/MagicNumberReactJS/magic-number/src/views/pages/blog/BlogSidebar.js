@@ -11,7 +11,7 @@ const BlogSidebar = () => {
   const url = "http://localhost:7999/api/Article/GetRandomPost"
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
-  }, [])
+  }, [data])
 
   const CategoryColorsArr = {
     Quote: 'light-info',
