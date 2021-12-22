@@ -50,7 +50,7 @@ const BlogDetails = (targetURL) => {
   const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
-  }, [])
+  }, [slug])
   //alert(url);
   const badgeColorsArr = {
     Quote: 'light-info',
