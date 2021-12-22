@@ -75,11 +75,13 @@ const BlogCreate = () => {
   function sendRequest(){    
     axios.post(url,staticData )
         .then(function (response) {
-          alert(response.data + content );
+          alert(response.data );
+          setSlug(response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
+        
   }
   return (
     <div className='blog-edit-wrapper'>
@@ -117,8 +119,7 @@ const BlogCreate = () => {
                     
                     <Col md='6'>
                       <FormGroup className='mb-2'>
-                        <Label for='blog-edit-slug'>Small Detail</Label>
-                        <Input id='blog-edit-slug' value={slug} onChange={e => setSlug(e.target.value)} />
+                        <Label for='blog-edit-slug'>Small Detail</Label>                        
                       </FormGroup>
                     </Col>
                     {
