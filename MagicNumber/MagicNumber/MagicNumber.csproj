@@ -236,6 +236,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NumberController.cs" />
     <Compile Include="Controllers\TypeArticleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="GetData\MyConnection.cs" />
     <Compile Include="Global.asax.cs">

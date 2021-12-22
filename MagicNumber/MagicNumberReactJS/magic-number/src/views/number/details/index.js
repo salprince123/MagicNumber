@@ -98,7 +98,9 @@ const NumberForm = () => {
                         </CardBody>
                     </Card>
                     <Card>
-                    <ChartTree top1={data.top[0].number} top2={data.top[1].number} top3={data.top[2].number} top4={data.top[3].number} />
+                    <ChartTree top1={data.top[0].number} top2={data.top[1].number} top3={data.top[2].number} top4={data.top[3].number} 
+                                dateNumber= {data.top[0].day} monthNumber={data.top[0].month} yearNumber={data.top[0].year}
+                    />
                         <CardHeader>
                             <CardTitle tag='h4'>Sau đây là các đỉnh cao trong đời bạn</CardTitle>
                         </CardHeader>                        

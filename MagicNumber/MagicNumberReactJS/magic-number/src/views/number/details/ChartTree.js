@@ -7,8 +7,8 @@ import Pyramid from '@src/assets/images/pyramid-line.png'
 const PyramidNumber = ({ dateNumber, monthNumber, yearNumber, top1, top2, top3, top4 }) => {
 
     const firstLayer = {
-        "Month": dateNumber,
-        "Date": monthNumber,
+        "Month": monthNumber,
+        "Date": dateNumber,
         "Year": yearNumber
     }
 
@@ -42,13 +42,14 @@ const PyramidNumber = ({ dateNumber, monthNumber, yearNumber, top1, top2, top3, 
                     </Button.Ripple>
 
                     <Button.Ripple className='rounded-circle Layer 1' color='primary' style={{ width: '60px', height: '60px', top: '320px', left: '80px' }}>
-                        {firstLayer.Month}
+                    {firstLayer.Month}                    
                     </Button.Ripple>
                     <Button.Ripple className='rounded-circle Layer 1' color='primary' style={{ width: '60px', height: '60px', top: '330px', left: '488px' }}>
-                        {firstLayer.Year}
+                        {firstLayer.Date}
                     </Button.Ripple>
                     <Button.Ripple className='rounded-circle Layer 1' color='primary' style={{ width: '60px', height: '60px', top: '320px', left: '900px' }}>
-                        {firstLayer.Date}
+                        
+                        {firstLayer.Year}
                     </Button.Ripple>
 
                     <Button.Ripple className='rounded-circle Layer 3' color='primary' style={{ width: '60px', height: '60px', top: '150px', left: '490px' }}>
