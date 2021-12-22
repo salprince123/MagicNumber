@@ -6,7 +6,7 @@ import htmlToDraft from 'html-to-draftjs'
 import { selectThemeColors } from '@utils'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, ContentState } from 'draft-js'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { convertToHTML } from 'draft-convert';
 import {
   Row,
@@ -35,10 +35,10 @@ const BlogCreate = () => {
   const contentBlock = htmlToDraft(initialContent)
   const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks)
   const editorState = EditorState.createWithContent(contentState)
-
+  const history = useHistory()
   const [data, setData] = useState(null),
     [title, setTitle] = useState('test'),
-    [slug, setSlug] = useState(''),
+    [slug, setSlug] = useState('-testsbkgp'),
     [content, setContent] = useState(() => EditorState.createEmpty()),
     [featuredImg, setFeaturedImg] = useState("https://www.studytienganh.vn/upload/2021/05/98114.jpg"),
     [imgPath, setImgPath] = useState('banner.jpg'),
@@ -74,14 +74,9 @@ const BlogCreate = () => {
   }
   function sendRequest(){    
     axios.post(url,staticData )
-        .then(function (response) {
-          alert(response.data );
-          setSlug(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
+        .then( 
+        res =>history.push(`/pages/article/detail/${res.data}`)
+        )    
   }
   return (
     <div className='blog-edit-wrapper'>
@@ -97,41 +92,12 @@ const BlogCreate = () => {
                         <Input id='blog-edit-title' value={title} onChange={e => setTitle(e.target.value)} />
                       </FormGroup>
                     </Col>
-                    {/*
-                    <Col md='6'>
-                      <FormGroup className='mb-2'>
-                        <Label for='blog-edit-category'>Category</Label>
-                        <Select
-                          id='blog-edit-category'
-                          isClearable={false}
-                          theme={selectThemeColors}
-                          value={blogCategories}
-                          isMulti
-                          name='colors'
-                          options={categories}
-                          className='react-select'
-                          classNamePrefix='select'
-                          onChange={data => setBlogCategories(data)}
-                        />
-                      </FormGroup>
-                    </Col>*/
-                    }
-                    
+                   
                     <Col md='6'>
                       <FormGroup className='mb-2'>
                         <Label for='blog-edit-slug'>Small Detail</Label>                        
                       </FormGroup>
                     </Col>
-                    {
-                      /*
-                       <Col sm='12'>
-                      <FormGroup className='mb-2'>
-                        <Label>Content</Label>
-                        <Editor editorState={content} onEditorStateChange={handleEditorChange} />
-                      </FormGroup>
-                    </Col>
-                      */
-                    }
                    
                    <Col sm='12'>
                    <ReactQuill  placeholder="Your text here"  onChange={setConvertedContent}>    

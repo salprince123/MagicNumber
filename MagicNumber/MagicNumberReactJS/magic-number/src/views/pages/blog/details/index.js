@@ -49,7 +49,11 @@ const BlogDetails = (targetURL) => {
   const slug= targetURL.location.pathname.substr(22,targetURL.location.pathname.length);
   const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
   useEffect(() => {
-    axios.get(url).then(res => setData(res.data))
+    axios.get(url).then(
+      res => setData(res.data))
+      .catch(function (error) {
+        console.log(error);
+      });   
   }, [slug])
   //alert(url);
   const badgeColorsArr = {
@@ -132,65 +136,6 @@ const BlogDetails = (targetURL) => {
                       <div
                         dangerouslySetInnerHTML={{ __html: data[0].Detail  }}
                       ></div>
-                      
-                      {
-                        /*
-                        <Media>
-                        <Avatar img={cmtImg} className='mr-2' imgHeight={60} imgWidth={60} />
-                        <Media body>
-                          <h6 className='font-weight-bolder'>Willie Clark</h6>
-                          <CardText className='mb-0'>
-                            Based in London, Uncode is a blog by Willie Clark. His posts explore modern design trends
-                            through photos and quotes by influential creatives and web designer around the world.
-                          </CardText>
-                        </Media>
-                      </Media>
-                        <hr className='my-2' />
-                      <div className='d-flex align-items-center justify-content-between'>
-                        <div className='d-flex align-items-center'>
-                          <div className='d-flex align-items-center mr-1'>
-                            <a className='mr-50' href='/' onClick={e => e.preventDefault()}>
-                              <MessageSquare size={21} className='text-body align-middle' />
-                            </a>
-                            <a href='/' onClick={e => e.preventDefault()}>
-                              <div className='text-body align-middle'></div>
-                            </a>
-                          </div>
-                          <div className='d-flex align-items-cente'>
-                            <a className='mr-50' href='/' onClick={e => e.preventDefault()}>
-                              <Bookmark size={21} className='text-body align-middle' />
-                            </a>
-                            <a href='/' onClick={e => e.preventDefault()}>
-                              <div className='text-body align-middle'>BOOKMART HERE</div>
-                            </a>
-                          </div>
-                        </div>
-                        <UncontrolledDropdown className='dropdown-icon-wrapper'>
-                          <DropdownToggle tag='span'>
-                            <Share2 size={21} className='text-body cursor-pointer' />
-                          </DropdownToggle>
-                          <DropdownMenu right>
-                            <DropdownItem className='py-50 px-1'>
-                              <GitHub size={18} />
-                            </DropdownItem>
-                            <DropdownItem className='py-50 px-1'>
-                              <Gitlab size={18} />
-                            </DropdownItem>
-                            <DropdownItem className='py-50 px-1'>
-                              <Facebook size={18} />
-                            </DropdownItem>
-                            <DropdownItem className='py-50 px-1'>
-                              <Twitter size={18} />
-                            </DropdownItem>
-                            <DropdownItem className='py-50 px-1'>
-                              <Linkedin size={18} />
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </div>
-                        */
-                      }
-                      
                     </CardBody>
                   </Card>
                 </Col>
@@ -253,7 +198,7 @@ const BlogDetails = (targetURL) => {
                   </Card>
                 </Col>
               </Row>
-            ) : null}
+            ) : <>Trang khong ton tai</>}
           </div>
         </div>
         <Sidebar />
