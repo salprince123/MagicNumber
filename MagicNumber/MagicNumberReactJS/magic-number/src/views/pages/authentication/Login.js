@@ -51,8 +51,8 @@ const Login = props => {
   const history = useHistory()
   //const [email, setEmail] = useState('salprince@gmail.com')
   //const [password, setPassword] = useState('123456')
-  const [email, setEmail] = useState('admin@demo.com')
-  const [password, setPassword] = useState('admin')
+  const [email, setEmail] = useState('guest@demo.com')
+  const [password, setPassword] = useState('123')
   const temp={
     action: 'manage',
     subject: 'all'
@@ -98,8 +98,7 @@ const Login = props => {
           )
         })
         .catch(err => console.log(err))
-    }
-  
+    }  
   }
   
   return (

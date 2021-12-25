@@ -3,7 +3,7 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Infinity Universe',
+    appName: 'Infinity',
     appLogoImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Infinite.svg/800px-Infinite.svg.png"
   },
   layout: {

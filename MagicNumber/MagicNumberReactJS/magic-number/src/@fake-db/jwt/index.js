@@ -7,7 +7,7 @@ const data = {
       id: 1,
       fullName: 'Admin',
       username: 'admin',
-      password: 'admin',
+      password: '123',
       avatar: "https://anhdep123.com/wp-content/uploads/2021/01/anh-mang-cute-lam-hinh-dai-dien-dep-nhat.jpg",
       email: 'admin@demo.com',
       role: 'admin',
@@ -23,16 +23,38 @@ const data = {
     },
     {
       id: 2,
-      fullName: 'Jane Doe',
-      username: 'janedoe',
-      password: 'client',
-      avatar: require('@src/assets/images/avatars/1-small.png').default,
-      email: 'client@demo.com',
+      fullName: 'Sol',
+      username: 'Sol',
+      password: '123',
+      avatar: "https://i.redd.it/c0giqzpkmcd11.jpg",
+      email: 'sol@demo.com',
       role: 'client',
       ability: [
         {
           action: 'read',
-          subject: 'ACL'
+          subject: 'all'
+        },
+        {
+          action: 'read',
+          subject: 'Auth'
+        }
+      ],
+      extras: {
+        eCommerceCartItemsCount: 5
+      }
+    },
+    {
+      id: 3,
+      fullName: 'Guest',
+      username: 'Guest',
+      password: '123',
+      avatar: "https://findicons.com/files/icons/2711/free_icons_for_windows8_metro/512/guest.png",
+      email: 'guest@demo.com',
+      role: 'guess',
+      ability: [
+        {
+          action: 'read',
+          subject: 'all'
         },
         {
           action: 'read',
