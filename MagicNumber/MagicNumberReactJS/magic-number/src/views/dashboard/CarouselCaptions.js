@@ -6,25 +6,26 @@ import sliderImage3 from '@src/assets/images/slider/10.jpg'
 
 const images = [
   {
-    src: sliderImage1,
+    src: "https://i.pinimg.com/originals/8f/ae/a4/8faea4c77bf07ec467306c0a1ecc356d.jpg",
     id: 1,
-    header: 'Slide 1',
+    header: 'Sứ mệnh của chúng tôi',
     caption:
-      'Donut jujubes I love topping I love sweet. Jujubes I love brownie gummi bears I love donut sweet chocolate. Tart chocolate marshmallow.Tart carrot cake muffin.'
+      'Giúp các bạn tìm ra con số của mình, từ đó hiểu bản thân hơn và cải thiện bản thân từng ngày'
+    
   },
   {
-    src: sliderImage2,
+    src: "https://static.wixstatic.com/media/d673d3_fc4de5291df44b2083ab5a2c894879de~mv2.png/v1/fill/w_980,h_483,al_c,usm_0.66_1.00_0.01/d673d3_fc4de5291df44b2083ab5a2c894879de~mv2.png",
     id: 2,
-    header: 'Slide 2',
+    header: 'Con số của bạn là gì?',
     caption:
-      'Tart macaroon marzipan I love soufflé apple pie wafer. Chocolate bar jelly caramels jujubes chocolate cake gummies. Cupcake cake I love cake danish carrot cake.'
+      'Khám phá bản thân qua ý nghĩa các con số'
   },
   {
-    src: sliderImage3,
+    src: "https://motionarray.imgix.net/preview-90839-RXPKHz9OAh-high_0002.jpg",
     id: 3,
-    header: 'Slide 3',
+    header: '4 đỉnh cao của đời người',
     caption:
-      'Pudding sweet pie gummies. Chocolate bar sweet tiramisu cheesecake chocolate cotton candy pastry muffin Marshmallow cake powder icing.'
+      'Bất kì ai cũng có 4 đỉnh cao trong cuộc đời, hãy khám phá 4 đỉnh cao của riêng bạn!'
   }
 ]
 

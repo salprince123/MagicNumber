@@ -12,6 +12,7 @@ const Profile = () => {
   const [data, setData] = useState(null)
   const [header, setHeader] = useState(null)
   const [block, setBlock] = useState(false)
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
   const url= "http://localhost:7999/api/User/GetByID"
   const handleBlock = () => {
     setBlock(true)
@@ -19,18 +20,18 @@ const Profile = () => {
       setBlock(false)
     }, 2000)
   }
-
-  useEffect(() => {
-    axios.get(url,{
-      params: {
-        id: 'admin'
-      }
-    }).then(response => setHeader(response.data))
-  }, [])
-
   useEffect(() => {
     axios.get('/profile/data').then(response => setData(response.data))
   }, [])
+  useEffect(() => {
+    axios.get(url,{
+      params: {
+        id: userData['email']
+      }
+    }).then(response => setHeader(response.data))
+    
+  }, [])
+
   return (
     <Fragment>
       {data !== null && header !== null ? (

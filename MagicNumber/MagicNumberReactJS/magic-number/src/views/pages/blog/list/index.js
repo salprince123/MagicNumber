@@ -37,7 +37,8 @@ const BlogList = () => {
       if(data.length<=5)
         setPageCount(1)
     }
-    
+    // if(data!=null)
+    // alert(data.length)
   }, [data])
   
   const badgeColorsArr = {

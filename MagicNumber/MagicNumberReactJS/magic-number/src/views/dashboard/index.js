@@ -27,7 +27,7 @@ import CardSlider from './CardSlider'
 const Dashboard = () => {
   const { colors } = useContext(ThemeColors),
     trackBgColor = '#e9ecef'
-
+  
   return (
     <Fragment>
       <div className='blog-wrapper'>
