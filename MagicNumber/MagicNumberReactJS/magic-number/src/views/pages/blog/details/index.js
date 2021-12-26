@@ -123,13 +123,14 @@ const BlogDetails = (targetURL) => {
                     <CardBody>
                       <Form className='form' onSubmit={e => e.preventDefault()}>
                         <Row>
+                        {
+                            /*
                           <Col sm='6'>
                             <FormGroup className='mb-2'>
                               <Input placeholder='Name' />
                             </FormGroup>
                           </Col>
-                          {
-                            /*
+                          
                             <Col sm='6'>
                             <FormGroup className='mb-2'>
                               <Input type='email' placeholder='Email' />

@@ -209,9 +209,27 @@ namespace MagicNumber.Controllers
 
 			}
 		}
-
+		[System.Web.Http.Route("api/Article/Delete")]
+		[System.Web.Http.HttpDelete]
+		public string Delete(string slug)
+		{
+			try
+			{
+				string sql = $" delete from Article where slug='{slug}'";
+				MySqlConnection con = new MySqlConnection("host=localhost;user=root;password='';database=numberum;");
+				MySqlCommand cmd = new MySqlCommand(sql, con);
+				con.Open();
+				cmd.ExecuteNonQuery();
+				return $"Delete successfully!";
+			}
+			catch (Exception)
+			{
+				return "Fail ";
+			}
+		}
 		[System.Web.Http.Route("api/Article/AddComment")]
 		[System.Web.Http.HttpPost]
+
 		public string AddComment(String slug, String detail, string userID)
 		{
 			try
@@ -232,10 +250,33 @@ namespace MagicNumber.Controllers
 
 			}
 		}
+		[System.Web.Http.Route("api/Article/GetComment")]
+		[System.Web.Http.HttpGet]
+		public HttpResponseMessage GetComment(string slug)
+		{
+			string sql = $" SELECT * FROM COMMENT c join article a on c.ArticleID=a.ArticleID where a.slug='{slug}' ";
+			MySqlConnection con = new MyConnection().GetConnection();
+			MySqlCommand cmd = new MySqlCommand(sql, con);
+			con.Open();
 
-		[System.Web.Http.Route("api/Article/Delete")]
+			MySqlDataReader reader = cmd.ExecuteReader();
+
+			List<Comment> temp = new List<Comment>();
+			while (reader.Read())
+			{
+				Comment temp1 = new Comment();
+				temp1.UserID = reader.GetString("UserId");
+				temp1.Time = reader.GetString("Time");
+				temp1.Detail = reader.GetString("Detail");
+				temp.Add(temp1);
+			}
+			con.Close();
+			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
+		}
+
+		[System.Web.Http.Route("api/Article/DeleteComment")]
 		[System.Web.Http.HttpDelete]
-		public string Delete(string slug)
+		public string DeleteComment(string slug, string userid)
 		{
 			try
 			{
