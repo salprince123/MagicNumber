@@ -43,14 +43,14 @@ const BlogCreate = () => {
     [featuredImg, setFeaturedImg] = useState("https://www.studytienganh.vn/upload/2021/05/98114.jpg"),
     [imgPath, setImgPath] = useState('banner.jpg'),
     [convertedContent, setConvertedContent] = useState("null")
-    [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+  const [author, setAuthor]= useState(JSON.parse(localStorage.getItem('userData')))
   const url="http://localhost:7999/api/Article/Add" ;
   const staticData={
     Title: title,
     ImageLink:featuredImg ,
     Detail: convertedContent,
     Upvote: "0",
-    AuthorID: userData['email'],
+    AuthorID: author['email'],
     ArticleTypeID: "type2"
   }
   const onChange = e => {
@@ -61,7 +61,7 @@ const BlogCreate = () => {
       setFeaturedImg(reader.result)
     }
     reader.readAsDataURL(files[0])
-    //alert(featuredImg)
+    alert(author['email'])
   }
   function sendRequest(){    
     axios.post(url,staticData )
