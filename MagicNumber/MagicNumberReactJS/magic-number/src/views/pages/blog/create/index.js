@@ -53,16 +53,6 @@ const BlogCreate = () => {
     AuthorID: userData['email'],
     ArticleTypeID: "type2"
   }
-  
-
-  /*const categories = [
-    { value: 'fashion', label: 'Fashion' },
-    { value: 'gaming', label: 'Gaming' },
-    { value: 'quote', label: 'Quote' },
-    { value: 'video', label: 'Video' },
-    { value: 'food', label: 'Food' }
-  ]*/
-
   const onChange = e => {
     const reader = new FileReader(),
       files = e.target.files

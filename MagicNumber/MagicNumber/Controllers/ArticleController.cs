@@ -34,7 +34,7 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetAll()
 		{
-			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article ";
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID  ";
 			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
@@ -43,7 +43,6 @@ namespace MagicNumber.Controllers
 			while (reader.Read())
 			{
 				temp.Add(loadFromTable(reader));
-
 			}
 			con.Close();
 			return Request.CreateResponse(System.Net.HttpStatusCode.OK, temp);
@@ -91,7 +90,7 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetRandomPost()
 		{
-			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article limit 5 ";
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID limit 5 ";
 			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
@@ -111,7 +110,7 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetTop( string top)
 		{
-			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article limit {top} ";
+			string sql = $" SELECT ArticleID, Detail, Title, ArticleTypeID,ImageLink, Upvote, slug, AuthorID, user.Name, user.avatar FROM article join user on article.AuthorID= user.UserID limit {top} ";
 			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
