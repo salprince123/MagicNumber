@@ -3,6 +3,7 @@ import axios from 'axios'
 import classnames from 'classnames'
 import Sidebar from '../BlogSidebar'
 import Avatar from '@components/avatar'
+import moment from 'moment';
 import cmtImg from '@src/assets/images/portrait/small/avatar-s-6.jpg'
 import { kFormatter } from '@utils'
 import {
@@ -47,10 +48,29 @@ import { useHistory } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 const BlogDetails = (targetURL) => {
+  const fakeComment=[
+    {
+      "Detail":"hahaha",
+      "ID":"hahaha"
+    },
+    {
+      "Detail":"hahaha",
+      "ID":"hahaha"
+    },
+    {
+      "Detail":"hahaha",
+      "ID":"hahaha"
+    }
+  ]
   const [data, setData] = useState(null)
+  const [comment, setComment] = useState(null)
+  const [author, setAuthor]= useState(JSON.parse(localStorage.getItem('userData')))
+  const [commentDetail, setCommentDetail]=useState("")
   const slug= targetURL.location.pathname.substr(22,targetURL.location.pathname.length);
   const url="http://localhost:7999/api/Article/GetBySlug/" +slug;
   const urlDelete="http://localhost:7999/api/Article/Delete";
+  const urlAddComment="http://localhost:7999/api/Article/AddComment";
+  const urlGetCommnent="http://localhost:7999/api/Article/GetComment";
   const history = useHistory()
   useEffect(() => {
     axios.get(url).then(
@@ -58,15 +78,17 @@ const BlogDetails = (targetURL) => {
       .catch(function (error) {
         console.log(error);
       });   
-  }, [slug])
-  //alert(url);
-  const badgeColorsArr = {
-    Quote: 'light-info',
-    Fashion: 'light-primary',
-    Gaming: 'light-danger',
-    Video: 'light-warning',
-    Food: 'light-success'
-  }
+    axios.get(urlGetCommnent,{
+      params: {
+          slug: slug
+      }
+  }).then(
+      res => setComment(res.data))
+      .catch(function (error) {
+        console.log(error);
+      }); 
+
+  }, [slug])  
 
   function sendDeleteRequest(){    
     axios.delete(urlDelete, {
@@ -78,7 +100,55 @@ const BlogDetails = (targetURL) => {
     alert("Xóa bài viết thành công")
   );
   }
-
+  
+  function addComment(){    
+    if(commentDetail!="")
+    {
+      axios.post("http://localhost:7999/api/Article/AddComment", {     
+        Slug: slug,
+        Detail: commentDetail,
+        UserID: author['email']
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+    })
+    setComment(comment => [...comment,{
+      "UserID": author['email'],
+      "Time": moment().format('DD/MM/YYYY h:mm:ss A'),
+      "Detail": commentDetail,
+      "ArticleID": null
+    } ]);
+    }
+    
+ }
+ const renderComment = () => {     
+  return comment.map(item => {
+    return (
+      <Col md='6'>
+        <Card>
+        <Media>
+          <Media body>              
+              <small>
+                  <a className='text-body' href='/' onClick={e => e.preventDefault()}>
+                      {item.UserID}
+                  </a>
+              </small>
+              <small className='text-muted mr-25'> at {item.Time}</small>
+              <Media >
+              <big>{item.Detail} </big>
+              </Media>
+                            
+          </Media>
+      </Media>
+        </Card> 
+      </Col>
+    )
+  })
+}
   return (
     <Fragment>
       <div className='blog-wrapper'>
@@ -113,6 +183,7 @@ const BlogDetails = (targetURL) => {
                   </Card>
                   
                 </Col>
+               
                 <Col sm='12'>
                   <h6 className='section-label'>Comment</h6>
                   COMMENT HERE
@@ -122,52 +193,22 @@ const BlogDetails = (targetURL) => {
                   <Card>
                     <CardBody>
                       <Form className='form' onSubmit={e => e.preventDefault()}>
-                        <Row>
-                        {
-                            /*
-                          <Col sm='6'>
-                            <FormGroup className='mb-2'>
-                              <Input placeholder='Name' />
-                            </FormGroup>
-                          </Col>
-                          
-                            <Col sm='6'>
-                            <FormGroup className='mb-2'>
-                              <Input type='email' placeholder='Email' />
-                            </FormGroup>
-                          </Col>
-                          <Col sm='6'>
-                            <FormGroup className='mb-2'>
-                              <Input type='url' placeholder='Website' />
-                            </FormGroup>
-                          </Col>
-                            */
-
-                          }
-                          
+                        <Row>                        
                           <Col sm='12'>
                             <FormGroup className='mb-2'>
-                              <Input className='mb-2' type='textarea' rows='4' placeholder='Comment' />
+                              <Input className='mb-2' type='textarea' rows='4' placeholder='Comment'  
+                              value={commentDetail} onChange={e => setCommentDetail(e.target.value)}/>
                             </FormGroup>
                           </Col>
-                          {
-                            /*
-                            <Col sm='12'>
-                            <CustomInput
-                              className='mb-2'
-                              type='checkbox'
-                              id='exampleCustomCheckbox4'
-                              label='Save my name, email, and website in this browser for the next time I comment.'
-                              htmlFor='exampleCustomCheckbox4'
-                            />
-                          </Col>  
-                            */
-                          }
-                          
                           <Col sm='12'>
-                            <Button.Ripple color='primary'>Post Comment</Button.Ripple>
-                          </Col>
+                            <Button.Ripple color='primary' onClick={addComment}>Post Comment</Button.Ripple>
+                          </Col>                          
                         </Row>
+                        {comment !== null ? (
+                        <Col>
+                          {renderComment()}
+                        </Col>
+                          ) : <></>}
                       </Form>
                     </CardBody>
                   </Card>

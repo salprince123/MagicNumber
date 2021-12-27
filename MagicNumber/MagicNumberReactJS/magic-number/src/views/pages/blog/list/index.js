@@ -48,27 +48,8 @@ const BlogList = () => {
     Video: 'light-warning',
     Food: 'light-success'
   }
-  const renderRenderList = () => { 
-    
+  const renderRenderList = () => {     
     return data.slice(currentPage*5,(currentPage+1)*5).map(item => {
-      /*const renderTags = () => {
-        return item.tags.map((tag, index) => {
-          return (
-            <a key={index} href='/' onClick={e => e.preventDefault()}>
-              <Badge
-                className={classnames({
-                  'mr-50': index !== item.tags.length - 1
-                })}
-                color={badgeColorsArr[tag]}
-                pill
-              >
-                {tag}
-              </Badge>
-            </a>
-          )
-        })
-      }*/
-
       return (
         <Col key={item.Title} md='6'>
           <Card>

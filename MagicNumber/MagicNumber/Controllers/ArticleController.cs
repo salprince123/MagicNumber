@@ -13,6 +13,12 @@ namespace MagicNumber.Controllers
 {
     public class ArticleController : ApiController
     {
+		public class CommentTemplate
+        {
+			public string Slug { get; set; }
+			public string UserID { get; set; }
+			public string Detail { get; set; }
+		}
 		private Article loadFromTable(MySqlDataReader reader)
         {
 			Article temp1 = new Article();
@@ -230,13 +236,13 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.Route("api/Article/AddComment")]
 		[System.Web.Http.HttpPost]
 
-		public string AddComment(String slug, String detail, string userID)
+		public string AddComment(CommentTemplate com)
 		{
 			try
 			{
-				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{userID}', " +
-							$" (SELECT ArticleID FROM article where slug='{slug}'), " +
-							$" '{detail}','{DateTime.Now.ToString()}'); ";
+				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{com.UserID}', " +
+							$" (SELECT ArticleID FROM article where slug='{com.Slug}'), " +
+							$" '{com.Detail}','{DateTime.Now.ToString()}'); ";
 				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
