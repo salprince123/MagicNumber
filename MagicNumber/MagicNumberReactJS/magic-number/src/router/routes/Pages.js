@@ -29,16 +29,12 @@ const PagesRoutes = [
   {
     path: '/pages/profile',
     component: lazy(() => import('../../views/pages/profile')),
-    meta: {
-      authRoute: true
-    }
+    
   },
   {
     path: '/pages/account-settings',
     component: lazy(() => import('../../views/pages/account-settings')),
-    meta: {
-      authRoute: true
-    }
+    
   },
   {
     path: '/find-number',
