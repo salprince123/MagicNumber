@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom'
 // ** Third Party Components
 import { Sun, Moon } from 'react-feather'
 import { NavItem, NavLink, Button } from 'reactstrap'
+import { useState } from 'react'
 
 const NavbarUser = props => {
   // ** Props
   const { skin, setSkin } = props
-
+  const [author, setAuthor]= useState(JSON.parse(localStorage.getItem('userData')))
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
     if (skin === 'dark') {
@@ -27,6 +28,7 @@ const NavbarUser = props => {
         <NavLink className='nav-link-style'>
           <ThemeToggler />
         </NavLink>
+
       </NavItem>
       <NavbarSearch />
       <NotificationDropdown />
@@ -35,9 +37,11 @@ const NavbarUser = props => {
         Find your number
       </Button.Ripple>
       <div className="px-0.5" />
+      {author['username'] != "Guest" ? (
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/pages/article/create'>
         Write Article
       </Button.Ripple>
+      ):<></>}
       <UserDropdown />
     </ul>
   )

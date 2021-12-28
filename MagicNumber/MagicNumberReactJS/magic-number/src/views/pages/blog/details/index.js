@@ -181,7 +181,9 @@ const BlogDetails = (targetURL) => {
                         dangerouslySetInnerHTML={{ __html: data[0].Detail  }}
                       ></div>
                     </CardBody>
+                    {author['email'] == "admin@demo.com" ? (
                     <Button.Ripple color='primary' onClick={sendDeleteRequest} >Xoa bai viet</Button.Ripple>
+                    ):<></>}
                   </Card>
                   
                 </Col>

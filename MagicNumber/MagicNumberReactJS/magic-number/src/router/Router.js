@@ -1,5 +1,5 @@
 // ** React Imports
-import { Suspense, useContext, lazy } from 'react'
+import { Suspense, useContext, lazy, useState } from 'react'
 
 // ** Utils
 import { isUserLoggedIn } from '@utils'
@@ -16,18 +16,21 @@ import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-route
 
 // ** Routes & Default Routes
 import { DefaultRoute, Routes } from './routes'
-
+import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
 // ** Layouts
 import BlankLayout from '@layouts/BlankLayout'
 import VerticalLayout from '@src/layouts/VerticalLayout'
 import HorizontalLayout from '@src/layouts/HorizontalLayout'
 import { CalculateNumber } from '../views/CalculateNumber'
-
+import useJwt from '@src/auth/jwt/useJwt'
+import { handleLogin } from '@store/actions/auth'
+import { useDispatch } from 'react-redux'
 const Router = () => {
   // ** Hooks
   const [layout, setLayout] = useLayout()
   const [transition, setTransition] = useRouterTransition()
-
+  const [email, setEmail] = useState('guest@demo.com')
+  const [password, setPassword] = useState('123')
   // ** ACL Ability Context
   const ability = useContext(AbilityContext)
 
@@ -62,7 +65,7 @@ const Router = () => {
 
   // ** Init Error Component
   const Error = lazy(() => import('@src/views/pages/misc/Error'))
-
+  const dispatch = useDispatch()
   /**
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
@@ -75,7 +78,20 @@ const Router = () => {
       action = route.meta.action ? route.meta.action : null
       resource = route.meta.resource ? route.meta.resource : null
     }
-
+    if(!isUserLoggedIn())
+    {
+      
+      useJwt
+        .login({ email, password })
+        .then(res => {
+          const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken }
+          dispatch(handleLogin(data))
+          ability.update(res.data.userData.ability)
+          history.push(getHomeRouteForLoggedInUser(data.role))
+          alert(data)
+        })
+        .catch(err => console.log(err))
+    }
     if (
       (!isUserLoggedIn() && route.meta === undefined) ||
       (!isUserLoggedIn() && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
