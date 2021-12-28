@@ -21,6 +21,7 @@ import {
 } from 'reactstrap'
 
 import '@styles/base/pages/page-blog.scss'
+import './index.css'
 
 const BlogList = () => {
   const [data, setData] = useState(null)
@@ -54,7 +55,7 @@ const BlogList = () => {
         <Col key={item.Title} md='6'>
           <Card>
             <Link to={`/pages/article/detail/${item.Slug}`}>
-              <CardImg className='img-fluid' src={item.ImageLink} alt={item.Title} top />
+              <CardImg className='img-fluid list' src={item.ImageLink} alt={item.Title} top />
             </Link>
             <CardBody>
               <CardTitle tag='h4'>
@@ -65,7 +66,7 @@ const BlogList = () => {
               <Media>
                 <Avatar className='mr-50' img={item.Author.Avatar} imgHeight='24' imgWidth='24' />
                 <Media body>
-                  <small className='text-muted mr-25'>by</small>
+                  <small className='text-muted mr-25'>Viết bởi</small>
                   <small>
                     <a className='text-body' href='/' onClick={e => e.preventDefault()}>
                       {item.Title}
@@ -81,10 +82,10 @@ const BlogList = () => {
               <div className='d-flex justify-content-between align-items-center'>
                 <Link to={`/pages/article/detail/${item.Slug}`}>
                   <MessageSquare size={15} className='text-body mr-50' />
-                  <span className='text-body font-weight-bold'>{item.Title} Comments</span>
+                  <span className='text-body font-weight-bold'>{item.Title} Bình luận</span>
                 </Link>
                 <Link className='font-weight-bold' to={`/pages/article/detail/${item.Slug}`}>
-                  Read More
+                  Đọc bài viết
                 </Link>
               </div>
             </CardBody>

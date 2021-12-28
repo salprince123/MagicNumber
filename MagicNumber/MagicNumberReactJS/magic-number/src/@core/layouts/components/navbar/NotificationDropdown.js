@@ -24,64 +24,25 @@ const NotificationDropdown = () => {
  
   const notificationsArray = [
     {
-      img: require('@src/assets/images/portrait/small/avatar-s-15.jpg').default,
-      subtitle: 'Won the monthly best seller badge.',
-      title: (
-        <Media tag='p' heading>
-          <span className='font-weight-bolder'>Congratulation Sam 🎉</span>winner!
-        </Media>
-      )
-    },
-    {
       img: require('@src/assets/images/portrait/small/avatar-s-3.jpg').default,
-      subtitle: 'You have 10 unread messages.',
+      subtitle: 'Bài viết của bạn có 10 bình luận mới',
       title: (
         <Media tag='p' heading>
-          <span className='font-weight-bolder'>New message</span>&nbsp;received
+          <span className='font-weight-bolder'>Bình luận mới</span>&nbsp;
         </Media>
       )
     },
     {
-      avatarContent: 'MD',
-      color: 'light-danger',
-      subtitle: 'MD Inc. order updated',
-      title: (
-        <Media tag='p' heading>
-          <span className='font-weight-bolder'>Revised Order 👋</span>&nbsp;checkout
-        </Media>
-      )
-    },
-    {
-      title: <h6 className='font-weight-bolder mr-auto mb-0'>System Notifications</h6>,
+      title: <h6 className='font-weight-bolder mr-auto mb-0'>Thông báo của hệ thống</h6>,
       switch: <CustomInput type='switch' id='primary' name='primary' inline defaultChecked />
     },
     {
       avatarIcon: <X size={14} />,
       color: 'light-danger',
-      subtitle: 'USA Server is down due to hight CPU usage',
+      subtitle: 'Hệ thống bảo trì vào 20/12/2021',
       title: (
         <Media tag='p' heading>
-          <span className='font-weight-bolder'>Server down</span>&nbsp;registered
-        </Media>
-      )
-    },
-    {
-      avatarIcon: <Check size={14} />,
-      color: 'light-success',
-      subtitle: 'Last month sales report generated',
-      title: (
-        <Media tag='p' heading>
-          <span className='font-weight-bolder'>Sales report</span>&nbsp;generated
-        </Media>
-      )
-    },
-    {
-      avatarIcon: <AlertTriangle size={14} />,
-      color: 'light-warning',
-      subtitle: 'BLR Server using high memory',
-      title: (
-        <Media tag='p' heading>
-          <span className='font-weight-bolder'>High memory</span>&nbsp;usage
+          <span className='font-weight-bolder'>Bảo trì hệ thống</span>&nbsp;
         </Media>
       )
     }
@@ -161,16 +122,16 @@ const NotificationDropdown = () => {
       <DropdownMenu tag='ul' right className='dropdown-menu-media mt-0'>
         <li className='dropdown-menu-header'>
           <DropdownItem className='d-flex' tag='div' header>
-            <h4 className='notification-title mb-0 mr-auto'>Notifications</h4>
+            <h4 className='notification-title mb-0 mr-auto'>Thông báo</h4>
             <Badge tag='div' color='light-primary' pill>
-              6 New
+              1 thông báo mới
             </Badge>
           </DropdownItem>
         </li>
         {renderNotificationItems()}
         <li className='dropdown-menu-footer'>
           <Button.Ripple color='primary' block>
-            Read all notifications
+            Xem tất cả
           </Button.Ripple>
         </li>
       </DropdownMenu>

@@ -31,33 +31,23 @@ const ProfileHeader = ({ data }) => {
               <Nav className='mb-0' pills>
                 <NavItem>
                   <NavLink className='font-weight-bold' active>
-                    <span className='d-none d-md-block'>Feed</span>
+                    <span className='d-none d-md-block'>Trang cá nhân</span>
                     <Rss className='d-block d-md-none' size={14} />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className='font-weight-bold'>
-                    <span className='d-none d-md-block'>Favorite Posts</span>
+                    <span className='d-none d-md-block'>Bài viết yêu thích</span>
                     <Info className='d-block d-md-none' size={14} />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className='font-weight-bold'>
-                    <span className='d-none d-md-block'>Saved Posts</span>
+                    <span className='d-none d-md-block'>Bài viết đã lưu</span>
                     <Image className='d-block d-md-none' size={14} />
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink className='font-weight-bold'>
-                    <span className='d-none d-md-block'>Friends</span>
-                    <Users className='d-block d-md-none' size={14} />
-                  </NavLink>
-                </NavItem>
               </Nav>
-              <Button color='primary'>
-                <Edit className='d-block d-md-none' size={14} />
-                <span className='font-weight-bold d-none d-md-block'>Edit</span>
-              </Button>
             </div>
           </Collapse>
         </Navbar>
