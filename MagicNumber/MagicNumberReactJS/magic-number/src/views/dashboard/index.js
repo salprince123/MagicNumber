@@ -42,7 +42,7 @@ const Dashboard = () => {
               <Col lg='2' md='6' xs='12'>
                 <Sidebar />
               </Col>
-              <h1 style={{padding:'20px'}}>Most favorite posts</h1>
+              <h1 style={{padding:'20px'}}>Các bài viết được ưu thích nhiều nhất</h1>
               <CardSlider></CardSlider>
             </Row>
           </div>

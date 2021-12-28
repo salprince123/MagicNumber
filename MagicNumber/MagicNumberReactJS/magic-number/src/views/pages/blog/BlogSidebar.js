@@ -90,7 +90,7 @@ const BlogSidebar = () => {
             {data !== null ? (
               <Fragment>
                 <div className='blog-recent-posts mt-3'>
-                  <h6 className='section-label'>Recent Posts</h6>
+                  <h6 className='section-label'>Bài viết mới</h6>
                   <div className='mt-75'>{renderRecentPosts()}</div>
                 </div>
                 
