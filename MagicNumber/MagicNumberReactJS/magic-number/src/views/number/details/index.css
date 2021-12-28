@@ -26,3 +26,9 @@
 .pyramid-line{
     position: relative;
 }
+span {
+    font-family: "Montserrat", Helvetica, Arial, serif !important;
+}
+p {
+    font-family: "Montserrat", Helvetica, Arial, serif !important;
+}
