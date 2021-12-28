@@ -69,11 +69,9 @@ const BlogList = () => {
                   <small className='text-muted mr-25'>Viết bởi</small>
                   <small>
                     <a className='text-body' href='/' onClick={e => e.preventDefault()}>
-                      {item.Title}
+                      {item.Author.Name}
                     </a>
                   </small>
-                  <span className='text-muted ml-50 mr-25'>|</span>
-                  <small className='text-muted'>{item.Title}</small>
                 </Media>
               </Media>
               
@@ -81,8 +79,7 @@ const BlogList = () => {
               <hr />
               <div className='d-flex justify-content-between align-items-center'>
                 <Link to={`/pages/article/detail/${item.Slug}`}>
-                  <MessageSquare size={15} className='text-body mr-50' />
-                  <span className='text-body font-weight-bold'>{item.Title} Bình luận</span>
+                 
                 </Link>
                 <Link className='font-weight-bold' to={`/pages/article/detail/${item.Slug}`}>
                   Đọc bài viết

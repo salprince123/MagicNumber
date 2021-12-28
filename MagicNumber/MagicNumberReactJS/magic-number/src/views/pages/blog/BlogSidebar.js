@@ -8,7 +8,7 @@ import { InputGroup, InputGroupAddon, Input, InputGroupText, Media } from 'react
 
 const BlogSidebar = () => {
   const [data, setData] = useState(null)
-  const url = "http://localhost:55675/api/Article/GetRandomPost"
+  const url = "http://localhost:7999/api/Article/GetRandomPost"
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
   }, [data])

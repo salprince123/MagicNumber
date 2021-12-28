@@ -41,7 +41,7 @@ const BlogCreate = () => {
     [title, setTitle] = useState('test'),
     [slug, setSlug] = useState('-testsbkgp'),
     [content, setContent] = useState(() => EditorState.createEmpty()),
-    [featuredImg, setFeaturedImg] = useState("https://www.studytienganh.vn/upload/2021/05/98114.jpg"),
+    [featuredImg, setFeaturedImg] = useState("https://seolenart.com/wp-content/uploads/2018/09/viet-bai-seo.jpg"),
     [imgPath, setImgPath] = useState('banner.jpg'),
     [convertedContent, setConvertedContent] = useState("null")
   const [author, setAuthor]= useState(JSON.parse(localStorage.getItem('userData')))
@@ -151,8 +151,7 @@ const BlogCreate = () => {
                             height='110'
                           />
                           <Media body>
-                            <small className='text-muted'>Required image resolution 800x400, image size 10mb.</small>
-
+                            
                             <p className='my-50'>
                               <a href='/' onClick={e => e.preventDefault()}>
                                 {imgPath}
