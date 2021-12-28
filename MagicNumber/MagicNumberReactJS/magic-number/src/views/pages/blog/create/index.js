@@ -29,6 +29,7 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/base/pages/page-blog.scss'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
+import QuillEditor from './Reactquill'
 const BlogCreate = () => {
   const initialContent = ``
 
@@ -61,7 +62,7 @@ const BlogCreate = () => {
       setFeaturedImg(reader.result)
     }
     reader.readAsDataURL(files[0])
-    alert(author['email'])
+    //alert(author['email'])
   }
   function sendRequest(){    
     axios.post(url,staticData )
@@ -69,6 +70,22 @@ const BlogCreate = () => {
       res =>history.push(`/pages/article/detail/${res.data}`)
       )    
   }
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+  }
+ 
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+  ]
   return (
     <div className='blog-edit-wrapper'>
         <Row>
@@ -119,9 +136,13 @@ const BlogCreate = () => {
                       */
                     }
                    
-                   <Col sm='12'>
-                   <ReactQuill  placeholder="Your text here"  onChange={setConvertedContent}>    
+                   <Col sm='12'>                    
+                   <ReactQuill  placeholder="Your text here"  onChange={setConvertedContent} 
+                   theme="snow"
+                   modules={modules}
+                   formats={formats}>    
                    </ReactQuill>
+                   
                     </Col>
                     <Col className='mb-2' sm='12'>
                       <div className='border rounded p-2'>
