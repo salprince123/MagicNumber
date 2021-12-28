@@ -10,7 +10,7 @@ const data = {
       password: '123',
       avatar: "https://anhdep123.com/wp-content/uploads/2021/01/anh-mang-cute-lam-hinh-dai-dien-dep-nhat.jpg",
       email: 'admin@demo.com',
-      role: 'admin',
+      role: 'Admin',
       ability: [
         {
           action: 'manage',
@@ -28,7 +28,7 @@ const data = {
       password: '123',
       avatar: "https://i.redd.it/c0giqzpkmcd11.jpg",
       email: 'sol@demo.com',
-      role: 'client',
+      role: 'Khách',
       ability: [
         {
           action: 'read',
@@ -50,7 +50,7 @@ const data = {
       password: '123',
       avatar: "https://findicons.com/files/icons/2711/free_icons_for_windows8_metro/512/guest.png",
       email: 'guest@demo.com',
-      role: 'guess',
+      role: 'Khách',
       ability: [
         {
           action: 'read',

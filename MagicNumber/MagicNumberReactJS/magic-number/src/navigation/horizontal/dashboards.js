@@ -3,8 +3,8 @@ import { Home, Activity, ShoppingCart } from 'react-feather'
 export default [
   {
     id: 'dashboards',
-    title: 'Dashboards',
+    title: 'Trang chủ',
     icon: <Home />,
-    navLink: '/home'
+    navLink: '/home',
   }
 ]
