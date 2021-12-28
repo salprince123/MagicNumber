@@ -22,9 +22,9 @@ const NavbarUser = props => {
       return <Moon className='ficon' onClick={() => setSkin('dark')} />
     }
   }
-
-  return (
-    <ul className='nav navbar-nav align-items-center ml-auto'>
+  if (isUserLoggedIn() !== null) {
+    return(
+<ul className='nav navbar-nav align-items-center ml-auto'>
       <NavItem className='d-none d-lg-block'>
         <NavLink className='nav-link-style'>
           <ThemeToggler />
@@ -35,16 +35,37 @@ const NavbarUser = props => {
       <NotificationDropdown />
       <div className="px-1" />
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/find-number'>
-        Find your number
+       Tra cứu nhân số học
       </Button.Ripple>
       <div className="px-0.5" />
       {author['username'] != "Guest" ? (
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/pages/article/create'>
-        Write Article
+        Viết bài
       </Button.Ripple>
       ):<></>}
       <UserDropdown />
     </ul>
-  )
+    )
+  }
+  else {
+    return(
+<ul className='nav navbar-nav align-items-center ml-auto'>
+      <NavItem className='d-none d-lg-block'>
+        <NavLink className='nav-link-style'>
+          <ThemeToggler />
+        </NavLink>
+      </NavItem>
+      <NavbarSearch />
+      <div className="px-1" />
+      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/find-number'>
+        Tra cứu nhân số học
+      </Button.Ripple>
+      <div className="px-0.5" />
+      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/login'>
+        Đăng nhập
+      </Button.Ripple>
+    </ul>
+    )
+  }
 }
 export default NavbarUser

@@ -14,7 +14,7 @@ import {
 export default [
   {
     id: 'pages',
-    title: 'All Articles',
+    title: 'Tất cả bài viết',
     icon: <FileText />,
     navLink: '/pages/article/list'
   }

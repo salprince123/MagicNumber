@@ -8,7 +8,7 @@ import { InputGroup, InputGroupAddon, Input, InputGroupText, Media } from 'react
 
 const BlogSidebar = () => {
   const [data, setData] = useState(null)
-  const url = "http://localhost:7999/api/Article/GetRandomPost"
+  const url = "http://localhost:55675/api/Article/GetRandomPost"
   useEffect(() => {
     axios.get(url).then(res => setData(res.data))
   }, [data])
@@ -90,7 +90,7 @@ const BlogSidebar = () => {
             {data !== null ? (
               <Fragment>
                 <div className='blog-recent-posts mt-3'>
-                  <h6 className='section-label'>Recent Posts</h6>
+                  <h6 className='section-label'>Bài viết mới</h6>
                   <div className='mt-75'>{renderRecentPosts()}</div>
                 </div>
                 

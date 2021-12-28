@@ -4,7 +4,7 @@ const ProfileAbout = ({ data }) => {
   return (
     <Card>
       <CardBody>
-        <h5 className='mb-75'>About</h5>
+        <h5 className='mb-75'>Giới thiệu bản thân</h5>
         <CardText>{data.About}</CardText>
         
       </CardBody>

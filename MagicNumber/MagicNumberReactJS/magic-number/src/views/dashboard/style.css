@@ -26,3 +26,6 @@
   .first-carousel-container {
     margin-bottom: 50px;
   }
+.slider{
+    height: 250px !important;
+  }
