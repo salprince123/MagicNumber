@@ -79,7 +79,7 @@ const BlogCreate = () => {
                   <Row>
                     <Col md='6'>
                       <FormGroup className='mb-2'>
-                        <Label for='blog-edit-title'>Title</Label>
+                        <Label for='blog-edit-title'>Tiêu đề</Label>
                         <Input id='blog-edit-title' value={title} onChange={e => setTitle(e.target.value)} />
                       </FormGroup>
                     </Col>
@@ -102,12 +102,7 @@ const BlogCreate = () => {
                       </FormGroup>
                     </Col>*/
                     }
-                    
-                    <Col md='6'>
-                      <FormGroup className='mb-2'>
-                        <Label for='blog-edit-slug'>Small Detail</Label>                        
-                      </FormGroup>
-                    </Col>
+
                     {
                       /*
                        <Col sm='12'>
@@ -125,7 +120,7 @@ const BlogCreate = () => {
                     </Col>
                     <Col className='mb-2' sm='12'>
                       <div className='border rounded p-2'>
-                        <h4 className='mb-1'>Featured Image</h4>
+                        <h4 className='mb-1'>Hình bài viết</h4>
                         <Media className='flex-column flex-md-row'>
                           <img
                             className='rounded mr-2 mb-1 mb-md-0'
@@ -159,10 +154,10 @@ const BlogCreate = () => {
                     </Col>
                     <Col className='mt-50'>
                       <Button.Ripple color='primary' className='mr-1' onClick={sendRequest} >
-                        Save Changes
+                        Lưu bài viết
                       </Button.Ripple>
                       <Button.Ripple color='secondary' outline tag={Link} to='/home'>
-                        Cancel
+                        Hủy
                       </Button.Ripple>
                     </Col>
                   </Row>

@@ -23,7 +23,7 @@ import {
     PaginationItem,
     PaginationLink
 } from 'reactstrap'
-
+import './style.css'
 const CardSlider = () => {
     const [data, setData] = useState(null)
     const url = "http://localhost:7999/api/Article/GetRandomPost"
@@ -35,7 +35,7 @@ const CardSlider = () => {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 5,
-            slidesToSlide: 4 // optional, default to 1.
+            slidesToSlide: 4
         }
     };
     const renderCardPosts = () => {
@@ -44,7 +44,7 @@ const CardSlider = () => {
                 <div style={{ padding: '20px' }}>
                 <Card>
                     <Link to={`/pages/article/detail/${item.Slug}`}>
-                        <CardImg className='img-fluid' src={item.ImageLink} alt={item.Title} top />
+                        <CardImg className='img-fluid slider' src={item.ImageLink} alt={item.Title} top />
                     </Link>
                     <CardBody>
                         <CardTitle tag='h4'>
@@ -55,7 +55,7 @@ const CardSlider = () => {
                         <Media>
                             <Avatar className='mr-50' img={item.Author.Avatar} imgHeight='24' imgWidth='24' />
                             <Media body>
-                                <small className='text-muted mr-25'>by</small>
+                                <small className='text-muted mr-25'>Viết bởi</small>
                                 <small>
                                     <a className='text-body' href='/' onClick={e => e.preventDefault()}>
                                         {item.Author.Name}
@@ -69,7 +69,7 @@ const CardSlider = () => {
                         <hr />
                         <div className='d-flex justify-content-between align-items-center'>                            
                             <Link className='font-weight-bold' to={``}>
-                                Read More
+                                Đọc bài viết
                             </Link>
                         </div>
                     </CardBody>
@@ -87,10 +87,7 @@ const CardSlider = () => {
                 showDots={true}
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
-                infinite={true}
                 autoPlay={false}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
                 customTransition="all .5"
                 transitionDuration={500}
                 containerClass="carousel-container"
