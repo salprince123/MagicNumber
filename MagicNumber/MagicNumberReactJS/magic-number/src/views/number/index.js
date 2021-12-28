@@ -59,7 +59,7 @@ const NumberForm = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle tag='h4'>Find Out Your Magic Number</CardTitle>
+                <CardTitle tag='h4'>Con số của bạn là gì?</CardTitle>
             </CardHeader>
 
             <CardBody>
@@ -67,14 +67,14 @@ const NumberForm = () => {
                     <Row>
                         <Col sm='12'>
                             <FormGroup>
-                                <Label for='nameVertical'>Input Your Fullname</Label>
+                                <Label for='nameVertical'>Họ và tên</Label>
                                 <Input type='text' id='nameVertical' placeholder='Full Name' onChange={e => setName(e.target.value)} />
                             </FormGroup>
                         </Col>
                         <Col sm='12'>
                             <FormGroup>
                                 <Fragment>
-                                    <Label for='default-picker'>Select Your Date of Birth</Label>
+                                    <Label for='default-picker'>Ngày sinh</Label>
                                     <Flatpickr className='form-control' options={{
                                         dateFormat: "d-m-Y",
                                     }} value={picker} onChange={date => setPicker(date[0])} id='default-picker' />
@@ -85,11 +85,11 @@ const NumberForm = () => {
                             <FormGroup className='d-flex mb-0' >
                                 <Link to={`/find-number/result/${("0" + picker.getDate()).slice(-2)}${("0" + (picker.getMonth()+1)).slice(-2)}${picker.getFullYear()}&${name}}`} >
                                     <Button.Ripple className='mr-1' color='primary' type='submit' >
-                                        See Result
+                                        Xem kết quả
                                     </Button.Ripple>
                                 </Link>
                                 <Button.Ripple outline color='secondary' type='reset'>
-                                    Reset
+                                    Nhập lại
                                 </Button.Ripple>
                             </FormGroup>
                         </Col>

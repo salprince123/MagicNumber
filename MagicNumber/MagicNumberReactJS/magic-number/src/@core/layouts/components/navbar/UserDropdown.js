@@ -51,16 +51,16 @@ const UserDropdown = () => {
       <DropdownMenu right>
         <DropdownItem tag={Link} to='/pages/profile'>
           <User size={14} className='mr-75' />
-          <span className='align-middle'>Profile</span>
+          <span className='align-middle'>Trang cá nhân</span>
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem tag={Link} to='/pages/account-settings'>
           <Settings size={14} className='mr-75' />
-          <span className='align-middle'>Settings</span>
+          <span className='align-middle'>Cài đặt</span>
         </DropdownItem>
         <DropdownItem tag={Link} to='/home' onClick={() => dispatch(handleLogout())}>
           <Power size={14} className='mr-75' />
-          <span className='align-middle'>Logout</span>
+          <span className='align-middle'>Đăng xuất</span>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
