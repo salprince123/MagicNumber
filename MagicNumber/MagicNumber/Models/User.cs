@@ -1,25 +1,20 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace MagicNumber.Models
 {
-    public class User : IdentityUser<int>
+    public class User
     {
-        [PersonalData]
+        public string UserID { get; set; }
+        public string Password { get; set; }
         public string Name { get; set; }
-        [PersonalData]
         public string About { get; set; }
-        [PersonalData]
         public string Quote { get; set; }
-        [PersonalData]
+
         public string Birthday { get; set; }
-        [PersonalData]
         public string Avatar { get; set; }
-        [PersonalData]
         public string Background { get; set; }
 
     }
