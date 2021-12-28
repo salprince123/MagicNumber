@@ -88,6 +88,7 @@ const NumberForm = () => {
                             <div dangerouslySetInnerHTML={{ __html: data.BirthChartArrow  }}/>
                         </CardBody>
                     </Card>
+                    {name !== "default"  ? (
                     <Card>
                         <CardHeader>
                             <CardTitle tag='h4'>Bạn tên là {name}</CardTitle>
@@ -97,6 +98,7 @@ const NumberForm = () => {
                         <div dangerouslySetInnerHTML={{ __html: data.OutNumber  }}/>
                         </CardBody>
                     </Card>
+                    ):<></>}
                     <Card>
                     <ChartTree top1={data.top[0].number} top2={data.top[1].number} top3={data.top[2].number} top4={data.top[3].number} 
                                 dateNumber= {data.top[0].day} monthNumber={data.top[0].month} yearNumber={data.top[0].year}
