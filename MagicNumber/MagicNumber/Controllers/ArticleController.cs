@@ -13,6 +13,12 @@ namespace MagicNumber.Controllers
 {
     public class ArticleController : ApiController
     {
+		public class CommentTemplate
+        {
+			public string Slug { get; set; }
+			public string UserID { get; set; }
+			public string Detail { get; set; }
+		}
 		private Article loadFromTable(MySqlDataReader reader)
         {
 			Article temp1 = new Article();
@@ -230,13 +236,13 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.Route("api/Article/AddComment")]
 		[System.Web.Http.HttpPost]
 
-		public string AddComment(String slug, String detail, string userID)
+		public string AddComment(CommentTemplate com)
 		{
 			try
 			{
-				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{userID}', " +
-							$" (SELECT ArticleID FROM article where slug='{slug}'), " +
-							$" '{detail}','{DateTime.Now.ToString()}'); ";
+				string sql = $"INSERT INTO comment(UserID,ArticleID,Detail, Time) VALUES('{com.UserID}', " +
+							$" (SELECT ArticleID FROM article where slug='{com.Slug}'), " +
+							$" '{com.Detail}','{DateTime.Now.ToString()}'); ";
 				MySqlConnection con = new MyConnection().GetConnection();
 				MySqlCommand cmd = new MySqlCommand(sql, con);
 				con.Open();
@@ -254,7 +260,7 @@ namespace MagicNumber.Controllers
 		[System.Web.Http.HttpGet]
 		public HttpResponseMessage GetComment(string slug)
 		{
-			string sql = $" SELECT * FROM COMMENT c join article a on c.ArticleID=a.ArticleID where a.slug='{slug}' ";
+			string sql = $" select c.UserID, c.Detail, c.Time, u.Name, u.avatar from comment c join article a on a.ArticleID=c.ArticleID join user u on u.UserID=c.UserID where a.slug='{slug}' ";
 			MySqlConnection con = new MyConnection().GetConnection();
 			MySqlCommand cmd = new MySqlCommand(sql, con);
 			con.Open();
@@ -268,6 +274,8 @@ namespace MagicNumber.Controllers
 				temp1.UserID = reader.GetString("UserId");
 				temp1.Time = reader.GetString("Time");
 				temp1.Detail = reader.GetString("Detail");
+				temp1.UserName = reader.GetString("Name");
+				temp1.UserAvatar = reader.GetString("avatar");
 				temp.Add(temp1);
 			}
 			con.Close();

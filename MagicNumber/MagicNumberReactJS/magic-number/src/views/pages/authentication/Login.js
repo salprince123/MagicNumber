@@ -51,7 +51,7 @@ const Login = props => {
   const history = useHistory()
   //const [email, setEmail] = useState('salprince@gmail.com')
   //const [password, setPassword] = useState('123456')
-  const [email, setEmail] = useState('guest@demo.com')
+  const [email, setEmail] = useState('admin@demo.com')
   const [password, setPassword] = useState('123')
   const temp={
     action: 'manage',
@@ -63,27 +63,7 @@ const Login = props => {
     source = require(`@src/assets/images/pages/${illustration}`).default
   const urlCheckPass ="http://localhost:7999/api/User/CheckPassword"
   const urlGetInfo= "http://localhost:7999/api/User/GetByID"
-  const onSubmit = data => {
-    /*alert("input "+ email)
-    axios.get(urlCheckPass,{
-      params: {
-        id: "salprince@gmail.com"
-      }
-    }).then(response => setRealPass(response.data))
-    
-    
-    if(realPass==password)
-    {
-      dispatch(handleLogin(data))
-      ability.update(temp)
-      history.push(getHomeRouteForLoggedInUser("admin"))
-          toast.success(
-            <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
-            { transition: Slide, hideProgressBar: true, autoClose: 2000 }
-          )
-    }
-    else alert("wrong pass!"+ email+realPass)*/
-    //alert(realPass);
+  const onSubmit = data => {    
     if (isObjEmpty(errors) ) {
       useJwt
         .login({ email, password })

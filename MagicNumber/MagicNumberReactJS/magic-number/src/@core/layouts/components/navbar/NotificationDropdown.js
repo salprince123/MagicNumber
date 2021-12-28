@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
-
+import { useState } from 'react'
 // ** Third Party Components
 import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -21,6 +21,7 @@ import {
 
 const NotificationDropdown = () => {
   // ** Notification Array
+ 
   const notificationsArray = [
     {
       img: require('@src/assets/images/portrait/small/avatar-s-15.jpg').default,
@@ -85,11 +86,12 @@ const NotificationDropdown = () => {
       )
     }
   ]
-
+  const [author, setAuthor]= useState(JSON.parse(localStorage.getItem('userData')))
   // ** Function to render Notifications
   /*eslint-disable */
   const renderNotificationItems = () => {
     return (
+     
       <PerfectScrollbar
         component='li'
         className='media-list scrollable-container'
@@ -141,11 +143,14 @@ const NotificationDropdown = () => {
           )
         })}
       </PerfectScrollbar>
+        
     )
   }
   /*eslint-enable */
 
   return (
+    <div>
+    {author['username'] != "Guest" ? (
     <UncontrolledDropdown tag='li' className='dropdown-notification nav-item mr-25'>
       <DropdownToggle tag='a' className='nav-link' href='/' onClick={e => e.preventDefault()}>
         <Bell size={21} />
@@ -170,6 +175,8 @@ const NotificationDropdown = () => {
         </li>
       </DropdownMenu>
     </UncontrolledDropdown>
+    ):<></>}
+    </div>
   )
 }
 
