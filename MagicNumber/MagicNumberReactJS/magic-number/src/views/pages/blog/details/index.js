@@ -120,7 +120,9 @@ const BlogDetails = (targetURL) => {
       "UserID": author['email'],
       "Time": moment().format('DD/MM/YYYY h:mm:ss A'),
       "Detail": commentDetail,
-      "ArticleID": null
+      "ArticleID": null,
+      "UserAvatar":author['avatar'],
+      "UserName": author['fullName']
     } ]);
     }
     
@@ -128,24 +130,24 @@ const BlogDetails = (targetURL) => {
  const renderComment = () => {     
   return comment.map(item => {
     return (
-      <Col md='6'>
-        <Card>
-        <Media>
-          <Media body>              
-              <small>
-                  <a className='text-body' href='/' onClick={e => e.preventDefault()}>
-                      {item.UserID}
-                  </a>
-              </small>
-              <small className='text-muted mr-25'> at {item.Time}</small>
-              <Media >
-              <big>{item.Detail} </big>
-              </Media>
-                            
+      <Card className='mb-3' key={item.UserName}>
+        <CardBody>
+          <Media>
+            <Avatar className='mr-75' img={item.UserAvatar} width='38' height='38' />
+            <Media body>
+              <h6 className='font-weight-bolder mb-25'>{item.UserName}</h6>
+              <CardText>{item.Time}</CardText>
+              <CardText>{item.Detail}</CardText>
+              <a href='/' onClick={e => e.preventDefault()}>
+                <div className='d-inline-flex align-items-center'>
+                  <CornerUpLeft size={18} className='mr-50' />
+                  <span>Reply</span>
+                </div>
+              </a>
+            </Media>
           </Media>
-      </Media>
-        </Card> 
-      </Col>
+        </CardBody>
+      </Card>
     )
   })
 }
@@ -205,9 +207,9 @@ const BlogDetails = (targetURL) => {
                           </Col>                          
                         </Row>
                         {comment !== null ? (
-                        <Col>
-                          {renderComment()}
-                        </Col>
+                         <Col sm='12'>
+                         {renderComment()}
+                       </Col>
                           ) : <></>}
                       </Form>
                     </CardBody>
