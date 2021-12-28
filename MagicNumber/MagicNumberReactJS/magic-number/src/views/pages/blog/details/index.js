@@ -191,11 +191,16 @@ const BlogDetails = (targetURL) => {
                 <Col sm='12'>
                   <h6 className='section-label'>Bình luận</h6>
                 </Col>
+                
                 <Col sm='12'>
+                {author['fullName'] != "Guest" ? (
                   <h6 className='section-label'>Viết bình luận</h6>
+                ):<></>}
+                {author['fullName'] != "Guest" ? (
                   <Card>
                     <CardBody>
                       <Form className='form' onSubmit={e => e.preventDefault()}>
+                      
                         <Row>
                           <Col sm='12'>
                             <FormGroup className='mb-2'>
@@ -207,14 +212,20 @@ const BlogDetails = (targetURL) => {
                             <Button.Ripple color='primary' onClick={addComment}>Đăng bình luận</Button.Ripple>
                           </Col>
                         </Row>
-                        {comment !== null ? (
-                          <Col sm='12'>
-                            {renderComment()}
-                          </Col>
-                        ) : <></>}
+                                             
                       </Form>
                     </CardBody>
                   </Card>
+                  ):<></>} 
+                 
+                  <Card>  
+                  {comment !== null ? (                
+                    <Col sm='12'>
+                      {renderComment()}
+                    </Col>   
+                     ) : <CardTitle>Bài viết này chưa có bình luận nào!</CardTitle>}                    
+                  </Card>
+                  
                 </Col>
               </Row>
             ) : <>Trang không tồn tại</>}
