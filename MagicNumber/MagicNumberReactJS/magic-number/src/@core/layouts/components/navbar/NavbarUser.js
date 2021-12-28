@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 // ** Third Party Components
 import { Sun, Moon } from 'react-feather'
 import { NavItem, NavLink, Button } from 'reactstrap'
-import { isUserLoggedIn } from '@utils'
 
 const NavbarUser = props => {
   // ** Props
@@ -21,9 +20,9 @@ const NavbarUser = props => {
       return <Moon className='ficon' onClick={() => setSkin('dark')} />
     }
   }
-  if (isUserLoggedIn() !== null) {
-    return(
-<ul className='nav navbar-nav align-items-center ml-auto'>
+
+  return (
+    <ul className='nav navbar-nav align-items-center ml-auto'>
       <NavItem className='d-none d-lg-block'>
         <NavLink className='nav-link-style'>
           <ThemeToggler />
@@ -33,35 +32,14 @@ const NavbarUser = props => {
       <NotificationDropdown />
       <div className="px-1" />
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/find-number'>
-       Tra cứu nhân số học
+        Find your number
       </Button.Ripple>
       <div className="px-0.5" />
       <Button.Ripple color='primary' className='mr-1' tag={Link} to='/pages/article/create'>
-        Viết bài
+        Write Article
       </Button.Ripple>
       <UserDropdown />
     </ul>
-    )
-  }
-  else {
-    return(
-<ul className='nav navbar-nav align-items-center ml-auto'>
-      <NavItem className='d-none d-lg-block'>
-        <NavLink className='nav-link-style'>
-          <ThemeToggler />
-        </NavLink>
-      </NavItem>
-      <NavbarSearch />
-      <div className="px-1" />
-      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/find-number'>
-        Tra cứu nhân số học
-      </Button.Ripple>
-      <div className="px-0.5" />
-      <Button.Ripple color='primary' className='mr-1' tag={Link} to='/login'>
-        Đăng nhập
-      </Button.Ripple>
-    </ul>
-    )
-  }
+  )
 }
 export default NavbarUser

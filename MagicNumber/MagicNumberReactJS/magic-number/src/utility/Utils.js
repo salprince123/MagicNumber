@@ -64,7 +64,7 @@ export const getHomeRouteForLoggedInUser = userRole => {
   else if (userRole === 'guest') return '/'
   else if (userRole === 'client') return '/'
   //if (userRole === 'client') return '/access-control'
-  return '/'
+  return '/login'
 }
 
 // ** React Select Theme Colors
